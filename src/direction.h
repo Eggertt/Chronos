@@ -6,9 +6,11 @@
 #include <vector>
 #include <string>
 #include <Arduino.h>
+#include <iostream>
 
 #include "node.h"
 #include "config.h"
+#include "robot.h"
 
 class Direction {
     private:
@@ -18,6 +20,7 @@ class Direction {
         int nNodes;
     public:
         Direction();
+        int initialCompass;
         char direction(Node *no1, Node *no2);
         const char* mode(Node *intermedio);
         void findEdges(int no1);

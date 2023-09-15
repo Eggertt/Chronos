@@ -60,7 +60,7 @@ int UdpBufferSize = UDP_MAX_SIZE;
 // SENSOR DE INFRARED
 
 #define RXD2 9 // Era IRrecvPIN
-char irrecvbuffer[5];
+char irrecvbuffer[6];
 char irrecvdata;
 byte irrecvbuffer_index = -1;
 
@@ -710,6 +710,19 @@ void loop()
           }
         }
       }
+          // irrecvbuffer[0] = 'R';
+          // irrecvbuffer[1] = '5';
+          // irrecvbuffer[2] = 'I';
+          // irrecvbuffer[3] = '1';
+          // irrecvbuffer[4] = '<';
+          // irrecvbuffer[5] = '\0';
+          // irrecvbuffer_index = -1;
+          // Serial.println("Received Instruction!");
+          // Serial.println(irrecvbuffer);
+          // robot.setState(SETUP1);
+          // stp2 = 1;
+          // Serial.println("Stp2 = TRUE");
+          // robot.IRLine.crosses = 0;
     }
 
     // if Setup, create boxes and start the setup for the Dijkstra

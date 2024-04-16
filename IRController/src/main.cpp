@@ -7,7 +7,8 @@
 char mode = 'E';
 //char mode = 'R';
 
-char emitted = 'U';
+//Create string with "Woooo"
+char emmited[] = "Woooo";
 char received;
 
 char irrecvbuffer[5];
@@ -60,11 +61,10 @@ void loop(){
 
   // Write byte to IR
   else if(mode == 'E'){
-    if(currentMillis - previousMillis_ping > interval_ping){
-      //Serial2.write(emitted);
-      Serial.print("Sent: ");
-      //Serial.println(emitted);
-      Serial.println(Serial2.write(emitted));
+    if(currentMillis - previousMillis_ping > 30*interval_ping){
+        Serial2.write(emmited);
+        Serial.print("Sent: ");
+        Serial.println(emmited);
 
       previousMillis_ping = currentMillis;
     }

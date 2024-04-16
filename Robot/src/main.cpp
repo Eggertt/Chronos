@@ -636,80 +636,80 @@ void loop()
 
       // ========== provaMode ==========
 
-      // Serial.printf("                                 Serial2.available() = ");
-      // Serial.println(Serial2.available());
-      // if (Serial2.available()) {
-      //     irrecvdata = Serial2.read();
-      //     if(irrecvdata == 'U') {
-      //       Serial.println("!\n");
-      //       Serial.println("!\n");
-      //       Serial.println("!\n");
-      //       Serial.println("!\n");
-      //       Serial.println("!\n");
-      //     } else if(irrecvdata == 'W') {
-      //       irrecvbuffer_index = 0;
-      //     } else if(irrecvbuffer_index >= 0) {
-      //       irrecvbuffer[irrecvbuffer_index] = irrecvdata;
-      //       if(irrecvbuffer[irrecvbuffer_index] == 'w' || irrecvbuffer[irrecvbuffer_index] == 'o' || irrecvbuffer[irrecvbuffer_index] == 'u'){
-      //         irrecvbuffer_index++;
-      //         if(irrecvbuffer_index >= 4) {
-      //           irrecvbuffer[irrecvbuffer_index] = '\0';
-      //           irrecvbuffer_index = -1;
-      //           Serial.println("Received Instruction!");
-      //           Serial.println(irrecvbuffer);
-      //           robot.setState(SETUP1);
-      //           robot.IRLine.crosses = 0;
-      //         }
-      //       } else {
-      //         Serial.write(irrecvdata);
-      //         Serial.println();
-      //       }
-      //   }
-      // }
+      Serial.printf("                                                 Serial2.available() = ");
+      Serial.println(Serial2.available());
+      if (Serial2.available()) {
+          irrecvdata = Serial2.read();
+          if(irrecvdata == 'U') {
+            Serial.println("!\n");
+            Serial.println("!\n");
+            Serial.println("!\n");
+            Serial.println("!\n");
+            Serial.println("!\n");
+          } else if(irrecvdata == 'W') {
+            irrecvbuffer_index = 0;
+          } else if(irrecvbuffer_index >= 0) {
+            irrecvbuffer[irrecvbuffer_index] = irrecvdata;
+            if(irrecvbuffer[irrecvbuffer_index] == 'w' || irrecvbuffer[irrecvbuffer_index] == 'o' || irrecvbuffer[irrecvbuffer_index] == 'u'){
+              irrecvbuffer_index++;
+              if(irrecvbuffer_index >= 4) {
+                irrecvbuffer[irrecvbuffer_index] = '\0';
+                irrecvbuffer_index = -1;
+                Serial.println("Received Instruction!");
+                Serial.println(irrecvbuffer);
+                robot.setState(SETUP1);
+                robot.IRLine.crosses = 0;
+              }
+            } else {
+              Serial.write(irrecvdata);
+              Serial.println();
+            }
+        }
+      }
 
       // ========== pacoMode ==========
 
-      Serial.printf("                                 Serial2.available() = ");
-      Serial.println(Serial2.available());
-      if (Serial2.available())
-      {
-        irrecvdata = Serial2.read();
-        if (irrecvdata == 'U')
-        {
-          Serial.println("!\n");
-          Serial.println("!\n");
-          Serial.println("!\n");
-          Serial.println("!\n");
-          Serial.println("!\n");
-        }
-        else if (irrecvdata == 'R')
-        {
-          irrecvbuffer_index = 0;
-        }
-        else if (irrecvbuffer_index >= 0)
-        {
-          irrecvbuffer[irrecvbuffer_index] = irrecvdata;
-          if (irrecvbuffer[0] == '5')
-          {
-            irrecvbuffer_index++;
-            if (irrecvbuffer_index >= 3)
-            {
-              irrecvbuffer[irrecvbuffer_index] = '\0';
-              irrecvbuffer_index = -1;
-              Serial.println("Received Instruction!");
-              Serial.println(irrecvbuffer);
-              stp2 = 1;
-              Serial.println("Stp2 = TRUE");
-              robot.IRLine.crosses = 0;
-            }
-          }
-          else
-          {
-            Serial.write(irrecvdata);
-            Serial.println();
-          }
-        }
-      }
+      // Serial.printf("                                 Serial2.available() = ");
+      // Serial.println(Serial2.available());
+      // if (Serial2.available())
+      // {
+      //   irrecvdata = Serial2.read();
+      //   if (irrecvdata == 'U')
+      //   {
+      //     Serial.println("!\n");
+      //     Serial.println("!\n");
+      //     Serial.println("!\n");
+      //     Serial.println("!\n");
+      //     Serial.println("!\n");
+      //   }
+      //   else if (irrecvdata == 'R')
+      //   {
+      //     irrecvbuffer_index = 0;
+      //   }
+      //   else if (irrecvbuffer_index >= 0)
+      //   {
+      //     irrecvbuffer[irrecvbuffer_index] = irrecvdata;
+      //     if (irrecvbuffer[0] == '5')
+      //     {
+      //       irrecvbuffer_index++;
+      //       if (irrecvbuffer_index >= 3)
+      //       {
+      //         irrecvbuffer[irrecvbuffer_index] = '\0';
+      //         irrecvbuffer_index = -1;
+      //         Serial.println("Received Instruction!");
+      //         Serial.println(irrecvbuffer);
+      //         stp2 = 1;
+      //         Serial.println("Stp2 = TRUE");
+      //         robot.IRLine.crosses = 0;
+      //       }
+      //     }
+      //     else
+      //     {
+      //       Serial.write(irrecvdata);
+      //       Serial.println();
+      //     }
+      //   }
+      // }
           // irrecvbuffer[0] = 'R';
           // irrecvbuffer[1] = '5';
           // irrecvbuffer[2] = 'I';

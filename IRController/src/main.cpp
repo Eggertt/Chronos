@@ -7,7 +7,7 @@
 char mode = 'E';
 //char mode = 'R';
 
-char emitted = 'B';
+char emitted = 'U';
 char received;
 
 char irrecvbuffer[5];

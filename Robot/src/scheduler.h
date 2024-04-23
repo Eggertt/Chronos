@@ -105,16 +105,16 @@ std::vector<std::string> Scheduler::getRoute(Box box, Port destPort) {
         destPort = getAvailablePort(box);
 
         Serial.println();
-        Serial.printf("Porta ");
+        Serial.print("Porta ");
         Serial.print(destPort.pos);
-        Serial.printf(".occupied = ");
+        Serial.print(".occupied = ");
         Serial.println(destPort.occupied);
     }
     else {
         Serial.println();
-        Serial.printf("Porta ");
+        Serial.print("Porta ");
         Serial.print(destPort.pos);
-        Serial.printf(".occupied = ");
+        Serial.print(".occupied = ");
         Serial.println(destPort.occupied);
     }
 

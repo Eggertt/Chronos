@@ -1,14 +1,13 @@
 #include <Arduino.h>
 
 #define TXD2 15//13
-#define RXD2 2//12
+#define RXD2 18//12
 #define IR_CARRIER 5
 
 char mode = 'E';
-//char mode = 'R';
+// char mode = 'R';
 
-//Create string with "Woooo"
-char emmited[] = "Woooo";
+char emitted = 'U';
 char received;
 
 char irrecvbuffer[5];
@@ -49,22 +48,43 @@ void loop(){
 
   // Read bytes from IR
   if (mode == 'R'){
-    if (Serial2.available()) {
-      irrecvdata = Serial2.read();
-      Serial.print("Received: ");
-      Serial.println(received);
-      //Serial.println(char(Serial2.read()));
-
-      if(irrecvdata == 'U') Serial.print("U");
-    }
+    Serial.printf("                                 Serial2.available() = ");
+      Serial.println(Serial2.available());
+      if (Serial2.available()) {
+          irrecvdata = Serial2.read();
+          if(irrecvdata == 'U') {
+            Serial.println("!\n");
+            Serial.println("!\n");
+            Serial.println("!\n");
+            Serial.println("!\n");
+            Serial.println("!\n");
+          } else if(irrecvdata == 'W') {
+            irrecvbuffer_index = 0;
+          } else if(irrecvbuffer_index >= 0) {
+            irrecvbuffer[irrecvbuffer_index] = irrecvdata;
+            if(irrecvbuffer[irrecvbuffer_index] == 'w' || irrecvbuffer[irrecvbuffer_index] == 'o' || irrecvbuffer[irrecvbuffer_index] == 'u'){
+              irrecvbuffer_index++;
+              if(irrecvbuffer_index >= 4) {
+                irrecvbuffer[irrecvbuffer_index] = '\0';
+                irrecvbuffer_index = -1;
+                Serial.println("Received Instruction!");
+                Serial.println(irrecvbuffer);
+              }
+            } else {
+              Serial.write(irrecvdata);
+              Serial.println();
+            }
+        }
+      }
   }
 
   // Write byte to IR
   else if(mode == 'E'){
-    if(currentMillis - previousMillis_ping > 30*interval_ping){
-        Serial2.write(emmited);
-        Serial.print("Sent: ");
-        Serial.println(emmited);
+    if(currentMillis - previousMillis_ping > interval_ping){
+      Serial2.write(emitted);
+      Serial.print("Sent: ");
+      Serial.println(emitted);
+      
 
       previousMillis_ping = currentMillis;
     }

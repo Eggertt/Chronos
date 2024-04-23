@@ -142,216 +142,359 @@ std::vector<std::string> Direction::definePath(int *path, int size, Node *nodeVe
             cont2 = 1;
             break;
         }
+
+        // MODO FNR (Feira Nacional de Robotica)
         else if(nodeVec[path[i+1]].next == NULL) { //Estamos no penultimo no
             if(path[i+1] == 0 || path[i+1] == 1 || path[i+1] == 2 || path[i+1] == 3){
-                if(size > 2){ //O path tem mais de 2 nos
-                    std::cout << "Direcao" << cont1 << "." << cont2 << " : " << path[i-1] << " -> " << path[i] << " = " << direction(&nodeVec[path[i-1]], &nodeVec[path[i]]) << std::endl;
-                    // Serial.println(cont1);
-                    // Serial.printf(".");
-                    cont2++;
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                    if(mode(&nodeVec[path[i]]) == "Right") {
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = AdjustL");
-                        dirVec.push_back("AdjustL");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = TRight");
-                        dirVec.push_back("TRight");
-                    }
-                    else if(mode(&nodeVec[path[i]]) == "Left") {
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = AdjustL");
-                        dirVec.push_back("AdjustL");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = TLeft");
-                        dirVec.push_back("TLeft");
-                    }
-                }
-                /*
-                else 
-                  // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                
-                if(robot.command == '<'){
-                    dirVec.push_back("PickB");  //Ultimo modo do vetor de modos (Uma posicao a menos do que o vetor de nos)
-                    // Serial.printf("Modo ");
-                    // Serial.print(path[i]);
-                    // Serial.println(" = PickB");
-                    // Serial.println();
-                }
-                else{
-                    // Serial.println("Missing command to get box, waiting for further instructions");
-                    // Serial.println();
-                }
-                */
-            }
-            else if(path[i+1] == 16 || path[i+1] == 23 || path[i+1] == 12 || path[i+1] == 19){
-                if(size > 2){
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
-                    cont2++;
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                    if(mode(&nodeVec[path[i]]) == "Right") {
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = AdjustL");
-                        dirVec.push_back("AdjustL");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = TRight");
-                        dirVec.push_back("TRight");
-                    }
-                    else if(mode(&nodeVec[path[i]]) == "Left") {
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = AdjustL");
-                        dirVec.push_back("AdjustL");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = TLeft");
-                        dirVec.push_back("TLeft");
-                    }
-                }
-                /*
-                else 
-                  // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                
-                if(robot.command == '<'){
-                    dirVec.push_back("PickBV");  //Ultimo modo do vetor de modos (Uma posicao a menos do que o vetor de nos)
-                    // Serial.printf("Modo ");
-                    // Serial.print(path[i]);
-                    // Serial.println(" = PickBV");
-                    // Serial.println();
-                }
-                else{
-                    // Serial.println("Missing command to get box, waiting for further instructions");
-                    // Serial.println();
-                }*/
-            }
-            else if(path[i+1] == 15 || path[i+1] == 22 || path[i+1] == 11 || path[i+1] == 18){
-                if(size > 2){
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
-                    cont2++;
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                    if(mode(&nodeVec[path[i]]) == "Right") {
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = AdjustL");
-                        dirVec.push_back("AdjustL");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = TRight");
-                        dirVec.push_back("TRight");
-                    }
-                    else if(mode(&nodeVec[path[i]]) == "Left") {
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = AdjustL");
-                        dirVec.push_back("AdjustL");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = TLeft");
-                        dirVec.push_back("TLeft");
-                    }
-                }/*
-                else 
-                  // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                if(robot.command == '>'){
-                    dirVec.push_back("DropBV");  
-                    // Serial.printf("Modo ");
-                    // Serial.print(path[i]);
-                    // Serial.println(" = DropBV");
-                    // Serial.println();
-                }
-                else{
-                    // Serial.println("Missing command to get box, waiting for further instructions");
-                    // Serial.println();
-                }*/
-            }
-            else if(path[i+1] == 31 || path[i+1] == 32 || path[i+1] == 33 || path[i+1] == 34){
-                if(size > 2){
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
-                    cont2++;
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                    if(mode(&nodeVec[path[i]]) == "Right") {
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = AdjustL");
-                        dirVec.push_back("AdjustL");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = TRight");
-                        dirVec.push_back("TRight");
-                    }
-                    else if(mode(&nodeVec[path[i]]) == "Left") {
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = AdjustL");
-                        dirVec.push_back("AdjustL");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = TLeft");
-                        dirVec.push_back("TLeft");
-                    }
-                }/*
-                else 
-                  // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                if(robot.command == '>'){
-                    dirVec.push_back("DropB");  
-                    // Serial.printf("Modo ");
-                    // Serial.print(path[i]);
-                    // Serial.println(" = DropB");
-                    // Serial.println();
-                }
-                else{
-                    // Serial.println("Missing command to get box, waiting for further instructions");
-                    // Serial.println();
-                }*/
-            }
-            else{
-                if(size > 2){
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
-                    cont2++;
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
-                    if(mode(&nodeVec[path[i]]) == "Right") {
-                        dirVec.push_back("RLine");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = RLine");
-                        // Serial.println();
-                    }
-                    else if(mode(&nodeVec[path[i]]) == "Left") {
-                        dirVec.push_back("LLine");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.println(" = LLine");
-                        // Serial.println();
-                    }
-                    else{
-                        dirVec.push_back("Line");
-                        // Serial.printf("Modo ");
-                        // Serial.print(path[i]);
-                        // Serial.printf(" = ");
-                        // Serial.println("Line");
-                        // Serial.println();
-                    }
+                std::cout << "Direcao" << cont1 << "." << cont2 << " : " << path[i-1] << " -> " << path[i] << " = " << direction(&nodeVec[path[i-1]], &nodeVec[path[i]]) << std::endl;
+                // Serial.println(cont1);
+                // Serial.printf(".");
+                cont2++;
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+                if(mode(&nodeVec[path[i]]) == "Right") {
                     // Serial.printf("Modo ");
                     // Serial.print(path[i]);
                     // Serial.println(" = AdjustL");
                     dirVec.push_back("AdjustL");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = TRight");
+                    dirVec.push_back("TRight");
                 }
-                else {
-                    // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+                else if(mode(&nodeVec[path[i]]) == "Left") {
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = AdjustL");
+                    dirVec.push_back("AdjustL");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = TLeft");
+                    dirVec.push_back("TLeft");
+                }
+                dirVec.push_back("Pick");
+            }
+            else if(path[i+1] == 16 || path[i+1] == 23 || path[i+1] == 12 || path[i+1] == 19){
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
+                cont2++;
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+                if(mode(&nodeVec[path[i]]) == "Right") {
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = AdjustL");
+                    dirVec.push_back("AdjustL");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = TRight");
+                    dirVec.push_back("TRight");
+                }
+                else if(mode(&nodeVec[path[i]]) == "Left") {
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = AdjustL");
+                    dirVec.push_back("AdjustL");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = TLeft");
+                    dirVec.push_back("TLeft");
+                }
+                dirVec.push_back("Pick");
+            }
+            else if(path[i+1] == 15 || path[i+1] == 22 || path[i+1] == 11 || path[i+1] == 18){
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
+                cont2++;
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+                if(mode(&nodeVec[path[i]]) == "Right") {
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = AdjustL");
+                    dirVec.push_back("AdjustL");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = TRight");
+                    dirVec.push_back("TRight");
+                }
+                else if(mode(&nodeVec[path[i]]) == "Left") {
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = AdjustL");
+                    dirVec.push_back("AdjustL");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = TLeft");
+                    dirVec.push_back("TLeft");
+                }
+                dirVec.push_back("Drop");
+            }
+            else if(path[i+1] == 31 || path[i+1] == 32 || path[i+1] == 33 || path[i+1] == 34){
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
+                cont2++;
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+                if(mode(&nodeVec[path[i]]) == "Right") {
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = AdjustL");
+                    dirVec.push_back("AdjustL");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = TRight");
+                    dirVec.push_back("TRight");
+                }
+                else if(mode(&nodeVec[path[i]]) == "Left") {
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = AdjustL");
+                    dirVec.push_back("AdjustL");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = TLeft");
+                    dirVec.push_back("TLeft");
+                }
+                dirVec.push_back("Drop");
+            }
+            else{
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
+                cont2++;
+                // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+                if(mode(&nodeVec[path[i]]) == "Right") {
+                    dirVec.push_back("RLine");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = RLine");
+                    // Serial.println();
+                }
+                else if(mode(&nodeVec[path[i]]) == "Left") {
+                    dirVec.push_back("LLine");
+                    // Serial.printf("Modo ");
+                    // Serial.print(path[i]);
+                    // Serial.println(" = LLine");
+                    // Serial.println();
+                }
+                else{
                     dirVec.push_back("Line");
                     // Serial.printf("Modo ");
                     // Serial.print(path[i]);
-                    // Serial.printf(" = Line");
+                    // Serial.printf(" = ");
+                    // Serial.println("Line");
                     // Serial.println();
                 }
+                // Serial.printf("Modo ");
+                // Serial.print(path[i]);
+                // Serial.println(" = AdjustL");
+                dirVec.push_back("AdjustL");
             }
         }
+
+        // MODO PI
+        // else if(nodeVec[path[i+1]].next == NULL) { //Estamos no penultimo no
+        //     if(path[i+1] == 0 || path[i+1] == 1 || path[i+1] == 2 || path[i+1] == 3){
+        //         if(size > 2){ //O path tem mais de 2 nos
+        //             std::cout << "Direcao" << cont1 << "." << cont2 << " : " << path[i-1] << " -> " << path[i] << " = " << direction(&nodeVec[path[i-1]], &nodeVec[path[i]]) << std::endl;
+        //             // Serial.println(cont1);
+        //             // Serial.printf(".");
+        //             cont2++;
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+        //             if(mode(&nodeVec[path[i]]) == "Right") {
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = AdjustL");
+        //                 dirVec.push_back("AdjustL");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = TRight");
+        //                 dirVec.push_back("TRight");
+        //             }
+        //             else if(mode(&nodeVec[path[i]]) == "Left") {
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = AdjustL");
+        //                 dirVec.push_back("AdjustL");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = TLeft");
+        //                 dirVec.push_back("TLeft");
+        //             }
+        //         }
+        //         /*
+        //         else 
+        //           // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+                
+        //         if(robot.command == '<'){
+        //             dirVec.push_back("PickB");  //Ultimo modo do vetor de modos (Uma posicao a menos do que o vetor de nos)
+        //             // Serial.printf("Modo ");
+        //             // Serial.print(path[i]);
+        //             // Serial.println(" = PickB");
+        //             // Serial.println();
+        //         }
+        //         else{
+        //             // Serial.println("Missing command to get box, waiting for further instructions");
+        //             // Serial.println();
+        //         }
+        //         */
+        //     }
+        //     else if(path[i+1] == 16 || path[i+1] == 23 || path[i+1] == 12 || path[i+1] == 19){
+        //         if(size > 2){
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
+        //             cont2++;
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+        //             if(mode(&nodeVec[path[i]]) == "Right") {
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = AdjustL");
+        //                 dirVec.push_back("AdjustL");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = TRight");
+        //                 dirVec.push_back("TRight");
+        //             }
+        //             else if(mode(&nodeVec[path[i]]) == "Left") {
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = AdjustL");
+        //                 dirVec.push_back("AdjustL");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = TLeft");
+        //                 dirVec.push_back("TLeft");
+        //             }
+        //         }
+        //         /*
+        //         else 
+        //           // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+                
+        //         if(robot.command == '<'){
+        //             dirVec.push_back("PickBV");  //Ultimo modo do vetor de modos (Uma posicao a menos do que o vetor de nos)
+        //             // Serial.printf("Modo ");
+        //             // Serial.print(path[i]);
+        //             // Serial.println(" = PickBV");
+        //             // Serial.println();
+        //         }
+        //         else{
+        //             // Serial.println("Missing command to get box, waiting for further instructions");
+        //             // Serial.println();
+        //         }*/
+        //     }
+        //     else if(path[i+1] == 15 || path[i+1] == 22 || path[i+1] == 11 || path[i+1] == 18){
+        //         if(size > 2){
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
+        //             cont2++;
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+        //             if(mode(&nodeVec[path[i]]) == "Right") {
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = AdjustL");
+        //                 dirVec.push_back("AdjustL");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = TRight");
+        //                 dirVec.push_back("TRight");
+        //             }
+        //             else if(mode(&nodeVec[path[i]]) == "Left") {
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = AdjustL");
+        //                 dirVec.push_back("AdjustL");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = TLeft");
+        //                 dirVec.push_back("TLeft");
+        //             }
+        //         }/*
+        //         else 
+        //           // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+        //         if(robot.command == '>'){
+        //             dirVec.push_back("DropBV");  
+        //             // Serial.printf("Modo ");
+        //             // Serial.print(path[i]);
+        //             // Serial.println(" = DropBV");
+        //             // Serial.println();
+        //         }
+        //         else{
+        //             // Serial.println("Missing command to get box, waiting for further instructions");
+        //             // Serial.println();
+        //         }*/
+        //     }
+        //     else if(path[i+1] == 31 || path[i+1] == 32 || path[i+1] == 33 || path[i+1] == 34){
+        //         if(size > 2){
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
+        //             cont2++;
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+        //             if(mode(&nodeVec[path[i]]) == "Right") {
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = AdjustL");
+        //                 dirVec.push_back("AdjustL");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = TRight");
+        //                 dirVec.push_back("TRight");
+        //             }
+        //             else if(mode(&nodeVec[path[i]]) == "Left") {
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = AdjustL");
+        //                 dirVec.push_back("AdjustL");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = TLeft");
+        //                 dirVec.push_back("TLeft");
+        //             }
+        //         }/*
+        //         else 
+        //           // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+        //         if(robot.command == '>'){
+        //             dirVec.push_back("DropB");  
+        //             // Serial.printf("Modo ");
+        //             // Serial.print(path[i]);
+        //             // Serial.println(" = DropB");
+        //             // Serial.println();
+        //         }
+        //         else{
+        //             // Serial.println("Missing command to get box, waiting for further instructions");
+        //             // Serial.println();
+        //         }*/
+        //     }
+        //     else{
+        //         if(size > 2){
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i-1], path[i], direction(&nodeVec[path[i-1]], &nodeVec[path[i]]));
+        //             cont2++;
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+        //             if(mode(&nodeVec[path[i]]) == "Right") {
+        //                 dirVec.push_back("RLine");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = RLine");
+        //                 // Serial.println();
+        //             }
+        //             else if(mode(&nodeVec[path[i]]) == "Left") {
+        //                 dirVec.push_back("LLine");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.println(" = LLine");
+        //                 // Serial.println();
+        //             }
+        //             else{
+        //                 dirVec.push_back("Line");
+        //                 // Serial.printf("Modo ");
+        //                 // Serial.print(path[i]);
+        //                 // Serial.printf(" = ");
+        //                 // Serial.println("Line");
+        //                 // Serial.println();
+        //             }
+        //             // Serial.printf("Modo ");
+        //             // Serial.print(path[i]);
+        //             // Serial.println(" = AdjustL");
+        //             dirVec.push_back("AdjustL");
+        //         }
+        //         else {
+        //             // Serial.printf("Direcao%d.%d : %d -> %d = %c\n", cont1, cont2, path[i], path[i+1],direction(&nodeVec[path[i]], &nodeVec[path[i+1]]));
+        //             dirVec.push_back("Line");
+        //             // Serial.printf("Modo ");
+        //             // Serial.print(path[i]);
+        //             // Serial.printf(" = Line");
+        //             // Serial.println();
+        //         }
+        //     }
+        // }
         else if(nodeVec[path[i]].prev != NULL && nodeVec[path[i+1]].next != NULL && nodeVec[path[i]].next != NULL){ //Nao e o primeiro, penultimo nem o ultimo
         //                                                                             Como i>2 estamos em algum no entre o quarto e o penultimo (pois o ultimo tem .next = NULL)
         //                                                                             Atribuimos apenas o modo do anterior a ele 

@@ -657,7 +657,7 @@ void loop()
                 irrecvbuffer_index = -1;
                 Serial.println("Received Instruction!");
                 Serial.println(irrecvbuffer);
-                robot.setState(SETUP1);
+                robot.setState(SETUP);
                 robot.IRLine.crosses = 0;
               }
             } else {
@@ -668,7 +668,6 @@ void loop()
       }
 
       // ========== pacoMode ==========
-
       // Serial.printf("                                 Serial2.available() = ");
       // Serial.println(Serial2.available());
       // if (Serial2.available())
@@ -719,14 +718,14 @@ void loop()
           // irrecvbuffer_index = -1;
           // Serial.println("Received Instruction!");
           // Serial.println(irrecvbuffer);
-          // robot.setState(SETUP1);
+          // robot.setState(SETUP);
           // stp2 = 1;
           // Serial.println("Stp2 = TRUE");
           // robot.IRLine.crosses = 0;
     }
 
     // if Setup, create boxes and start the setup for the Dijkstra
-    if (robot.state == SETUP1)
+    if (robot.state == SETUP)
     {
       for (size_t i = 0; i < 4; i++)
       {
@@ -747,69 +746,65 @@ void loop()
       }
 
       scheduler.setUp(boxes, 4);
+
+      robot.setState(NEXT);
+    }
+
+    if (robot.state == NEXT){
       currentBox = scheduler.getBox();
       currentPort = scheduler.getAvailablePort(currentBox);
       instructions = scheduler.getRoute();
-      // Serial.println("Aqui");
+      Serial.print("Picking at: ");
+      Serial.println(currentBox.pos);
+      Serial.print("Dropping at: ");
+      Serial.println(currentPort.pos);
       for (auto inst : instructions)
       {
         Serial.println(inst.c_str());
       }
 
-      robot.setState(STOP);
+      robot.setState(GO);
     }
 
-    if (stp2)
-    {
+    // MODO PACO
+    // if (stp2)
+    // {
+    //   Serial.println("ESTOU NO SETUP");
+    //   if (irrecvbuffer[1] == '0')
+    //   {
+    //     destNode = irrecvbuffer[2] - 48;
+    //   }
+    //   else if (irrecvbuffer[1] == '1')
+    //   {
+    //     destNode = 10 + (irrecvbuffer[2] - 48);
+    //   }
+    //   else if (irrecvbuffer[1] == '2')
+    //   {
+    //     destNode = 20 + (irrecvbuffer[2] - 48);
+    //   }
+    //   else if (irrecvbuffer[1] == '3')
+    //   {
+    //     destNode = 30 + (irrecvbuffer[2] - 48);
+    //   }
+    //   Serial.println("Morri depois do if");
+    //   instructions = scheduler.getPaco(destNode);
+    //   Serial.println("Morri depois do getpaco");
+    //   instructionCounter = 0;
+    //   pathCounter = 0;
+    //   Serial.println("Morri depois de zerar coisas");
+    //   // Serial.println("Aqui");
+    //   for (auto inst : instructions)
+    //   {
+    //     Serial.println(inst.c_str());
+    //   }
+    //   Serial.println("Morri depois do FOR");
+    //   robot.setState(GO);
+    //   Serial.println("Morri depois de entrar em GO");
+    //   stp2 = 0;
+    //   Serial.println("Morri depois do stp2 = 0");
+    // }
 
-      Serial.println("ESTOU NO SETUP");
-
-      if (irrecvbuffer[1] == '0')
-      {
-
-        destNode = irrecvbuffer[2] - 48;
-      }
-      else if (irrecvbuffer[1] == '1')
-      {
-
-        destNode = 10 + (irrecvbuffer[2] - 48);
-      }
-      else if (irrecvbuffer[1] == '2')
-      {
-
-        destNode = 20 + (irrecvbuffer[2] - 48);
-      }
-      else if (irrecvbuffer[1] == '3')
-      {
-
-        destNode = 30 + (irrecvbuffer[2] - 48);
-      }
-
-      Serial.println("Morri depois do if");
-
-      instructions = scheduler.getPaco(destNode);
-      Serial.println("Morri depois do getpaco");
-      instructionCounter = 0;
-      pathCounter = 0;
-      Serial.println("Morri depois de zerar coisas");
-      // Serial.println("Aqui");
-      for (auto inst : instructions)
-      {
-        Serial.println(inst.c_str());
-      }
-
-      Serial.println("Morri depois do FOR");
-
-      robot.setState(STOP);
-
-      Serial.println("Morri depois de entrar em STOP");
-
-      stp2 = 0;
-
-      Serial.println("Morri depois do stp2 = 0");
-    }
-
-    if (robot.state == STOP)
+    if (robot.state == GO)
     {
 
       Serial.println("ESTOU NO SCHEDULER!");
@@ -852,8 +847,8 @@ void loop()
         robot.setState(FLINE);
 
       } else if (instructions[instructionCounter] == "Line" && (instructions[instructionCounter + 1] == "Drop" || instructions[instructionCounter + 1] == "Pick")){
-        Serial.println("Case STOP");
-        robot.setState(STOP);
+        Serial.println("Case GO");
+        robot.setState(GO);
       } else if (instructions[instructionCounter] == "Left" && (instructions[instructionCounter + 1] == "Pick" || instructions[instructionCounter + 1] == "Drop")){
         Serial.println("Case TLEFT");
 
@@ -877,16 +872,18 @@ void loop()
         
         
       } else if (instructions[instructionCounter] == "Pick"){
-        if (destNode == 0 || destNode == 1 || destNode == 2 || destNode == 3){
+        if (currentBox.pos == 0 || currentBox.pos == 1 || currentBox.pos == 2 || currentBox.pos == 3){
           robot.setState(PICKB);
           robot.compassCount = 2;
           Serial.printf("compassCount: %d\n", robot.compassCount);
 
-        } else if (destNode == 16 || destNode == 23 || destNode == 12 || destNode == 19){
+        } else if (currentBox.pos == 16 || currentBox.pos == 23 || currentBox.pos == 12 || currentBox.pos == 19){
           robot.setState(PICKBV);
           robot.compassCount = 1;
           Serial.printf("compassCount: %d\n", robot.compassCount);
         }
+        else
+          Serial.println("Failed to start picking phase");
         // Assuming that after this robot.state the box is picked
         if (currentBox.color == RED)
         {
@@ -901,23 +898,25 @@ void loop()
           }
         }
         currentBox.status = HOLDING;
-        Serial.println("Case START");
-        instructionCounter++;
+        Serial.println("Case PICK");
+        // instructionCounter++;
       } else if (instructions[instructionCounter] == "Drop"){
         Serial.println("Case DROP");
 
-        if (destNode == 31 || destNode == 32 || destNode == 33 || destNode == 34){
+        if (currentPort.pos == 31 || currentPort.pos == 32 || currentPort.pos == 33 || currentPort.pos == 34){
           robot.setState(DROPB);
           robot.compassCount = 0;
           Serial.printf("compassCount: %d\n", robot.compassCount);
 
-        } else if (destNode == 15 || destNode == 22 || destNode == 11 || destNode == 18) {
+        } else if (currentPort.pos == 15 || currentPort.pos == 22 || currentPort.pos == 11 || currentPort.pos == 18) {
           robot.setState(DROPBV);
            robot.compassCount = 3;
           Serial.printf("compassCount: %d\n", robot.compassCount);
           Serial.println("CAIXA VERDE OU VERMELHA");
 
         }
+        else 
+          Serial.println("Failed to start dropping phase");
 
         currentBox.status = DELIVERED;
         currentPort = scheduler.getAvailablePort(currentBox);
@@ -949,9 +948,13 @@ void loop()
       } else if (instructions[instructionCounter] == "Error"){
         Serial.println("CASE ERROR -> State = START");
         robot.setState(START);
+      } else if (instructions[instructionCounter] == "Fim"){
+        Serial.println("CASE FIM");
+        robot.setState(NEXT);
       }
 
       instructionCounter++;
+      Serial.println("HERE");
     }
 
     // Debug information

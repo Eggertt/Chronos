@@ -34,14 +34,23 @@ PID_t::PID_t()
   ppars = &pars;  // Use the internal pars
   
   // Some typical values
-  pars.Kf = 12.5;
-  pars.Kc = 8.7;
-  pars.Ki = 6;
+  // pars.Kf = 12.5;
+  // pars.Kc = 8.7;
+  // pars.Ki = 6;
+  // pars.Kd = 0;
+  // pars.dt = 0.04;
+
+  // m_max = 5.8;
+  // m_min = -5.8;
+
+  pars.Kf = 340;
+  pars.Kc = 100;
+  pars.Ki = 500;
   pars.Kd = 0;
   pars.dt = 0.04;
-
-  m_max = 5.8;
-  m_min = -5.8;
+  
+  m_max = 255;
+  m_min = -255;
 
   Se = 0;
   e = 0;

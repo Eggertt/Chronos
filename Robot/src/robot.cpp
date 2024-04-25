@@ -97,6 +97,9 @@ void robot_t::VWToMotorsVoltage(void)
 {
   v1ref = v + w * wheel_dist / 2;
   v2ref = v - w * wheel_dist / 2; 
+
+  v1ref *= 20;
+  v2ref *= 20;
   
   w1ref = v1ref * wheel_radius;
   w2ref = v2ref * wheel_radius;
@@ -115,8 +118,8 @@ void robot_t::VWToMotorsVoltage(void)
     if (v2ref != 0) u2 = PID[1].calc(v2ref, v2e);
     else PID[1].Se = 0;
 
-    PWM_1 = u1 / battery_voltage * 255;
-    PWM_2 = u2 / battery_voltage * 255;
+    PWM_1 = u1;
+    PWM_2 = -u2;
   }
 }
 

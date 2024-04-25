@@ -78,10 +78,8 @@ int debug;
 void setMotorPWM(int new_PWM, int pin_a, int pin_b)
 {
   int PWM_max = 200;
-  if (new_PWM > PWM_max)
-    new_PWM = PWM_max;
-  if (new_PWM < -PWM_max)
-    new_PWM = -PWM_max;
+  if (new_PWM >  PWM_max) new_PWM =  PWM_max;
+  if (new_PWM < -PWM_max) new_PWM = -PWM_max;
 
   if (new_PWM == 0)
   { // Both outputs 0 -> A = H, B = H
@@ -327,18 +325,12 @@ void serial_write(const char *buffer, size_t size)
   }
 }
 
-const char *encToString(uint8_t enc)
-{
-  switch (enc)
-  {
-  case ENC_TYPE_NONE:
-    return "NONE";
-  case ENC_TYPE_TKIP:
-    return "WPA";
-  case ENC_TYPE_CCMP:
-    return "WPA2";
-  case ENC_TYPE_AUTO:
-    return "AUTO";
+const char *encToString(uint8_t enc) {
+  switch (enc) {
+    case ENC_TYPE_NONE: return "NONE";
+    case ENC_TYPE_TKIP: return "WPA";
+    case ENC_TYPE_CCMP: return "WPA2";
+    case ENC_TYPE_AUTO: return "AUTO";
   }
   return "UNKN";
 }
@@ -409,7 +401,7 @@ void setup()
   analogReadResolution(10);
 
   commands_list.register_command("m1", &(robot.PWM_1_req)); // The 'm1' command sets the PWM value for motor 1
-  commands_list.register_command("m2", &(robot.PWM_2_req)); // The 'm2' command sets the PWM value for motor 1
+  commands_list.register_command("m2", &(robot.PWM_2_req)); // The 'm2' command sets the PWM value for motor 2
 
   udp_commands.init(process_command, serial_write);
 
@@ -636,7 +628,7 @@ void loop()
 
       // ========== provaMode ==========
 
-      Serial.printf("                                                 Serial2.available() = ");
+      Serial.printf("                                                                                                           Serial2.available() = ");
       Serial.println(Serial2.available());
       if (Serial2.available()) {
           irrecvdata = Serial2.read();
@@ -809,16 +801,16 @@ void loop()
 
       Serial.println("ESTOU NO SCHEDULER!");
 
-      // if (instructionCounter == instructions.size()) {
-      // if (currentBox.status == HOLDING) {
-      // instructions = scheduler.getRoute(currentBox, currentPort);
-      //} else {
-      // instructions = scheduler.getRoute();
-      // if(scheduler.flag = 1) robot.solenoid_robot.state = 0;
-      //}
-      // instructionCounter = 0;
-      // pathCounter = 0;
-      //}
+      if (instructionCounter == instructions.size()) {
+        if (currentBox.status == HOLDING) {
+          instructions = scheduler.getRoute(currentBox, currentPort);
+        } else {
+          instructions = scheduler.getRoute();
+        //if(scheduler.flag = 1) robot.solenoid_robot.state = 0;
+        }
+          instructionCounter = 0;
+          pathCounter = 0;
+      }
 
       if (instructions[instructionCounter] == "Line" && (instructions[instructionCounter + 1] != "Drop" || instructions[instructionCounter + 1] != "Pick"))
       {
@@ -961,19 +953,19 @@ void loop()
     // prints
     // serial_commands.send_command("dte", delta);
 
-    // serial_commands.send_command("M1", robot.PWM_1);
-    // serial_commands.send_command("M2", robot.PWM_2);
+     serial_commands.send_command("M1", robot.PWM_1);
+     serial_commands.send_command("M2", robot.PWM_2);
 
-    // serial_commands.send_command("e1", robot.enc1);
-    // serial_commands.send_command("e2", robot.enc2);
+    //serial_commands.send_command("e1", robot.enc1);
+    //serial_commands.send_command("e2", robot.enc2);
 
     // serial_commands.send_command("Vbat", robot.battery_voltage);
 
     // serial_commands.send_command("ve", robot.ve);
     // serial_commands.send_command("we", robot.we);
 
-    // serial_commands.send_command("v1ref", robot.v1ref);
-    // serial_commands.send_command("v2ref", robot.v2ref);
+     serial_commands.send_command("v1ref", robot.v1ref);
+     serial_commands.send_command("v2ref", robot.v2ref);
     // Serial.println("TESTE");
 
     serial_commands.send_command("iman", robot.solenoid_PWM);
@@ -982,14 +974,16 @@ void loop()
 
     serial_commands.send_command("st", robot.state);
 
-    serial_commands.send_command("theta", robot.rel_theta);
+    //serial_commands.send_command("theta", robot.rel_theta);
 
     // serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
+    // Serial.println("");
     // serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
     // serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
     // serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
     // serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
     // serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
+    // Serial.println("");
 
     serial_commands.send_command("tof", robot.tof_dist);
     // serial_commands.send_command("fk", robot.follow_k);

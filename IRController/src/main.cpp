@@ -1,11 +1,11 @@
 #include <Arduino.h>
 
 #define TXD2 15//13
-#define RXD2 18//12
+#define RXD2 25//12
 #define IR_CARRIER 5
 
-char mode = 'E';
-// char mode = 'R';
+//char mode = 'E';
+char mode = 'R';
 
 char emitted = 'U';
 char received;

@@ -65,5 +65,5 @@ void loop()
   Serial.print(sensor.readRangeSingleMillimeters());
   if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
 
-  Serial.println();
+  //Serial.println();
 }

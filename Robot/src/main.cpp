@@ -464,7 +464,7 @@ void setup()
   }*/
 
   // Connection established
-  Serial.println("");
+  //Serial.println("");
   Serial.print("Pico W is connected to WiFi network ");
   Serial.println(WiFi.SSID());
 
@@ -628,15 +628,11 @@ void loop()
 
       // ========== provaMode ==========
 
-      Serial.printf("                                                                                                           Serial2.available() = ");
-      Serial.println(Serial2.available());
+      //Serial.printf("                                                                                                           Serial2.available() = ");
+      //Serial.println(Serial2.available());
       if (Serial2.available()) {
           irrecvdata = Serial2.read();
           if(irrecvdata == 'U') {
-            Serial.println("!\n");
-            Serial.println("!\n");
-            Serial.println("!\n");
-            Serial.println("!\n");
             Serial.println("!\n");
           } else if(irrecvdata == 'W') {
             irrecvbuffer_index = 0;
@@ -654,77 +650,20 @@ void loop()
               }
             } else {
               Serial.write(irrecvdata);
-              Serial.println();
+              //Serial.println();
             }
         }
       }
 
-      // ========== pacoMode ==========
-      // Serial.printf("                                 Serial2.available() = ");
-      // Serial.println(Serial2.available());
-      // if (Serial2.available())
-      // {
-      //   irrecvdata = Serial2.read();
-      //   if (irrecvdata == 'U')
-      //   {
-      //     Serial.println("!\n");
-      //     Serial.println("!\n");
-      //     Serial.println("!\n");
-      //     Serial.println("!\n");
-      //     Serial.println("!\n");
-      //   }
-      //   else if (irrecvdata == 'R')
-      //   {
-      //     irrecvbuffer_index = 0;
-      //   }
-      //   else if (irrecvbuffer_index >= 0)
-      //   {
-      //     irrecvbuffer[irrecvbuffer_index] = irrecvdata;
-      //     if (irrecvbuffer[0] == '5')
-      //     {
-      //       irrecvbuffer_index++;
-      //       if (irrecvbuffer_index >= 3)
-      //       {
-      //         irrecvbuffer[irrecvbuffer_index] = '\0';
-      //         irrecvbuffer_index = -1;
-      //         Serial.println("Received Instruction!");
-      //         Serial.println(irrecvbuffer);
-      //         stp2 = 1;
-      //         Serial.println("Stp2 = TRUE");
-      //         robot.IRLine.crosses = 0;
-      //       }
-      //     }
-      //     else
-      //     {
-      //       Serial.write(irrecvdata);
-      //       Serial.println();
-      //     }
-      //   }
-      // }
-          // irrecvbuffer[0] = 'R';
-          // irrecvbuffer[1] = '5';
-          // irrecvbuffer[2] = 'I';
-          // irrecvbuffer[3] = '1';
-          // irrecvbuffer[4] = '<';
-          // irrecvbuffer[5] = '\0';
-          // irrecvbuffer_index = -1;
-          // Serial.println("Received Instruction!");
-          // Serial.println(irrecvbuffer);
-          // robot.setState(SETUP);
-          // stp2 = 1;
-          // Serial.println("Stp2 = TRUE");
-          // robot.IRLine.crosses = 0;
     }
 
     // if Setup, create boxes and start the setup for the Dijkstra
-    if (robot.state == SETUP)
-    {
-      for (size_t i = 0; i < 4; i++)
-      {
+    if (robot.state == SETUP){
+      for (size_t i = 0; i < 4; i++){
         Box box;
         box.pos = i;
         box.num = i;
-        box.status = WAINTING;
+        box.status = WAITING;
         if (irrecvbuffer[i] == 'w')
           box.color = RED;
 
@@ -741,6 +680,7 @@ void loop()
 
       robot.setState(NEXT);
     }
+    
 
     if (robot.state == NEXT){
       currentBox = scheduler.getBox();
@@ -758,55 +698,21 @@ void loop()
       robot.setState(GO);
     }
 
-    // MODO PACO
-    // if (stp2)
-    // {
-    //   Serial.println("ESTOU NO SETUP");
-    //   if (irrecvbuffer[1] == '0')
-    //   {
-    //     destNode = irrecvbuffer[2] - 48;
-    //   }
-    //   else if (irrecvbuffer[1] == '1')
-    //   {
-    //     destNode = 10 + (irrecvbuffer[2] - 48);
-    //   }
-    //   else if (irrecvbuffer[1] == '2')
-    //   {
-    //     destNode = 20 + (irrecvbuffer[2] - 48);
-    //   }
-    //   else if (irrecvbuffer[1] == '3')
-    //   {
-    //     destNode = 30 + (irrecvbuffer[2] - 48);
-    //   }
-    //   Serial.println("Morri depois do if");
-    //   instructions = scheduler.getPaco(destNode);
-    //   Serial.println("Morri depois do getpaco");
-    //   instructionCounter = 0;
-    //   pathCounter = 0;
-    //   Serial.println("Morri depois de zerar coisas");
-    //   // Serial.println("Aqui");
-    //   for (auto inst : instructions)
-    //   {
-    //     Serial.println(inst.c_str());
-    //   }
-    //   Serial.println("Morri depois do FOR");
-    //   robot.setState(GO);
-    //   Serial.println("Morri depois de entrar em GO");
-    //   stp2 = 0;
-    //   Serial.println("Morri depois do stp2 = 0");
-    // }
 
     if (robot.state == GO)
     {
 
-      Serial.println("ESTOU NO SCHEDULER!");
+      //Serial.println("ESTOU NO SCHEDULER!");
 
       if (instructionCounter == instructions.size()) {
         if (currentBox.status == HOLDING) {
           instructions = scheduler.getRoute(currentBox, currentPort);
         } else {
           instructions = scheduler.getRoute();
-        //if(scheduler.flag = 1) robot.solenoid_robot.state = 0;
+
+          Serial.print("Picking at: ");
+          Serial.println(currentBox.pos);
+
         }
           instructionCounter = 0;
           pathCounter = 0;
@@ -817,10 +723,6 @@ void loop()
         Serial.println("Case FLINE");
         robot.setState(FLINE);
       } else if (pathCounter <= 0 && instructions[instructionCounter] == "Right" && (instructions[instructionCounter + 1] == "Left" && instructions[instructionCounter + 2] == "Pick")){
-        // instructions[instructionCounter] = "Line";
-        // instructions[instructionCounter + 1] = "Right";
-        // instructions[instructionCounter + 2] = "Left";
-        // instructions[instructionCounter + 3] = "Pick";
         instructions.insert(instructions.begin() + 2, "Line");
         Serial.println("CASO PROBLEMA1");
         pathCounter++;
@@ -850,7 +752,7 @@ void loop()
         else
           robot.compassCount--;
 
-        Serial.printf("compassCount: %d\n", robot.compassCount);
+        //Serial.printf("compassCount: %d\n", robot.compassCount);
       } else if (instructions[instructionCounter] == "Right" && (instructions[instructionCounter + 1] == "Pick" || instructions[instructionCounter + 1] == "Drop")){
         Serial.println("Case TRIGHT");
         robot.setState(TRIGHT);
@@ -860,37 +762,31 @@ void loop()
         else
           robot.compassCount++;
 
-        Serial.printf("compassCount: %d\n", robot.compassCount);
+        //Serial.printf("compassCount: %d\n", robot.compassCount);
         
         
       } else if (instructions[instructionCounter] == "Pick"){
         if (currentBox.pos == 0 || currentBox.pos == 1 || currentBox.pos == 2 || currentBox.pos == 3){
           robot.setState(PICKB);
           robot.compassCount = 2;
-          Serial.printf("compassCount: %d\n", robot.compassCount);
+          //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentBox.pos == 16 || currentBox.pos == 23 || currentBox.pos == 12 || currentBox.pos == 19){
           robot.setState(PICKBV);
           robot.compassCount = 1;
-          Serial.printf("compassCount: %d\n", robot.compassCount);
+          //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
         else
           Serial.println("Failed to start picking phase");
-        // Assuming that after this robot.state the box is picked
-        if (currentBox.color == RED)
-        {
-          int counterGreen = 0;
-          for (auto pick : scheduler.deliveryNodesB)
-          {
-            pick.occupied = false;
-            Serial.printf("deliveryNodesB[");
-            Serial.print(counterGreen);
-            Serial.printf("].occupied = ");
-            Serial.println(scheduler.deliveryNodesB[counterGreen].occupied);
-          }
-        }
+
         currentBox.status = HOLDING;
         Serial.println("Case PICK");
+
+        Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[0].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[0].occupied);
+        Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[1].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[1].occupied);
+        Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[2].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[2].occupied);
+        Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[3].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[3].occupied);
+
         // instructionCounter++;
       } else if (instructions[instructionCounter] == "Drop"){
         Serial.println("Case DROP");
@@ -898,23 +794,27 @@ void loop()
         if (currentPort.pos == 31 || currentPort.pos == 32 || currentPort.pos == 33 || currentPort.pos == 34){
           robot.setState(DROPB);
           robot.compassCount = 0;
-          Serial.printf("compassCount: %d\n", robot.compassCount);
+          //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentPort.pos == 15 || currentPort.pos == 22 || currentPort.pos == 11 || currentPort.pos == 18) {
           robot.setState(DROPBV);
-           robot.compassCount = 3;
-          Serial.printf("compassCount: %d\n", robot.compassCount);
-          Serial.println("CAIXA VERDE OU VERMELHA");
+          robot.compassCount = 3;
+          //Serial.printf("compassCount: %d\n", robot.compassCount);
+          //Serial.println("CAIXA VERDE OU VERMELHA");
 
         }
         else 
           Serial.println("Failed to start dropping phase");
 
-        currentBox.status = DELIVERED;
-        currentPort = scheduler.getAvailablePort(currentBox);
-        currentPort.occupied = true;
-        // scheduler.updatePorts(currentPort);
-        currentBox = scheduler.getBox();
+          if(currentPort.pos == 31) scheduler.deliveryPorts[0].occupied = true;
+          else if(currentPort.pos == 32) scheduler.deliveryPorts[1].occupied = true;
+          else if(currentPort.pos == 33) scheduler.deliveryPorts[2].occupied = true;
+          else if(currentPort.pos == 34) scheduler.deliveryPorts[3].occupied = true;
+
+          currentBox.status = DELIVERED;
+          currentPort = scheduler.getAvailablePort(currentBox);
+          currentPort.occupied = true;
+          currentBox = scheduler.getBox();
         
       } else if (instructions[instructionCounter] == "Left") {
         Serial.println("Case LEFTLINE");
@@ -925,7 +825,7 @@ void loop()
         else
           robot.compassCount--;
 
-        Serial.printf("compassCount: %d\n", robot.compassCount);
+        //Serial.printf("compassCount: %d\n", robot.compassCount);
         
       } else if (instructions[instructionCounter] == "Right"){
         Serial.println("Case RIGHTLINE");
@@ -935,26 +835,28 @@ void loop()
         else
           robot.compassCount++;
 
-        Serial.printf("compassCount: %d\n", robot.compassCount);
+        //Serial.printf("compassCount: %d\n", robot.compassCount);
         
       } else if (instructions[instructionCounter] == "Error"){
         Serial.println("CASE ERROR -> State = START");
         robot.setState(START);
-      } else if (instructions[instructionCounter] == "Fim"){
-        Serial.println("CASE FIM");
-        robot.setState(NEXT);
-      }
+      } 
+      
+      // else if (instructions[instructionCounter] == "Fim"){
+      //   Serial.println("CASE FIM");
+      //   robot.setState(NEXT);
+      // }
 
       instructionCounter++;
-      Serial.println("HERE");
+      //Serial.println("HERE");
     }
 
     // Debug information
     // prints
     // serial_commands.send_command("dte", delta);
 
-     serial_commands.send_command("M1", robot.PWM_1);
-     serial_commands.send_command("M2", robot.PWM_2);
+     //serial_commands.send_command("M1", robot.PWM_1);
+     //serial_commands.send_command("M2", robot.PWM_2);
 
     //serial_commands.send_command("e1", robot.enc1);
     //serial_commands.send_command("e2", robot.enc2);
@@ -964,17 +866,20 @@ void loop()
     // serial_commands.send_command("ve", robot.ve);
     // serial_commands.send_command("we", robot.we);
 
-     serial_commands.send_command("v1ref", robot.v1ref);
-     serial_commands.send_command("v2ref", robot.v2ref);
+     //serial_commands.send_command("v1ref", robot.v1ref);
+     //serial_commands.send_command("v2ref", robot.v2ref);
     // Serial.println("TESTE");
 
-    serial_commands.send_command("iman", robot.solenoid_PWM);
+    ////serial_commands.send_command("iman", robot.solenoid_PWM);
 
     // serial_commands.send_command("mode", robot.control_mode);
 
-    serial_commands.send_command("st", robot.state);
+    ////serial_commands.send_command("st", robot.state);
 
-    //serial_commands.send_command("theta", robot.rel_theta);
+    // serial_commands.send_command("rel_s", robot.rel_s);
+    // Serial.println("");
+    // serial_commands.send_command("theta", robot.rel_theta);
+    // Serial.println("");
 
     // serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
     // Serial.println("");
@@ -985,7 +890,7 @@ void loop()
     // serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
     // Serial.println("");
 
-    serial_commands.send_command("tof", robot.tof_dist);
+    ////serial_commands.send_command("tof", robot.tof_dist);
     // serial_commands.send_command("fk", robot.follow_k);
     // serial_commands.send_command("fv", robot.follow_v);
 
@@ -993,6 +898,7 @@ void loop()
     // serial_commands.send_command("pl", robot.IRLine.pos_left);
 
     // serial_commands.send_command("ki", wheel_PID_pars.Ki);
+
 
     // Serial.print(" cmd: ");
     Serial.print(serial_commands.frame.command);
@@ -1004,6 +910,6 @@ void loop()
     // serial_commands.send_command("loop", micros() - loop_micros);
 
     serial_commands.flush();
-    Serial.println();
+    //Serial.println();
   }
 }

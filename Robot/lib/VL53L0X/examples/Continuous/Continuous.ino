@@ -33,5 +33,5 @@ void loop()
   Serial.print(sensor.readRangeContinuousMillimeters());
   if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
 
-  Serial.println();
+  //Serial.println();
 }

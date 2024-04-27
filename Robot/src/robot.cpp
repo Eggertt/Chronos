@@ -98,8 +98,8 @@ void robot_t::VWToMotorsVoltage(void)
   v1ref = v + w * wheel_dist / 2;
   v2ref = v - w * wheel_dist / 2; 
 
-  v1ref *= 20;
-  v2ref *= 20;
+  v1ref *= 10;
+  v2ref *= 10;
   
   w1ref = v1ref * wheel_radius;
   w2ref = v2ref * wheel_radius;
@@ -119,7 +119,7 @@ void robot_t::VWToMotorsVoltage(void)
     else PID[1].Se = 0;
 
     PWM_1 = u1;
-    PWM_2 = -u2;
+    PWM_2 = u2;
   }
 }
 
@@ -143,23 +143,23 @@ void robot_t::followLineLeft(float Vnom, float K)
 
 void robot_t::followLine(){
 
-       if (IRLine.IR_values[2] < 500){
+       if (IRLine.IR_values[2] > 500){
         setRobotVW(0.1, 0);
 
-       }else if (IRLine.IR_values[3] < 500){
-        setRobotVW(0.1, 0.2);
+       }else if (IRLine.IR_values[3] > 500){
+        setRobotVW(0.1, 1);
 
-       }else if (IRLine.IR_values[4] < 500 && IRLine.IR_values[3] < 500){
-        setRobotVW(0.05, 0.7);
+       }else if (IRLine.IR_values[4] > 500 && IRLine.IR_values[3] > 500){
+        setRobotVW(0.05, 1.5);
         
       //  }else if (IRLine.IR_values[4] > 500 && IRLine.IR_values[3] <= 500){
       //   setRobotVW(0.065, 1.5);
 
-      } else if (IRLine.IR_values[1] < 500){
-        setRobotVW(0.1, -0.2);
+      } else if (IRLine.IR_values[1] > 500){
+        setRobotVW(0.1, -1);
 
-       }else if (IRLine.IR_values[0] < 500 && IRLine.IR_values[1] < 500){
-        setRobotVW(0.05, -0.7);
+       }else if (IRLine.IR_values[0] > 500 && IRLine.IR_values[1] > 500){
+        setRobotVW(0.05, -1.5);
 
       //  }else if (IRLine.IR_values[0] > 500 && IRLine.IR_values[1] <= 500){
       //   setRobotVW(0.065, -1.5);

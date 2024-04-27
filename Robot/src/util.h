@@ -8,7 +8,7 @@ enum Color {
 };
 
 enum Status {
-    WAINTING,
+    WAITING,
     HOLDING,
     DELIVERED
 };

@@ -118,10 +118,10 @@ void IRLine_t::calcCrosses(void)
     if (cross_count > 0) cross_count--;
   }
 
-  Serial.printf("                                                                              Blacks = ");
-  Serial.println(blacks);
-  Serial.printf("                                                                                               Crosses = ");
-  Serial.println(crosses);
+  // Serial.printf("                                                                              Blacks = ");
+  // Serial.println(blacks);
+  // Serial.printf("                                                                                               Crosses = ");
+  // Serial.println(crosses);
 }
 
 /*

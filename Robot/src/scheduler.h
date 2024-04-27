@@ -15,8 +15,6 @@ class Scheduler
 {
 private:
     Direction dir;
-    std::vector<Port> deliveryPorts;
-    std::vector<Port> deliveryNodesA;
     int currentPosition, prevPosition = -1;
     Node *nodeVec;
     int *path; 
@@ -30,6 +28,8 @@ public:
     std::vector<std::string> getRoute(Box box, Port port);
     std::vector<std::string> getRoute();
     std::vector<std::string> getPaco(int destNode);
+    std::vector<Port> deliveryPorts;
+    std::vector<Port> deliveryNodesA;
     std::vector<Port> deliveryNodesB;
     Box getBox();
     Port getAvailablePort(Box currentBox);
@@ -105,14 +105,14 @@ std::vector<std::string> Scheduler::getRoute(Box box, Port destPort) {
         destPort = getAvailablePort(box);
 
         Serial.println();
-        Serial.print("Porta ");
+        Serial.print("Dropping at: ");
         Serial.print(destPort.pos);
         Serial.print(".occupied = ");
         Serial.println(destPort.occupied);
     }
     else {
         Serial.println();
-        Serial.print("Porta ");
+        Serial.print("Dropping at: ");
         Serial.print(destPort.pos);
         Serial.print(".occupied = ");
         Serial.println(destPort.occupied);
@@ -148,9 +148,7 @@ std::vector<std::string> Scheduler::getRoute(Box box, Port destPort) {
         
         newBox.num = box.num;
         newBox.pos = currentPosition+1;
-        // Serial.print(F(" BoxPos: "));
-        // serial_print_format(box.pos, 4);
-        newBox.status = WAINTING;
+        newBox.status = WAITING;
 
         queue.push(newBox);
     }
@@ -162,12 +160,13 @@ std::vector<std::string> Scheduler::getRoute() {
     Dijkstra dijkstra = Dijkstra(N_NODES);
 
     if(queue.empty()){
-        //flag = 1;
-        Serial.print("FILA -= VAZIA =- BRO");
+        Serial.print("FILA -= VAZIA =- BRO ");
     }
     
     Box box = queue.top();
     queue.pop();
+
+
 
     // If box is waiting then we need to pick it up
     dijkstra.findPath(graph, currentPosition, box.pos);

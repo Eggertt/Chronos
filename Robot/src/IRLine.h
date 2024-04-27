@@ -44,7 +44,8 @@ class IRLine_t
     int crosses;
     int cross_count, last_cross_count;
     int cross_tresh;
-    int black_cross_level;
+    
+    float black_cross_level;
 
     float blacks;
 

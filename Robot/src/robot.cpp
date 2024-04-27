@@ -40,7 +40,7 @@ robot_t::robot_t()
   dt = 0.04;
 
   follow_k = -0.15;
-  follow_v = 0.10; // 0.20;
+  follow_v = 0.20; // 0.20;
 
   pchannels = NULL;
   pfsm = NULL;
@@ -142,25 +142,26 @@ void robot_t::followLineLeft(float Vnom, float K)
 }
 
 
+
 void robot_t::followLine(){
 
        if (IRLine.IR_values[2] > 500){
-        setRobotVW(0.1, 0);
+        setRobotVW(follow_v, 0);
 
        }else if (IRLine.IR_values[3] > 500){
-        setRobotVW(0.1, 1);
+        setRobotVW(follow_v, 1);
 
        }else if (IRLine.IR_values[4] > 500 && IRLine.IR_values[3] > 500){
-        setRobotVW(0.05, 1.5);
+        setRobotVW(follow_v/2, 1.5);
         
       //  }else if (IRLine.IR_values[4] > 500 && IRLine.IR_values[3] <= 500){
       //   setRobotVW(0.065, 1.5);
 
       } else if (IRLine.IR_values[1] > 500){
-        setRobotVW(0.1, -1);
+        setRobotVW(follow_v, -1);
 
        }else if (IRLine.IR_values[0] > 500 && IRLine.IR_values[1] > 500){
-        setRobotVW(0.05, -1.5);
+        setRobotVW(follow_v/2, -1.5);
 
       //  }else if (IRLine.IR_values[0] > 500 && IRLine.IR_values[1] <= 500){
       //   setRobotVW(0.065, -1.5);

@@ -192,15 +192,16 @@ class main_fsm_t: public state_machine_t
       //robot.setRobotVW(0,0);
     
     }else if(robot.state == FLINE){  
+      
       robot.rel_theta = 0;                  
       robot.followLine();
     
     }else if(robot.state == TLEFT){  
       //robot.rel_theta = 0;
-      robot.setRobotVW(0.04, -1.6); //w was 2
+      robot.setRobotVW(0.02, -2); //v was 0.1 and w was 1.6
     
     }else if(robot.state == TRIGHT){  
-      robot.setRobotVW(0.04, 1.6); //w was 2
+      robot.setRobotVW(0.02, 2); //v was 0.1 and w was 1.6
     
     }else if(robot.state == PICKB) {  //follow until find box
       robot.followLine();
@@ -244,10 +245,10 @@ class main_fsm_t: public state_machine_t
     //    robot.followLine();   
     
     }else if(robot.state == LEFTLINE){  
-      robot.setRobotVW(0.02, -2); //was v = 0.02 and w = 2.5
+      robot.setRobotVW(0.06, -2); //was v = 0.02 and w = 2.5
     
     }else if(robot.state == RIGHTLINE){  
-      robot.setRobotVW(0.02, 2); //was v = 0.02 and w = 2.5
+      robot.setRobotVW(0.06, 2); //was v = 0.02 and w = 2.5
     
     }else if(robot.state == START){         // Robot GOed            
       robot.solenoid_PWM = 0;
@@ -281,8 +282,8 @@ main_fsm_t main_fsm;
 void init_control(robot_t& robot)
 {
   robot.pfsm = &main_fsm;
-  //robot.setState(START);
-  robot.setState(102);
+  robot.setState(START);
+  //robot.setState(102);
 
 
   //main_fsm.set_new_state(8);

@@ -141,6 +141,7 @@ void robot_t::followLineLeft(float Vnom, float K)
   v_req = Vnom;
 }
 
+
 void robot_t::followLine(){
 
        if (IRLine.IR_values[2] > 500){
@@ -166,35 +167,30 @@ void robot_t::followLine(){
 
       }
 
-
-     // ===================== TESTES =====================
-
-
-
-      // if (IRLine.IR_values[2] < 500){
-      //   setRobotVW(0, 0);
-
-      //  }else if (IRLine.IR_values[3] < 500){
-      //   setRobotVW(0, 0);
-
-      //  }else if (IRLine.IR_values[4] < 500 && IRLine.IR_values[3] < 500){
-      //   setRobotVW(0, 0);
-        
-      // //  }else if (IRLine.IR_values[4] > 500 && IRLine.IR_values[3] <= 500){
-      // //   setRobotVW(0.065, 1.5);
-
-      // } else if (IRLine.IR_values[1] < 500){
-      //   setRobotVW(0, -0);
-
-      //  }else if (IRLine.IR_values[0] < 500 && IRLine.IR_values[1] < 500){
-      //   setRobotVW(0, -0);
-
-      // //  }else if (IRLine.IR_values[0] > 500 && IRLine.IR_values[1] <= 500){
-      // //   setRobotVW(0.065, -1.5);
-
-      // }
-
 }
+
+// void robot_t::followLine(){
+//   double Kp = 0.1;
+//   double Ki = 0.01;
+//   double Kd = 0.05;
+//   double prevError = 0; // Erro anterior para cada sensor
+//   double integral = 0; // Integral para cada sensor
+
+//   double error = -3 * IRLine.IR_values[0] - 2 * IRLine.IR_values[1] + IRLine.IR_values[2] + 2 * IRLine.IR_values[3] + 3 * IRLine.IR_values[4];
+
+//   integral += error;
+//   double derivative = error - prevError;
+//   prevError = error;
+
+//   double output_w = Kp * error + Ki * integral + Kd * derivative;
+//   output_w /= 100;
+
+//   Serial.printf("Output_w = %f\n",output_w);
+
+//   // Aplicação das saídas
+//   setRobotVW(0.1, output_w);
+
+// }
 
 void robot_t::send_command(const char* command, float par)
 {

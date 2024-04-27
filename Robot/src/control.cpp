@@ -281,8 +281,8 @@ main_fsm_t main_fsm;
 void init_control(robot_t& robot)
 {
   robot.pfsm = &main_fsm;
-  robot.setState(START);
-  //robot.setState(102);
+  //robot.setState(START);
+  robot.setState(102);
 
 
   //main_fsm.set_new_state(8);

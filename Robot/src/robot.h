@@ -66,7 +66,7 @@ class robot_t {
   int *mypath;
   int mypathsize;
 
-  int compassCount;
+  int compassCount = 0;
 
   byte state;
   uint32_t tis, tes;

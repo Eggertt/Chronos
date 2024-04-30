@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sheet>
+  <columns>
+    <defaultcol width="50"/>
+    <col num="4" width="67"/>
+  </columns>
+  <cells>
+    <cell r="7" c="2" text="0" read_channel="M2" charted="1"/>
+    <cell r="6" c="2" text="0" read_channel="M1" charted="1"/>
+    <cell r="5" c="2" text="0" read_channel="e2" charted="1" series_color="clGreen"/>
+    <cell r="4" c="2" text="0" read_channel="e1" charted="1" series_color="clRed"/>
+    <cell r="4" c="1" text="Enc1"/>
+    <cell r="5" c="1" text="Enc2"/>
+    <cell r="6" c="1" text="M1"/>
+    <cell r="7" c="1" text="M2"/>
+    <cell r="6" c="4" text="[Set PWM]"/>
+    <cell r="6" c="3" text="0" write_channel="m1" trigger_row="6" trigger_col="4"/>
+    <cell r="7" c="3" text="0" write_channel="m2" trigger_row="6" trigger_col="4"/>
+    <cell r="2" c="1" text="VBat"/>
+    <cell r="2" c="2" text="8.15" read_channel="Vbat"/>
+    <cell r="1" c="1" text="IP"/>
+    <cell r="1" c="2" text="0" read_channel="IP" read_channel_mode="2"/>
+  </cells>
+</sheet>

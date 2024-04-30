@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sheet>
+  <columns>
+    <defaultcol width="50"/>
+    <col num="4" width="67"/>
+  </columns>
+  <cells>
+    <cell r="7" c="2" text="0" read_channel="M2"/>
+    <cell r="6" c="2" text="0" read_channel="M1"/>
+    <cell r="5" c="2" text="0" read_channel="M0" series_color="clGreen"/>
+    <cell r="5" c="1" text="M0"/>
+    <cell r="6" c="1" text="M1"/>
+    <cell r="7" c="1" text="M2"/>
+    <cell r="6" c="4" text="[Zero PWM]"/>
+    <cell r="6" c="3" text="0" write_channel="m1" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
+    <cell r="7" c="3" text="0" write_channel="m2" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
+    <cell r="2" c="1" text="VBat"/>
+    <cell r="2" c="2" text="7.75" read_channel="Vbat"/>
+    <cell r="1" c="1" text="IP"/>
+    <cell r="1" c="2" text="192.168.1.196" read_channel="IP" read_channel_mode="2"/>
+    <cell r="17" c="1" text="loop:"/>
+    <cell r="17" c="2" text="1848" read_channel="loop"/>
+    <cell r="17" c="4" text="[Button]"/>
+    <cell r="15" c="1" text="Servo"/>
+    <cell r="15" c="2" text="1.5" read_channel="sv"/>
+    <cell r="15" c="3" text="1.5" write_channel="sv" trigger_row="15" trigger_col="4"/>
+    <cell r="15" c="4" text="[Servo]"/>
+    <cell r="11" c="2" text="0" read_channel="e2"/>
+    <cell r="9" c="1" text="Enc0"/>
+    <cell r="5" c="3" text="0" write_channel="m0" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
+    <cell r="10" c="1" text="Enc1"/>
+    <cell r="11" c="1" text="Enc2"/>
+    <cell r="9" c="2" text="0" read_channel="e0"/>
+    <cell r="10" c="2" text="0" read_channel="e1"/>
+    <cell r="3" c="1" text="Mode"/>
+    <cell r="3" c="2" text="0" read_channel="mode"/>
+    <cell r="3" c="3" text="0" write_channel="mo" trigger_row="3" trigger_col="4"/>
+    <cell r="3" c="4" text="[Set]"/>
+    <cell r="9" c="5" text="V"/>
+    <cell r="10" c="5" text="Vn"/>
+    <cell r="11" c="5" text="W"/>
+    <cell r="11" c="6" text="0" read_channel="we"/>
+    <cell r="11" c="7" text="0" write_channel="w" trigger_row="9" trigger_col="8" default_write="0" default_trigger_row="10" default_trigger_col="8"/>
+    <cell r="9" c="8" text="[Go]"/>
+    <cell r="9" c="10" text="w0"/>
+    <cell r="10" c="10" text="w1"/>
+    <cell r="11" c="10" text="w2"/>
+    <cell r="9" c="11" text="0" read_channel="w0" charted="1"/>
+    <cell r="10" c="11" text="0" read_channel="w1"/>
+    <cell r="11" c="11" text="0" read_channel="w2"/>
+    <cell r="3" c="5" text="Kf"/>
+    <cell r="4" c="5" text="Kc"/>
+    <cell r="5" c="5" text="Ki"/>
+    <cell r="3" c="6" text="0.5" read_channel="kf"/>
+    <cell r="4" c="6" text="0.5" read_channel="kc"/>
+    <cell r="3" c="7" text="0.5" write_channel="kf" trigger_row="3" trigger_col="8"/>
+    <cell r="3" c="8" text="[PID]"/>
+    <cell r="4" c="7" text="0.5" write_channel="kc" trigger_row="3" trigger_col="8"/>
+    <cell r="5" c="7" text="5" write_channel="ki" trigger_row="3" trigger_col="8"/>
+    <cell r="5" c="6" text="5" read_channel="ki"/>
+    <cell r="10" c="6" text="0" read_channel="vne"/>
+    <cell r="9" c="12" text="0" read_channel="we0" charted="1" series_color="clRed"/>
+    <cell r="10" c="12" text="0" read_channel="we1"/>
+    <cell r="11" c="12" text="0" read_channel="we2"/>
+    <cell r="9" c="13" text="0" write_channel="w0" trigger_row="9" trigger_col="14"/>
+    <cell r="9" c="14" text="[Set]"/>
+    <cell r="10" c="13" text="0" write_channel="w1" trigger_row="9" trigger_col="14"/>
+    <cell r="11" c="13" text="0" write_channel="w2" trigger_row="9" trigger_col="14"/>
+    <cell r="9" c="6" text="0" read_channel="ve"/>
+    <cell r="9" c="7" text="0" write_channel="v" trigger_row="9" trigger_col="8" default_write="0" default_trigger_row="10" default_trigger_col="8"/>
+    <cell r="10" c="7" text="0" write_channel="vn" trigger_row="9" trigger_col="8" default_write="0" default_trigger_row="10" default_trigger_col="8"/>
+    <cell r="19" c="2" text="0.626" read_channel="d0"/>
+    <cell r="19" c="3" text="8.19" read_channel="d1"/>
+    <cell r="19" c="4" text="0.126" read_channel="d2"/>
+    <cell r="19" c="5" text="0.126" read_channel="d3"/>
+    <cell r="19" c="6" text="0.211" read_channel="d4"/>
+    <cell r="19" c="7" text="0.126" read_channel="d5"/>
+    <cell r="19" c="1" text="Dists:"/>
+    <cell r="21" c="1" text="State:"/>
+    <cell r="21" c="2" text="200" read_channel="st"/>
+    <cell r="21" c="3" text="0" write_channel="st" trigger_row="21" trigger_col="4"/>
+    <cell r="21" c="4" text="[State]"/>
+    <cell r="10" c="8" text="[Zero]"/>
+    <cell r="5" c="4" text="[Set PWM]"/>
+  </cells>
+</sheet>

@@ -1,0 +1,2237 @@
+object FMain: TFMain
+  Left = 451
+  Height = 677
+  Top = 115
+  Width = 1337
+  Caption = 'ComRobot'
+  ClientHeight = 677
+  ClientWidth = 1337
+  Font.Height = -11
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  SessionProperties = 'CBChartFreeze.Checked;CBComPort.Text;CBDecimalSeparator.ItemIndex;CBIRSeries.Checked;CBOmniJoy.Checked;CBRawRecv.Checked;CBRawSend.Checked;CBSaveSheetOnExit.Checked;CBSendPars.Checked;CBSerialChannels.Checked;ComboBoxJoystick.ItemIndex;EditAxisChannelV.Text;EditAxisChannelVn.Text;EditAxisChannelW.Text;EditAxisFactorV.Text;EditAxisFactorVn.Text;EditAxisFactorW.Text;EditAxisIndexV.Text;EditAxisIndexVn.Text;EditAxisIndexW.Text;EditAxisOffsetV.Text;EditAxisOffsetVn.Text;EditAxisOffsetW.Text;EditLogName.Text;EditRemoteIP.Text;EditSheetFilename.Text;EditStateReq.Text;EditStateReqAlt.Text;EditVmax.Text;EditVnmax.Text;EditWmax.Text;EditZpole.Text;Left;TabConfig.PageIndex;Top;EditSolenoidMax.Text;EditSolenoidChannel.Text;EditButtonSolenoidOff.Text;EditButtonSolenoidOn.Text;EditButtonSolenoidToggle.Text'
+  LCLVersion = '2.1.0.0'
+  object PageControl: TPageControl
+    Left = 4
+    Height = 532
+    Top = 56
+    Width = 780
+    ActivePage = TabJoystick
+    Anchors = [akTop, akLeft, akBottom]
+    TabIndex = 4
+    TabOrder = 19
+    object TabGrid: TTabSheet
+      Caption = 'Grid'
+      ClientHeight = 506
+      ClientWidth = 772
+      object SGSheet: TStringGrid
+        Left = 0
+        Height = 394
+        Top = 80
+        Width = 772
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 128
+        DefaultColWidth = 50
+        DefaultRowHeight = 16
+        Font.Height = -11
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing]
+        ParentFont = False
+        PopupMenu = PopupMenuGrid
+        RowCount = 256
+        TabOrder = 0
+        TitleFont.CharSet = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        OnDrawCell = SGSheetDrawCell
+        OnKeyDown = SGSheetKeyDown
+        OnKeyPress = SGSheetKeyPress
+        OnKeyUp = SGSheetKeyUp
+        OnMouseDown = SGSheetMouseDown
+        OnMouseUp = SGSheetMouseUp
+        ColWidths = (
+          20
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+          50
+        )
+      end
+      object SpeedButtonOK: TSpeedButton
+        Left = 0
+        Height = 24
+        Top = 4
+        Width = 24
+        Glyph.Data = {
+          66010000424D6601000000000000760000002800000014000000140000000100
+          040000000000F000000000000000000000001000000010000000000000000000
+          BF0000BF000000BFBF00BF000000BF00BF00BFBF0000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777888777777
+          777777770000774448877777777777770000772244887777777777770000A222
+          22488777777777770000A22222248877777777770000A2222222488777777777
+          0000A22222222488777777770000A22222222248877777770000A22248A22224
+          887777770000A222488A2222488777770000A2224887A2224488777700007A22
+          48877A222488777700007A22477777A222488777000077777777777A22244877
+          0000777777777777A222488700007777777777777A2224870000777777777777
+          77A224480000777777777777777A224800007777777777777777A24800007777
+          7777777777777A270000
+        }
+        OnClick = SpeedButtonOKClick
+      end
+      object EditFormula: TEdit
+        Left = 28
+        Height = 22
+        Top = 4
+        Width = 597
+        AutoSize = False
+        AutoSelect = False
+        OnChange = EditFormulaChange
+        OnKeyDown = EditFormulaKeyDown
+        TabOrder = 1
+      end
+      object SpeedButtonFont: TSpeedButton
+        Left = 712
+        Height = 24
+        Top = 4
+        Width = 24
+        Anchors = [akTop, akRight]
+        Caption = 'f'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Visible = False
+        ParentFont = False
+      end
+      object SpeedButtonBackColor: TSpeedButton
+        Left = 744
+        Height = 24
+        Top = 4
+        Width = 24
+        Anchors = [akTop, akRight]
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          20000000000000040000130B0000130B00000000000000000000000000000000
+          000000000000000000000000000F1A0F0D51452E2A894D38319D2E4F4F9B2135
+          3678030909360000000000000000000000000000000000000000000000000000
+          0000000000001B100D5B8C6059D3DEACA4FFFFCCC5FFE0B2A4FFA9F1F2FFC7F4
+          F8FF91C1C3FA37585BAB00000026000000000000000000000000000000000000
+          0000311A1681D5857AFFFFC3B9FFFFCBC3FFFFC4BDFFD8A494FF9DEAEDFFD1FB
+          FFFFD2FFFFFFB8FDFFFF559196E0030808360000000000000000000000001D0D
+          0A64D76B5BFFFF9C8DFFF99A8DFFF89A8CFFFF9485FFD38571FF79E6ECFFA0F4
+          FDFFA3F2FAFFA5F5FDFF99FFFFFF3E848BDD0000001B000000000001011C9834
+          26E7FF6853FFF76955FFF66855FFF66855FFFE634FFFCF644EFF53E3ECFF6FEF
+          FCFF71EDF9FF71ECF8FF73F1FCFF60EDF9FF143C419500000000270B0673E835
+          1DFFF93D27FFF33D26FFF33D26FFF33D26FFFD361FFFCC4830FF30DFECFF40E9
+          FCFF42E6F7FF42E6F7FF42E6F7FF43F5FFFF2398A5EC0100001E621002B5FF20
+          03FFF81F04FFF71F04FFF71F04FFF71F04FFFF1800FFCD3620FF17DEF1FF1CE6
+          FFFF1FE3FBFF1FE3FAFF1FE3FBFF20EAFFFF19C9DFFF051416577B0F0AD0F414
+          10FFE8130FFFE8130FFFE8130FFFE8130FFFF10C0CFFC12E2DFF0AD6E4FF08DD
+          F0FF0CDAECFF0BDAEBFF09D9E9FF06DCECFF09D2E2FF05292B7A240477D23C02
+          E3FF3902DBFF3902DBFF3902DBFF3902DBFF3B00E0FF3021BDFF0A9E3BFF0AA0
+          3BFF0A9E3BFF0B9F3DFF19A74AFF21AC52FF0C9A3CFF05200F7C14056EBE2A06
+          FFFF2806F9FF2806F9FF2806F9FF2806F9FF2901FFFF2421D6FF179C2EFF1AA0
+          2FFF20A237FF34AD4AFF55BC68FF80D18EFF359E48FF01100360100936874018
+          F1FF451CF7FF441CF3FF431CF3FF431CF3FF4516FAFF3D30D4FF2AA847FF3EB4
+          57FF53BC6CFF6FC884FF90D5A1FFB2EAC0FF3B874DF50000002B030304303E22
+          B2F7673FFFFF6540F5FF643FF5FF643FF5FF663BFCFF5A4FD7FF4EB967FF78CC
+          8BFF90D4A0FFA8DEB5FFCDEDD6FFA3E1B3FF133F1DB00000000100000000170F
+          378B7251EEFF906EFFFF8C6EF6FF8B6DF6FF8D6AFBFF8178DDFF82CF94FFB2E3
+          BDFFC4E8CDFFDDF1E3FFD5FADFFF4A8A59F20004003500000000000000000000
+          000B2C2157AF9276EFFFB89FFFFFB9A3FAFFB89FFCFFB0ACE7FFB7E4BFFFE3F4
+          E5FFF1FDF4FFDFFCE6FF69A176F90612095F0000000000000000000000000000
+          00000000000C211B3C8F7D6ABBF7BDA8F9FFD8C1FFFFCBCBF0FFC2F0CCFFE5FB
+          E9FFB3D6BBFF4F7658D7050D074F000000000000000000000000000000000000
+          0000000000000000000004040B3627223F8B534676BF5B5B7CD1446F4ECE3B53
+          40B0122015680002001400000000000000000000000000000000
+        }
+        Visible = False
+        OnClick = SpeedButtonBackColorClick
+      end
+      object Label4: TLabel
+        Left = 0
+        Height = 13
+        Top = 32
+        Width = 48
+        Caption = 'Channels'
+        ParentColor = False
+      end
+      object Label5: TLabel
+        Left = 64
+        Height = 13
+        Top = 32
+        Width = 29
+        Caption = 'Read:'
+        ParentColor = False
+      end
+      object EditReadChannel: TEdit
+        Left = 100
+        Height = 22
+        Top = 28
+        Width = 80
+        AutoSize = False
+        AutoSelect = False
+        OnKeyDown = EditFormulaKeyDown
+        TabOrder = 2
+      end
+      object Label6: TLabel
+        Left = 196
+        Height = 13
+        Top = 32
+        Width = 31
+        Caption = 'Write:'
+        ParentColor = False
+      end
+      object EditWriteChannel: TEdit
+        Left = 244
+        Height = 22
+        Top = 28
+        Width = 68
+        AutoSize = False
+        AutoSelect = False
+        OnKeyDown = EditFormulaKeyDown
+        TabOrder = 3
+      end
+      object CBCellCharted: TCheckBox
+        Left = 560
+        Height = 19
+        Top = 28
+        Width = 61
+        Caption = 'Charted'
+        TabOrder = 4
+      end
+      object Label8: TLabel
+        Left = 320
+        Height = 13
+        Top = 44
+        Width = 39
+        Caption = 'Trigger:'
+        ParentColor = False
+      end
+      object EditWriteTriggerRow: TEdit
+        Left = 404
+        Height = 22
+        Top = 28
+        Width = 32
+        AutoSize = False
+        AutoSelect = False
+        OnKeyDown = EditFormulaKeyDown
+        TabOrder = 5
+      end
+      object Label9: TLabel
+        Left = 372
+        Height = 13
+        Top = 32
+        Width = 23
+        Caption = 'Row'
+        ParentColor = False
+      end
+      object Label10: TLabel
+        Left = 440
+        Height = 13
+        Top = 32
+        Width = 17
+        Caption = 'Col'
+        ParentColor = False
+      end
+      object EditWriteTriggerCol: TEdit
+        Left = 468
+        Height = 22
+        Top = 28
+        Width = 32
+        AutoSize = False
+        AutoSelect = False
+        OnKeyDown = EditFormulaKeyDown
+        TabOrder = 6
+      end
+      object Label7: TLabel
+        Left = 0
+        Height = 13
+        Top = 484
+        Width = 85
+        Anchors = [akLeft, akBottom]
+        Caption = 'Sheet File Name:'
+        ParentColor = False
+      end
+      object EditSheetFilename: TEdit
+        Left = 96
+        Height = 21
+        Top = 480
+        Width = 208
+        Anchors = [akLeft, akBottom]
+        TabOrder = 7
+        Text = 'sheet.xml'
+      end
+      object BSaveSheet: TButton
+        Left = 316
+        Height = 23
+        Top = 480
+        Width = 55
+        Anchors = [akLeft, akBottom]
+        Caption = 'Save'
+        OnClick = BSaveSheetClick
+        TabOrder = 8
+      end
+      object BLoadSheet: TButton
+        Left = 376
+        Height = 23
+        Top = 480
+        Width = 55
+        Anchors = [akLeft, akBottom]
+        Caption = 'Load'
+        OnClick = BLoadSheetClick
+        TabOrder = 9
+      end
+      object ColorBoxSeries: TColorBox
+        Left = 628
+        Height = 20
+        Top = 27
+        Width = 100
+        Selected = clRed
+        Style = [cbStandardColors, cbExtendedColors, cbPrettyNames]
+        AutoSelect = False
+        DropDownCount = 30
+        ItemHeight = 14
+        TabOrder = 10
+      end
+      object ComboReadMode: TComboBox
+        Left = 100
+        Height = 21
+        Top = 52
+        Width = 80
+        ItemHeight = 13
+        ItemIndex = 0
+        Items.Strings = (
+          'Float'
+          'Integer'
+          'String'
+        )
+        Style = csDropDownList
+        TabOrder = 11
+        Text = 'Float'
+      end
+      object CBSaveSheetOnExit: TCheckBox
+        Left = 440
+        Height = 19
+        Top = 482
+        Width = 83
+        Caption = 'Save On Exit'
+        TabOrder = 12
+      end
+      object Label12: TLabel
+        Left = 196
+        Height = 13
+        Top = 55
+        Width = 41
+        Caption = 'Default:'
+        ParentColor = False
+      end
+      object EditDefaultWrite: TEdit
+        Left = 244
+        Height = 22
+        Top = 51
+        Width = 68
+        AutoSize = False
+        AutoSelect = False
+        OnKeyDown = EditFormulaKeyDown
+        TabOrder = 13
+      end
+      object Label13: TLabel
+        Left = 372
+        Height = 13
+        Top = 55
+        Width = 23
+        Caption = 'Row'
+        ParentColor = False
+      end
+      object EditDefaultWriteTriggerRow: TEdit
+        Left = 404
+        Height = 22
+        Top = 51
+        Width = 32
+        AutoSize = False
+        AutoSelect = False
+        OnKeyDown = EditFormulaKeyDown
+        TabOrder = 14
+      end
+      object EditDefaultWriteTriggerCol: TEdit
+        Left = 468
+        Height = 22
+        Top = 51
+        Width = 32
+        AutoSize = False
+        AutoSelect = False
+        OnKeyDown = EditFormulaKeyDown
+        TabOrder = 15
+      end
+    end
+    object TabConfig: TTabSheet
+      Caption = 'Config'
+    end
+    object TabOld: TTabSheet
+      Caption = 'Old'
+      ClientHeight = 506
+      ClientWidth = 772
+      object SGPars: TStringGrid
+        Left = -4
+        Height = 492
+        Top = 0
+        Width = 240
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 4
+        DefaultRowHeight = 16
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goSmoothScroll]
+        RowCount = 33
+        ScrollBars = ssNone
+        TabOrder = 0
+        OnGetEditText = SGParsGetEditText
+        OnPrepareCanvas = SGParsPrepareCanvas
+        OnValidateEntry = SGParsValidateEntry
+        ColWidths = (
+          26
+          92
+          59
+          59
+        )
+        Cells = (
+          46
+          0
+          0
+          '#'
+          0
+          1
+          '0'
+          0
+          2
+          '1'
+          0
+          3
+          '2'
+          0
+          4
+          '3'
+          0
+          5
+          '4'
+          0
+          6
+          '5'
+          0
+          7
+          '6'
+          0
+          8
+          '7'
+          0
+          9
+          '8'
+          0
+          10
+          '9'
+          0
+          11
+          '10'
+          0
+          12
+          '11'
+          0
+          13
+          '12'
+          0
+          14
+          '13'
+          0
+          15
+          '14'
+          0
+          16
+          '15'
+          0
+          17
+          '16'
+          0
+          18
+          '17'
+          0
+          19
+          '18'
+          0
+          20
+          '19'
+          0
+          21
+          '20'
+          0
+          22
+          '21'
+          0
+          23
+          '22'
+          0
+          24
+          '23'
+          0
+          25
+          '24'
+          0
+          26
+          '25'
+          0
+          27
+          '26'
+          0
+          28
+          '27'
+          0
+          29
+          '28'
+          0
+          30
+          '29'
+          0
+          31
+          '30'
+          0
+          32
+          '31'
+          1
+          0
+          'Name'
+          1
+          1
+          'Kp'
+          1
+          2
+          'Ki'
+          1
+          3
+          'Kd'
+          1
+          4
+          'Kf'
+          1
+          5
+          'i'
+          1
+          6
+          'Xt'
+          1
+          7
+          'Yt'
+          1
+          8
+          'Theta'
+          1
+          9
+          'Vnom'
+          1
+          10
+          'Vf'
+          2
+          0
+          'Write'
+          3
+          0
+          'Write'
+        )
+      end
+      object SGRobot: TStringGrid
+        Left = 240
+        Height = 492
+        Top = 0
+        Width = 172
+        Anchors = [akTop, akLeft, akBottom]
+        AutoFillColumns = True
+        ColCount = 2
+        DefaultRowHeight = 16
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goSmoothScroll]
+        PopupMenu = PopupMenuGrid
+        RowCount = 64
+        ScrollBars = ssNone
+        TabOrder = 1
+        OnClick = SGRobotClick
+        OnMouseDown = SGRobotMouseDown
+        ColWidths = (
+          84
+          84
+        )
+        Cells = (
+          1
+          0
+          0
+          'Robot'
+        )
+      end
+      object BSetState: TButton
+        Left = 484
+        Height = 23
+        Top = 0
+        Width = 60
+        Caption = 'Set State'
+        OnClick = BSetStateClick
+        TabOrder = 2
+      end
+      object BSetStateAlt: TButton
+        Left = 484
+        Height = 23
+        Top = 27
+        Width = 60
+        Caption = 'Set State'
+        OnClick = BSetStateAltClick
+        TabOrder = 3
+      end
+      object BClearEncoderAcc: TButton
+        Left = 484
+        Height = 23
+        Top = 54
+        Width = 60
+        Caption = 'Clear Enc'
+        OnClick = BClearEncoderAccClick
+        TabOrder = 4
+      end
+      object BSetPWMs: TButton
+        Left = 484
+        Height = 23
+        Top = 81
+        Width = 60
+        Caption = 'Set PWM'
+        OnClick = BSetPWMsClick
+        TabOrder = 5
+      end
+      object BSetRobotVW: TButton
+        Left = 484
+        Height = 23
+        Top = 108
+        Width = 60
+        Caption = ' Set vω'
+        OnClick = BSetRobotVWClick
+        TabOrder = 6
+      end
+      object BSetRobotXYTheta: TButton
+        Left = 484
+        Height = 23
+        Top = 136
+        Width = 60
+        Caption = 'Set XYθ'
+        OnClick = BSetRobotXYThetaClick
+        TabOrder = 7
+      end
+      object BSetRobotPID: TButton
+        Left = 484
+        Height = 23
+        Top = 164
+        Width = 60
+        Caption = 'Set PID'
+        OnClick = BSetRobotPIDClick
+        TabOrder = 8
+      end
+      object BSetRobotSolenoid: TButton
+        Left = 484
+        Height = 23
+        Top = 192
+        Width = 60
+        Caption = 'Solenoid'
+        OnClick = BSetRobotSolenoidClick
+        TabOrder = 9
+      end
+      object CBRawRecv: TCheckBox
+        Left = 484
+        Height = 19
+        Top = 228
+        Width = 68
+        Caption = 'Raw Recv'
+        TabOrder = 10
+      end
+      object CBRawSend: TCheckBox
+        Left = 552
+        Height = 19
+        Top = 228
+        Width = 71
+        Caption = 'Raw Send'
+        TabOrder = 11
+      end
+      object MemoDebug: TMemo
+        Left = 484
+        Height = 241
+        Top = 251
+        Width = 282
+        Anchors = [akTop, akLeft, akBottom]
+        TabOrder = 12
+      end
+      object EditStateReqAlt: TEdit
+        Left = 552
+        Height = 21
+        Top = 26
+        Width = 44
+        TabOrder = 13
+      end
+      object EditStateReq: TEdit
+        Left = 552
+        Height = 21
+        Top = 0
+        Width = 44
+        TabOrder = 14
+      end
+      object EditZpole: TEdit
+        Left = 604
+        Height = 21
+        Top = 0
+        Width = 80
+        TabOrder = 15
+        Text = '0.2'
+      end
+      object BRobotStop: TButton
+        Left = 692
+        Height = 23
+        Top = 0
+        Width = 80
+        Caption = 'Stop Robot'
+        OnClick = BRobotStopClick
+        TabOrder = 16
+      end
+      object BSetPWMZero: TButton
+        Left = 560
+        Height = 23
+        Top = 141
+        Width = 60
+        Caption = 'Zero PWM'
+        OnClick = BSetPWMZeroClick
+        TabOrder = 17
+      end
+      object BSetRobotVW0: TButton
+        Left = 560
+        Height = 23
+        Top = 168
+        Width = 60
+        Caption = 'Zero vω'
+        OnClick = BSetRobotVW0Click
+        TabOrder = 18
+      end
+    end
+    object TabTerminal: TTabSheet
+      Caption = 'Terminal'
+      ClientHeight = 506
+      ClientWidth = 772
+      inline SETerm: TSynEdit
+        Left = 0
+        Height = 474
+        Top = 28
+        Width = 772
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Pitch = fpFixed
+        Font.Quality = fqNonAntialiased
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+        Gutter.Visible = False
+        Gutter.Width = 57
+        Gutter.MouseActions = <>
+        RightGutter.Width = 0
+        RightGutter.MouseActions = <>
+        Keystrokes = <        
+          item
+            Command = ecUp
+            ShortCut = 38
+          end        
+          item
+            Command = ecSelUp
+            ShortCut = 8230
+          end        
+          item
+            Command = ecScrollUp
+            ShortCut = 16422
+          end        
+          item
+            Command = ecDown
+            ShortCut = 40
+          end        
+          item
+            Command = ecSelDown
+            ShortCut = 8232
+          end        
+          item
+            Command = ecScrollDown
+            ShortCut = 16424
+          end        
+          item
+            Command = ecLeft
+            ShortCut = 37
+          end        
+          item
+            Command = ecSelLeft
+            ShortCut = 8229
+          end        
+          item
+            Command = ecWordLeft
+            ShortCut = 16421
+          end        
+          item
+            Command = ecSelWordLeft
+            ShortCut = 24613
+          end        
+          item
+            Command = ecRight
+            ShortCut = 39
+          end        
+          item
+            Command = ecSelRight
+            ShortCut = 8231
+          end        
+          item
+            Command = ecWordRight
+            ShortCut = 16423
+          end        
+          item
+            Command = ecSelWordRight
+            ShortCut = 24615
+          end        
+          item
+            Command = ecPageDown
+            ShortCut = 34
+          end        
+          item
+            Command = ecSelPageDown
+            ShortCut = 8226
+          end        
+          item
+            Command = ecPageBottom
+            ShortCut = 16418
+          end        
+          item
+            Command = ecSelPageBottom
+            ShortCut = 24610
+          end        
+          item
+            Command = ecPageUp
+            ShortCut = 33
+          end        
+          item
+            Command = ecSelPageUp
+            ShortCut = 8225
+          end        
+          item
+            Command = ecPageTop
+            ShortCut = 16417
+          end        
+          item
+            Command = ecSelPageTop
+            ShortCut = 24609
+          end        
+          item
+            Command = ecLineStart
+            ShortCut = 36
+          end        
+          item
+            Command = ecSelLineStart
+            ShortCut = 8228
+          end        
+          item
+            Command = ecEditorTop
+            ShortCut = 16420
+          end        
+          item
+            Command = ecSelEditorTop
+            ShortCut = 24612
+          end        
+          item
+            Command = ecLineEnd
+            ShortCut = 35
+          end        
+          item
+            Command = ecSelLineEnd
+            ShortCut = 8227
+          end        
+          item
+            Command = ecEditorBottom
+            ShortCut = 16419
+          end        
+          item
+            Command = ecSelEditorBottom
+            ShortCut = 24611
+          end        
+          item
+            Command = ecToggleMode
+            ShortCut = 45
+          end        
+          item
+            Command = ecCopy
+            ShortCut = 16429
+          end        
+          item
+            Command = ecPaste
+            ShortCut = 8237
+          end        
+          item
+            Command = ecDeleteChar
+            ShortCut = 46
+          end        
+          item
+            Command = ecCut
+            ShortCut = 8238
+          end        
+          item
+            Command = ecDeleteLastChar
+            ShortCut = 8
+          end        
+          item
+            Command = ecDeleteLastChar
+            ShortCut = 8200
+          end        
+          item
+            Command = ecDeleteLastWord
+            ShortCut = 16392
+          end        
+          item
+            Command = ecUndo
+            ShortCut = 32776
+          end        
+          item
+            Command = ecRedo
+            ShortCut = 40968
+          end        
+          item
+            Command = ecLineBreak
+            ShortCut = 13
+          end        
+          item
+            Command = ecSelectAll
+            ShortCut = 16449
+          end        
+          item
+            Command = ecCopy
+            ShortCut = 16451
+          end        
+          item
+            Command = ecBlockIndent
+            ShortCut = 24649
+          end        
+          item
+            Command = ecLineBreak
+            ShortCut = 16461
+          end        
+          item
+            Command = ecInsertLine
+            ShortCut = 16462
+          end        
+          item
+            Command = ecDeleteWord
+            ShortCut = 16468
+          end        
+          item
+            Command = ecBlockUnindent
+            ShortCut = 24661
+          end        
+          item
+            Command = ecPaste
+            ShortCut = 16470
+          end        
+          item
+            Command = ecCut
+            ShortCut = 16472
+          end        
+          item
+            Command = ecDeleteLine
+            ShortCut = 16473
+          end        
+          item
+            Command = ecDeleteEOL
+            ShortCut = 24665
+          end        
+          item
+            Command = ecUndo
+            ShortCut = 16474
+          end        
+          item
+            Command = ecRedo
+            ShortCut = 24666
+          end        
+          item
+            Command = ecGotoMarker0
+            ShortCut = 16432
+          end        
+          item
+            Command = ecGotoMarker1
+            ShortCut = 16433
+          end        
+          item
+            Command = ecGotoMarker2
+            ShortCut = 16434
+          end        
+          item
+            Command = ecGotoMarker3
+            ShortCut = 16435
+          end        
+          item
+            Command = ecGotoMarker4
+            ShortCut = 16436
+          end        
+          item
+            Command = ecGotoMarker5
+            ShortCut = 16437
+          end        
+          item
+            Command = ecGotoMarker6
+            ShortCut = 16438
+          end        
+          item
+            Command = ecGotoMarker7
+            ShortCut = 16439
+          end        
+          item
+            Command = ecGotoMarker8
+            ShortCut = 16440
+          end        
+          item
+            Command = ecGotoMarker9
+            ShortCut = 16441
+          end        
+          item
+            Command = ecSetMarker0
+            ShortCut = 24624
+          end        
+          item
+            Command = ecSetMarker1
+            ShortCut = 24625
+          end        
+          item
+            Command = ecSetMarker2
+            ShortCut = 24626
+          end        
+          item
+            Command = ecSetMarker3
+            ShortCut = 24627
+          end        
+          item
+            Command = ecSetMarker4
+            ShortCut = 24628
+          end        
+          item
+            Command = ecSetMarker5
+            ShortCut = 24629
+          end        
+          item
+            Command = ecSetMarker6
+            ShortCut = 24630
+          end        
+          item
+            Command = ecSetMarker7
+            ShortCut = 24631
+          end        
+          item
+            Command = ecSetMarker8
+            ShortCut = 24632
+          end        
+          item
+            Command = ecSetMarker9
+            ShortCut = 24633
+          end        
+          item
+            Command = EcFoldLevel1
+            ShortCut = 41009
+          end        
+          item
+            Command = EcFoldLevel2
+            ShortCut = 41010
+          end        
+          item
+            Command = EcFoldLevel3
+            ShortCut = 41011
+          end        
+          item
+            Command = EcFoldLevel4
+            ShortCut = 41012
+          end        
+          item
+            Command = EcFoldLevel5
+            ShortCut = 41013
+          end        
+          item
+            Command = EcFoldLevel6
+            ShortCut = 41014
+          end        
+          item
+            Command = EcFoldLevel7
+            ShortCut = 41015
+          end        
+          item
+            Command = EcFoldLevel8
+            ShortCut = 41016
+          end        
+          item
+            Command = EcFoldLevel9
+            ShortCut = 41017
+          end        
+          item
+            Command = EcFoldLevel0
+            ShortCut = 41008
+          end        
+          item
+            Command = EcFoldCurrent
+            ShortCut = 41005
+          end        
+          item
+            Command = EcUnFoldCurrent
+            ShortCut = 41003
+          end        
+          item
+            Command = EcToggleMarkupWord
+            ShortCut = 32845
+          end        
+          item
+            Command = ecNormalSelect
+            ShortCut = 24654
+          end        
+          item
+            Command = ecColumnSelect
+            ShortCut = 24643
+          end        
+          item
+            Command = ecLineSelect
+            ShortCut = 24652
+          end        
+          item
+            Command = ecTab
+            ShortCut = 9
+          end        
+          item
+            Command = ecShiftTab
+            ShortCut = 8201
+          end        
+          item
+            Command = ecMatchBracket
+            ShortCut = 24642
+          end        
+          item
+            Command = ecColSelUp
+            ShortCut = 40998
+          end        
+          item
+            Command = ecColSelDown
+            ShortCut = 41000
+          end        
+          item
+            Command = ecColSelLeft
+            ShortCut = 40997
+          end        
+          item
+            Command = ecColSelRight
+            ShortCut = 40999
+          end        
+          item
+            Command = ecColSelPageDown
+            ShortCut = 40994
+          end        
+          item
+            Command = ecColSelPageBottom
+            ShortCut = 57378
+          end        
+          item
+            Command = ecColSelPageUp
+            ShortCut = 40993
+          end        
+          item
+            Command = ecColSelPageTop
+            ShortCut = 57377
+          end        
+          item
+            Command = ecColSelLineStart
+            ShortCut = 40996
+          end        
+          item
+            Command = ecColSelLineEnd
+            ShortCut = 40995
+          end        
+          item
+            Command = ecColSelEditorTop
+            ShortCut = 57380
+          end        
+          item
+            Command = ecColSelEditorBottom
+            ShortCut = 57379
+          end>
+        MouseActions = <>
+        MouseTextActions = <>
+        MouseSelActions = <>
+        VisibleSpecialChars = [vscSpace, vscTabAtLast]
+        SelectedColor.BackPriority = 50
+        SelectedColor.ForePriority = 50
+        SelectedColor.FramePriority = 50
+        SelectedColor.BoldPriority = 50
+        SelectedColor.ItalicPriority = 50
+        SelectedColor.UnderlinePriority = 50
+        SelectedColor.StrikeOutPriority = 50
+        BracketHighlightStyle = sbhsBoth
+        BracketMatchColor.Background = clNone
+        BracketMatchColor.Foreground = clNone
+        BracketMatchColor.Style = [fsBold]
+        FoldedCodeColor.Background = clNone
+        FoldedCodeColor.Foreground = clGray
+        FoldedCodeColor.FrameColor = clGray
+        MouseLinkColor.Background = clNone
+        MouseLinkColor.Foreground = clBlue
+        LineHighlightColor.Background = clNone
+        LineHighlightColor.Foreground = clNone
+        inline SynLeftGutterPartList1: TSynGutterPartList
+          object SynGutterMarks1: TSynGutterMarks
+            Width = 24
+            MouseActions = <>
+          end
+          object SynGutterLineNumber1: TSynGutterLineNumber
+            Width = 17
+            MouseActions = <>
+            MarkupInfo.Background = clBtnFace
+            MarkupInfo.Foreground = clNone
+            DigitCount = 2
+            ShowOnlyLineNumbersMultiplesOf = 1
+            ZeroStart = False
+            LeadingZeros = False
+          end
+          object SynGutterChanges1: TSynGutterChanges
+            Width = 4
+            MouseActions = <>
+            ModifiedColor = 59900
+            SavedColor = clGreen
+          end
+          object SynGutterSeparator1: TSynGutterSeparator
+            Width = 2
+            MouseActions = <>
+            MarkupInfo.Background = clWhite
+            MarkupInfo.Foreground = clGray
+          end
+          object SynGutterCodeFolding1: TSynGutterCodeFolding
+            MouseActions = <>
+            MarkupInfo.Background = clNone
+            MarkupInfo.Foreground = clGray
+            MouseActionsExpanded = <>
+            MouseActionsCollapsed = <>
+          end
+        end
+      end
+    end
+    object TabJoystick: TTabSheet
+      Caption = 'Joystick'
+      ClientHeight = 506
+      ClientWidth = 772
+      object CBDeadManSwitch: TCheckBox
+        Left = 8
+        Height = 19
+        Top = 356
+        Width = 110
+        Caption = 'Dead Man Switch'
+        TabOrder = 0
+      end
+      object Label14: TLabel
+        Left = 148
+        Height = 13
+        Top = 360
+        Width = 20
+        Caption = 'Axis'
+        ParentColor = False
+      end
+      object Label15: TLabel
+        Left = 36
+        Height = 13
+        Top = 380
+        Width = 32
+        Caption = 'Robot'
+        ParentColor = False
+      end
+      object Label16: TLabel
+        Left = 92
+        Height = 13
+        Top = 380
+        Width = 21
+        Caption = 'Max'
+        ParentColor = False
+      end
+      object Label17: TLabel
+        Left = 148
+        Height = 13
+        Top = 380
+        Width = 28
+        Caption = 'Index'
+        ParentColor = False
+      end
+      object Label18: TLabel
+        Left = 204
+        Height = 13
+        Top = 380
+        Width = 32
+        Caption = 'Offset'
+        ParentColor = False
+      end
+      object Label19: TLabel
+        Left = 260
+        Height = 13
+        Top = 380
+        Width = 32
+        Caption = 'Factor'
+        ParentColor = False
+      end
+      object EditAxisFactorV: TEdit
+        Left = 260
+        Height = 21
+        Top = 400
+        Width = 50
+        AutoSize = False
+        TabOrder = 1
+        Text = '-1'
+      end
+      object EditAxisOffsetV: TEdit
+        Left = 204
+        Height = 21
+        Top = 400
+        Width = 50
+        AutoSize = False
+        TabOrder = 2
+        Text = '-32767'
+      end
+      object EditAxisIndexV: TEdit
+        Left = 148
+        Height = 21
+        Top = 400
+        Width = 50
+        AutoSize = False
+        TabOrder = 3
+        Text = '1'
+      end
+      object EditVmax: TEdit
+        Left = 92
+        Height = 21
+        Top = 400
+        Width = 50
+        AutoSize = False
+        TabOrder = 4
+        Text = '0.1'
+      end
+      object EditRobotV: TEdit
+        Left = 36
+        Height = 21
+        Top = 400
+        Width = 50
+        AutoSize = False
+        TabOrder = 5
+        Text = '0'
+      end
+      object Label20: TLabel
+        Left = 4
+        Height = 13
+        Top = 402
+        Width = 7
+        Caption = 'V'
+        ParentColor = False
+      end
+      object Label21: TLabel
+        Left = 4
+        Height = 13
+        Top = 450
+        Width = 11
+        Caption = 'W'
+        ParentColor = False
+      end
+      object EditRobotW: TEdit
+        Left = 36
+        Height = 21
+        Top = 448
+        Width = 50
+        AutoSize = False
+        TabOrder = 6
+        Text = '0'
+      end
+      object EditWmax: TEdit
+        Left = 92
+        Height = 21
+        Top = 448
+        Width = 50
+        AutoSize = False
+        TabOrder = 7
+        Text = '0.5'
+      end
+      object EditAxisIndexW: TEdit
+        Left = 148
+        Height = 21
+        Top = 448
+        Width = 50
+        AutoSize = False
+        TabOrder = 8
+        Text = '2'
+      end
+      object EditAxisOffsetW: TEdit
+        Left = 204
+        Height = 21
+        Top = 448
+        Width = 50
+        AutoSize = False
+        TabOrder = 9
+        Text = '-32767'
+      end
+      object EditAxisFactorW: TEdit
+        Left = 260
+        Height = 21
+        Top = 448
+        Width = 50
+        AutoSize = False
+        TabOrder = 10
+        Text = '-1'
+      end
+      object BJoySetConfig: TButton
+        Left = 376
+        Height = 23
+        Top = 472
+        Width = 50
+        Caption = 'Set'
+        OnClick = BJoySetConfigClick
+        TabOrder = 11
+      end
+      object EditSolenoid: TEdit
+        Left = 36
+        Height = 21
+        Top = 472
+        Width = 50
+        AutoSize = False
+        TabOrder = 12
+        Text = '0'
+      end
+      object Label22: TLabel
+        Left = 4
+        Height = 13
+        Top = 476
+        Width = 19
+        Caption = 'Sol.'
+        ParentColor = False
+      end
+      object SGJoyState: TStringGrid
+        Left = 0
+        Height = 278
+        Top = 36
+        Width = 384
+        Anchors = [akTop, akLeft, akRight]
+        DefaultRowHeight = 16
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goSmoothScroll]
+        RowCount = 17
+        ScrollBars = ssNone
+        TabOrder = 13
+        TitleFont.Height = -12
+        TitleFont.Name = 'Sans'
+        ColWidths = (
+          21
+          56
+          55
+          64
+          55
+        )
+        Cells = (
+          21
+          0
+          0
+          '#'
+          0
+          1
+          '0'
+          0
+          2
+          '1'
+          0
+          3
+          '2'
+          0
+          4
+          '3'
+          0
+          5
+          '4'
+          0
+          6
+          '5'
+          0
+          7
+          '6'
+          0
+          8
+          '7'
+          0
+          9
+          '8'
+          0
+          10
+          '9'
+          0
+          11
+          '10'
+          0
+          12
+          '11'
+          0
+          13
+          '12'
+          0
+          14
+          '13'
+          0
+          15
+          '14'
+          0
+          16
+          '15'
+          1
+          0
+          'Button'
+          2
+          0
+          'Name'
+          3
+          0
+          'Axis'
+          4
+          0
+          'Name'
+        )
+      end
+      object Label23: TLabel
+        Left = 4
+        Height = 13
+        Top = 426
+        Width = 14
+        Caption = 'Vn'
+        ParentColor = False
+      end
+      object EditRobotVn: TEdit
+        Left = 36
+        Height = 21
+        Top = 424
+        Width = 50
+        AutoSize = False
+        TabOrder = 14
+        Text = '0'
+      end
+      object EditVnmax: TEdit
+        Left = 92
+        Height = 21
+        Top = 424
+        Width = 50
+        AutoSize = False
+        TabOrder = 15
+        Text = '0.1'
+      end
+      object EditAxisIndexVn: TEdit
+        Left = 148
+        Height = 21
+        Top = 424
+        Width = 50
+        AutoSize = False
+        TabOrder = 16
+        Text = '1'
+      end
+      object EditAxisOffsetVn: TEdit
+        Left = 204
+        Height = 21
+        Top = 424
+        Width = 50
+        AutoSize = False
+        TabOrder = 17
+        Text = '-32767'
+      end
+      object EditAxisFactorVn: TEdit
+        Left = 260
+        Height = 21
+        Top = 424
+        Width = 50
+        AutoSize = False
+        TabOrder = 18
+        Text = '-1'
+      end
+      object CBOmniJoy: TCheckBox
+        Left = 376
+        Height = 19
+        Top = 424
+        Width = 48
+        Caption = 'Omni'
+        TabOrder = 19
+      end
+      object Label24: TLabel
+        Left = 316
+        Height = 13
+        Top = 380
+        Width = 43
+        Caption = 'Channel'
+        ParentColor = False
+      end
+      object EditAxisChannelV: TEdit
+        Left = 316
+        Height = 21
+        Top = 400
+        Width = 50
+        AutoSize = False
+        TabOrder = 20
+        Text = 'v'
+      end
+      object EditAxisChannelVn: TEdit
+        Left = 316
+        Height = 21
+        Top = 424
+        Width = 50
+        AutoSize = False
+        TabOrder = 21
+        Text = 'vn'
+      end
+      object EditAxisChannelW: TEdit
+        Left = 316
+        Height = 21
+        Top = 448
+        Width = 50
+        AutoSize = False
+        TabOrder = 22
+        Text = 'w'
+      end
+      object ComboBoxJoystick: TComboBox
+        Left = 56
+        Height = 21
+        Top = 8
+        Width = 100
+        ItemHeight = 13
+        ItemIndex = 0
+        Items.Strings = (
+          'Joystick1'
+          'Joystick2'
+        )
+        Style = csDropDownList
+        TabOrder = 23
+        Text = 'Joystick1'
+      end
+      object Label25: TLabel
+        Left = 4
+        Height = 13
+        Top = 12
+        Width = 42
+        Caption = 'Joystick:'
+        ParentColor = False
+      end
+      object BJoystickStart: TButton
+        Left = 196
+        Height = 23
+        Top = 8
+        Width = 56
+        Caption = 'Start'
+        OnClick = BJoystickStartClick
+        TabOrder = 24
+      end
+      object BJoystickStop: TButton
+        Left = 260
+        Height = 23
+        Top = 8
+        Width = 56
+        Caption = 'Stop'
+        OnClick = BJoystickStopClick
+        TabOrder = 25
+      end
+      object ShapeLEDJoy: TShape
+        Left = 164
+        Height = 22
+        Top = 8
+        Width = 22
+        Shape = stCircle
+      end
+      object EditSolenoidMax: TEdit
+        Left = 92
+        Height = 21
+        Top = 472
+        Width = 50
+        AutoSize = False
+        TabOrder = 26
+        Text = '170'
+      end
+      object Label26: TLabel
+        Left = 148
+        Height = 13
+        Top = 476
+        Width = 19
+        Caption = 'On:'
+        ParentColor = False
+      end
+      object EditButtonSolenoidOn: TEdit
+        Left = 172
+        Height = 21
+        Top = 472
+        Width = 26
+        AutoSize = False
+        TabOrder = 27
+        Text = '4'
+      end
+      object Label27: TLabel
+        Left = 204
+        Height = 13
+        Top = 476
+        Width = 20
+        Caption = 'Off:'
+        ParentColor = False
+      end
+      object EditButtonSolenoidOff: TEdit
+        Left = 226
+        Height = 21
+        Top = 472
+        Width = 26
+        AutoSize = False
+        TabOrder = 28
+        Text = '5'
+      end
+      object Label28: TLabel
+        Left = 260
+        Height = 13
+        Top = 476
+        Width = 22
+        Caption = 'Tog:'
+        ParentColor = False
+      end
+      object EditButtonSolenoidToggle: TEdit
+        Left = 284
+        Height = 21
+        Top = 472
+        Width = 26
+        AutoSize = False
+        TabOrder = 29
+        Text = '6'
+      end
+      object EditSolenoidChannel: TEdit
+        Left = 316
+        Height = 21
+        Top = 472
+        Width = 50
+        AutoSize = False
+        TabOrder = 30
+        Text = 'sl'
+      end
+    end
+  end
+  object EditPacketCount: TEdit
+    Left = 464
+    Height = 21
+    Top = 4
+    Width = 80
+    TabOrder = 0
+  end
+  object EditDebug: TEdit
+    Left = 316
+    Height = 21
+    Top = 4
+    Width = 80
+    TabOrder = 1
+  end
+  object Chart: TChart
+    Left = 788
+    Height = 525
+    Top = 60
+    Width = 539
+    AxisList = <    
+      item
+        Marks.LabelBrush.Style = bsClear
+        Minors = <>
+        Title.LabelFont.Orientation = 900
+        Title.LabelBrush.Style = bsClear
+      end    
+      item
+        Alignment = calBottom
+        Marks.LabelBrush.Style = bsClear
+        Minors = <>
+        Title.LabelBrush.Style = bsClear
+      end>
+    Foot.Brush.Color = clBtnFace
+    Foot.Font.Color = clBlue
+    Title.Brush.Color = clBtnFace
+    Title.Font.Color = clBlue
+    Title.Text.Strings = (
+      'TAChart'
+    )
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    OnMouseMove = ChartMouseMove
+  end
+  object CBChartFreeze: TCheckBox
+    Left = 872
+    Height = 19
+    Top = 593
+    Width = 53
+    Anchors = [akLeft, akBottom]
+    Caption = 'Freeze'
+    TabOrder = 2
+  end
+  object EditLogName: TEdit
+    Left = 872
+    Height = 21
+    Top = 622
+    Width = 80
+    Anchors = [akLeft, akBottom]
+    TabOrder = 3
+    Text = 'Log_'
+  end
+  object BSaveLog: TButton
+    Left = 788
+    Height = 23
+    Top = 620
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Save Log'
+    OnClick = BSaveLogClick
+    TabOrder = 4
+  end
+  object EditRemoteIP: TEdit
+    Left = 76
+    Height = 21
+    Top = 4
+    Width = 100
+    TabOrder = 5
+    Text = '192.168.1.197'
+  end
+  object Label2: TLabel
+    Left = 4
+    Height = 13
+    Top = 8
+    Width = 47
+    Caption = 'Robot IP:'
+    ParentColor = False
+  end
+  object BUDPConnect: TButton
+    Left = 184
+    Height = 23
+    Top = 4
+    Width = 60
+    Caption = 'Connect'
+    OnClick = BUDPConnectClick
+    TabOrder = 6
+  end
+  object BUDPDisconnect: TButton
+    Left = 248
+    Height = 23
+    Top = 4
+    Width = 60
+    Caption = 'Disc.'
+    OnClick = BUDPDisconnectClick
+    TabOrder = 7
+  end
+  object StatusBar: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 654
+    Width = 1337
+    Panels = <>
+  end
+  object Label1: TLabel
+    Left = 4
+    Height = 13
+    Top = 36
+    Width = 53
+    Caption = 'COM Port:'
+    ParentColor = False
+  end
+  object CBComPort: TComboBox
+    Left = 76
+    Height = 21
+    Top = 32
+    Width = 100
+    ItemHeight = 13
+    TabOrder = 8
+    Text = 'COM9'
+  end
+  object BOpenComPort: TButton
+    Left = 184
+    Height = 23
+    Top = 32
+    Width = 60
+    Caption = 'Open'
+    OnClick = BOpenComPortClick
+    TabOrder = 9
+  end
+  object BCloseComPort: TButton
+    Left = 248
+    Height = 23
+    Top = 32
+    Width = 60
+    Caption = 'Close'
+    OnClick = BCloseComPortClick
+    TabOrder = 10
+  end
+  object BRefreshComPorts: TButton
+    Left = 316
+    Height = 23
+    Top = 32
+    Width = 59
+    Caption = 'Refresh'
+    OnClick = BRefreshComPortsClick
+    TabOrder = 11
+  end
+  object Label3: TLabel
+    Left = 416
+    Height = 13
+    Top = 8
+    Width = 41
+    Caption = 'Packets:'
+    ParentColor = False
+  end
+  object Button_ClearChart: TButton
+    Left = 1252
+    Height = 23
+    Top = 623
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Clear Chart'
+    OnClick = Button_ClearChartClick
+    TabOrder = 12
+  end
+  object EditDt: TEdit
+    Left = 1252
+    Height = 21
+    Top = 600
+    Width = 76
+    Anchors = [akLeft, akBottom]
+    TabOrder = 13
+    Text = '0.04'
+  end
+  object BSetDt: TButton
+    Left = 1204
+    Height = 23
+    Top = 598
+    Width = 43
+    Anchors = [akLeft, akBottom]
+    Caption = 'Set dt'
+    OnClick = BSetDtClick
+    TabOrder = 14
+  end
+  object BTest: TButton
+    Left = 736
+    Height = 23
+    Top = 2
+    Width = 51
+    Caption = 'Test'
+    OnClick = BTestClick
+    TabOrder = 15
+  end
+  object BChartRefresh: TButton
+    Left = 788
+    Height = 23
+    Top = 592
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Refresh'
+    OnClick = BChartRefreshClick
+    TabOrder = 16
+  end
+  object EditDebugChannels: TEdit
+    Left = 4
+    Height = 22
+    Top = 593
+    Width = 776
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    AutoSelect = False
+    TabOrder = 20
+    Text = 'channels'
+  end
+  object Label11: TLabel
+    Left = 960
+    Height = 13
+    Top = 624
+    Width = 96
+    Anchors = [akLeft, akBottom]
+    Caption = 'Decimal Separator:'
+    ParentColor = False
+  end
+  object CBDecimalSeparator: TComboBox
+    Left = 1072
+    Height = 21
+    Top = 620
+    Width = 32
+    Anchors = [akLeft, akBottom]
+    ItemHeight = 13
+    ItemIndex = 0
+    Items.Strings = (
+      '.'
+      ','
+    )
+    Style = csDropDownList
+    TabOrder = 21
+    Text = '.'
+  end
+  object EditErrorChannels: TEdit
+    Left = 4
+    Height = 22
+    Top = 616
+    Width = 776
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    AutoSelect = False
+    TabOrder = 22
+  end
+  object UDP: TLUDPComponent
+    Port = 4224
+    OnReceive = UDPReceive
+    OnError = UDPError
+    Timeout = 0
+    Left = 480
+    Top = 380
+  end
+  object JSONPropStorage: TJSONPropStorage
+    StoredValues = <>
+    JSONFileName = 'config.json'
+    Formatted = True
+    Left = 652
+    Top = 468
+  end
+  object Timer: TTimer
+    Interval = 50
+    OnTimer = TimerTimer
+    Left = 476
+    Top = 436
+  end
+  object Serial: TSdpofpSerial
+    Active = False
+    BaudRate = br115200
+    AltBaudRate = 0
+    DataBits = db8bits
+    Parity = NoneParity
+    FlowControl = []
+    StopBits = sbOne
+    Device = 'COM1'
+    OnRxData = SerialRxData
+    Left = 476
+    Top = 488
+  end
+  object PopupMenuGrid: TPopupMenu
+    Left = 327
+    Top = 198
+    object MenuItemDelRow: TMenuItem
+      Caption = 'Delete Row'
+      OnClick = MenuItemDelRowClick
+    end
+    object MenuItemAddRow: TMenuItem
+      Caption = 'Add Row'
+      OnClick = MenuItemAddRowClick
+    end
+  end
+  object PopupMenuSheet: TPopupMenu
+    Left = 524
+    Top = 316
+    object Edit1: TMenuItem
+      Caption = '&Edit'
+      Visible = False
+      object Undo1: TMenuItem
+        Caption = '&Undo'
+        ShortCut = 16474
+      end
+      object Repeatcommand1: TMenuItem
+        Caption = '&Repeat <command>'
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object PasteSpecial1: TMenuItem
+        Caption = 'Paste &Special...'
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object Find1: TMenuItem
+        Caption = '&Find...'
+      end
+      object Replace1: TMenuItem
+        Caption = 'R&eplace...'
+      end
+      object GoTo1: TMenuItem
+        Caption = '&Go To...'
+      end
+    end
+    object MenuCut: TMenuItem
+      Caption = 'Cu&t'
+      ShortCut = 16472
+      Visible = False
+    end
+    object MenuCopy: TMenuItem
+      Caption = '&Copy'
+      ShortCut = 16451
+    end
+    object MenuPaste: TMenuItem
+      Caption = '&Paste'
+      ShortCut = 16470
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object MenuDelete: TMenuItem
+      Caption = '&Delete Contents'
+      ShortCut = 46
+    end
+    object MenuDeleteAll: TMenuItem
+      Caption = 'Delete &All'
+      ShortCut = 8238
+    end
+  end
+  object ColorDialog: TColorDialog
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    Left = 476
+    Top = 260
+  end
+  object FontDialog: TFontDialog
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    MinFontSize = 0
+    MaxFontSize = 0
+    Left = 476
+    Top = 208
+  end
+  object Joystick: TSdpoJoystick
+    Active = False
+    DeviceLin = '/dev/input/js0'
+    DeviceWin = dwJoystickID2
+    Left = 348
+    Top = 264
+  end
+end

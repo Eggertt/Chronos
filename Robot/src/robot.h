@@ -65,6 +65,8 @@ class robot_t {
 
   bool wasDropPick = 0;
 
+  double  IRkp=0.1, IRki=0.02, IRkd=0.1;
+
   int *mypath;
   int mypathsize;
 

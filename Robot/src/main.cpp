@@ -183,10 +183,15 @@ void save_pars(void)
     return;
   }
 
-  f.printf("kf %.6g;\n", wheel_PID_pars.Kf);
-  f.printf("kc %.6g;\n", wheel_PID_pars.Kc);
-  f.printf("ki %.6g;\n", wheel_PID_pars.Ki);
-  f.printf("kd %.6g;\n", wheel_PID_pars.Kd);
+  // f.printf("kf %.6g;\n", wheel_PID_pars.Kf);
+  // f.printf("kc %.6g;\n", wheel_PID_pars.Kc);
+  // f.printf("ki %.6g;\n", wheel_PID_pars.Ki);
+  // f.printf("kd %.6g;\n", wheel_PID_pars.Kd);
+
+  f.printf("kf %.6g;\n", robot.IRkp);
+  f.printf("kc %.6g;\n", robot.IRki);
+  f.printf("ki %.6g;\n", robot.IRkp);
+
   f.close();
 }
 
@@ -243,25 +248,20 @@ void process_command(command_frame_t frame)
   {
     robot.solenoid_PWM = frame.value;
   }
-  else if (frame.command_is("kf"))
+  else if (frame.command_is("kp"))
   {
-    wheel_PID_pars.Kf = frame.value;
-    serial_commands.send_command("kf", wheel_PID_pars.Kf);
-  }
-  else if (frame.command_is("kc"))
-  {
-    wheel_PID_pars.Kc = frame.value;
-    serial_commands.send_command("kc", wheel_PID_pars.Kc);
+    robot.IRkp = frame.value;
+    serial_commands.send_command("kp", robot.IRkp);
   }
   else if (frame.command_is("ki"))
   {
-    wheel_PID_pars.Ki = frame.value;
-    serial_commands.send_command("ki", wheel_PID_pars.Ki);
+    robot.IRki = frame.value;
+    serial_commands.send_command("ki", robot.IRki);
   }
   else if (frame.command_is("kd"))
   {
-    wheel_PID_pars.Kd = frame.value;
-    serial_commands.send_command("kd", wheel_PID_pars.Kd);
+    robot.IRkd = frame.value;
+    serial_commands.send_command("kd", robot.IRkd);
   }
   else if (frame.command_is("pl"))
   {
@@ -269,10 +269,9 @@ void process_command(command_frame_t frame)
   }
   else if (frame.command_is("pr"))
   {
-    serial_commands.send_command("kf", wheel_PID_pars.Kf);
-    serial_commands.send_command("kc", wheel_PID_pars.Kc);
-    serial_commands.send_command("ki", wheel_PID_pars.Ki);
-    serial_commands.send_command("kd", wheel_PID_pars.Kd);
+    serial_commands.send_command("kp", robot.IRkp);
+    serial_commands.send_command("ki", robot.IRki);
+    serial_commands.send_command("kd", robot.IRkd);
   }
   else if (frame.command_is("ES"))
   { // EEPROM Store
@@ -299,7 +298,13 @@ void process_command(command_frame_t frame)
     WiFi.end();
     WiFi.begin(ssid, password);
 
-  } // Put here more commands...
+  }
+  // else if (frame.command_is("IRkp"))
+  // {
+  //   robot.IRkp = frame.value;
+  //   serial_commands.send_command("kf", robot.IRkp);
+  // } 
+  // Put here more commands...
 }
 
 void init_PIO_dual_encoders(int enc1_pin_A, int enc2_pin_A);
@@ -770,13 +775,13 @@ void loop()
       } else if (instructions[instructionCounter] == "Pick"){
         if (currentBox.pos == 0 || currentBox.pos == 1 || currentBox.pos == 2 || currentBox.pos == 3){
           robot.setState(PICKB);
-          robot.wasDropPick = 1;
+          //robot.wasDropPick = 1;
           robot.compassCount = 2;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentBox.pos == 16 || currentBox.pos == 23 || currentBox.pos == 12 || currentBox.pos == 19){
           robot.setState(PICKBV);
-          robot.wasDropPick = 1;
+          //robot.wasDropPick = 1;
           robot.compassCount = 1;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
@@ -873,63 +878,65 @@ void loop()
 
     // Debug information
     // prints
-    // serial_commands.send_command("dte", delta);
+    serial_commands.send_command("dte", delta);
 
-     //serial_commands.send_command("M1", robot.PWM_1);
-     //serial_commands.send_command("M2", robot.PWM_2);
+    serial_commands.send_command("M1", robot.PWM_1);
+    serial_commands.send_command("M2", robot.PWM_2);
 
-    //serial_commands.send_command("e1", robot.enc1);
-    //serial_commands.send_command("e2", robot.enc2);
+    serial_commands.send_command("e1", robot.enc1);
+    serial_commands.send_command("e2", robot.enc2);
 
-    // serial_commands.send_command("Vbat", robot.battery_voltage);
+    serial_commands.send_command("Vbat", robot.battery_voltage);
 
-    // serial_commands.send_command("ve", robot.ve);
-    // serial_commands.send_command("we", robot.we);
+    serial_commands.send_command("ve", robot.ve);
+    serial_commands.send_command("we", robot.we);
 
-     //serial_commands.send_command("v1ref", robot.v1ref);
-     //serial_commands.send_command("v2ref", robot.v2ref);
-    // Serial.println("TESTE");
+    serial_commands.send_command("v1ref", robot.v1ref);
+    serial_commands.send_command("v2ref", robot.v2ref);
+    Serial.println("TESTE");
 
-    ////serial_commands.send_command("iman", robot.solenoid_PWM);
+    serial_commands.send_command("iman", robot.solenoid_PWM);
 
-    // serial_commands.send_command("mode", robot.control_mode);
+    serial_commands.send_command("mode", robot.control_mode);
 
-    ////serial_commands.send_command("st", robot.state);
+    serial_commands.send_command("st", robot.state);
 
-    // serial_commands.send_command("rel_s", robot.rel_s);
-    // Serial.println("");
-    // serial_commands.send_command("theta", robot.rel_theta);
-    // Serial.println("");
+    serial_commands.send_command("rel_s", robot.rel_s);
+    Serial.println("");
+    serial_commands.send_command("theta", robot.rel_theta);
+    Serial.println("");
 
     serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
     Serial.println("");
-    // serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
-    // serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
-    // serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
-    // serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
-    // serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
-    // Serial.println("");
+    serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
+    serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
+    serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
+    serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
+    serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
+    Serial.println("");
 
-    ////serial_commands.send_command("tof", robot.tof_dist);
-    // serial_commands.send_command("fk", robot.follow_k);
-    // serial_commands.send_command("fv", robot.follow_v);
+    serial_commands.send_command("tof", robot.tof_dist);
+    serial_commands.send_command("fk", robot.follow_k);
+    serial_commands.send_command("fv", robot.follow_v);
 
-    // serial_commands.send_command("pr", robot.IRLine.pos_right);
-    // serial_commands.send_command("pl", robot.IRLine.pos_left);
+    serial_commands.send_command("pr", robot.IRLine.pos_right);
+    serial_commands.send_command("pl", robot.IRLine.pos_left);
 
-    // serial_commands.send_command("ki", wheel_PID_pars.Ki);
+    serial_commands.send_command("kp", robot.IRkp);
+    serial_commands.send_command("ki", robot.IRki);
+    serial_commands.send_command("kd", robot.IRkd);
 
 
-    // Serial.print(" cmd: ");
+    Serial.print(" cmd: ");
     Serial.print(serial_commands.frame.command);
-    // Serial.print("; ");
+    Serial.print("; ");
 
-    // serial_commands.send_command("dbg", debug);
-    // Serial.print(" loop: ");
-    // Serial.println(micros() - loop_micros);
-    // serial_commands.send_command("loop", micros() - loop_micros);
+    serial_commands.send_command("dbg", debug);
+    Serial.print(" loop: ");
+    Serial.println(micros() - loop_micros);
+    serial_commands.send_command("loop", micros() - loop_micros);
 
     serial_commands.flush();
-    //Serial.println();
+    Serial.println();
   }
 }

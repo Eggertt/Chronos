@@ -82,10 +82,10 @@ class main_fsm_t: public state_machine_t
 
       Serial.print("State:");
       Serial.println(robot.state);
-      //robot.setState(43); 
+      robot.setState(43); 
     
-    //}
-    //else if(robot.state == 43 && robot.rel_theta > radians(170)){
+    }
+    else if(robot.state == 43 && robot.rel_theta > radians(170)){
       robot.rel_theta = 0;
       robot.IRLine.crosses = 0;
 
@@ -133,10 +133,10 @@ class main_fsm_t: public state_machine_t
 
       Serial.print("State:");
       Serial.println(robot.state);
-      robot.setState(22);
+      //robot.setState(22);
     
-    }
-    else if(robot.state == 22 && robot.rel_theta > radians(170)){
+    //}
+    //else if(robot.state == 22 && robot.rel_theta > radians(170)){
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 
@@ -175,9 +175,9 @@ class main_fsm_t: public state_machine_t
 
     Serial.print("State:");
     Serial.println(robot.state);
-    robot.setState(32);
+    //robot.setState(32);
     
-    }else if(robot.state == 32 && robot.rel_theta < radians(-170)){
+    //}else if(robot.state == 32 && robot.rel_theta < radians(-170)){
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 

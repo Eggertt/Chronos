@@ -34,7 +34,7 @@ IRLine_t::IRLine_t()
   IR_WaterLevel = 100;
   IR_tresh = 512;
   cross_tresh = 3;
-  black_cross_level = 2.7;
+  black_cross_level = 2.5;
 }
 
 void IRLine_t::calibrate(void)
@@ -119,6 +119,11 @@ void IRLine_t::calcCrosses(void)
   } else {
     if (cross_count > 0) cross_count--;
   }
+
+    // Serial.printf("                                                                              Blacks = ");
+    // Serial.println(blacks);
+    // Serial.printf("                                                                                               Crosses = ");
+    // Serial.println(crosses);
 
 }
 

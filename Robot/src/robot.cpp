@@ -40,7 +40,7 @@ robot_t::robot_t()
   dt = 0.04;
 
   follow_k = -0.15;
-  follow_v = 0.20; // 0.20;
+  follow_v = 0.15; // 0.20;
 
   pchannels = NULL;
   pfsm = NULL;
@@ -172,8 +172,8 @@ void robot_t::followLine(){
 
 // void robot_t::followLine(){
 //   double Kp = 0.1;
-//   double Ki = 0.01;
-//   double Kd = 0.05;
+//   double Ki = 0.02;
+//   double Kd = 0.1;
 //   double prevError = 0; // Erro anterior para cada sensor
 //   double integral = 0; // Integral para cada sensor
 

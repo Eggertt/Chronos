@@ -442,8 +442,8 @@ void setup()
 
   // strcpy(ssid, "TP-Link_4B12");
   // strcpy(password, "23893481");
-  strcpy(ssid, "BDWireless");
-  strcpy(password, "BFFDDB8849");
+  strcpy(ssid, "5DPO-NETWORK");
+  strcpy(password, "5dpo5dpo");
 
   // Operate in WiFi Station mode
   WiFi.mode(WIFI_STA);
@@ -690,6 +690,7 @@ void loop()
       Serial.println(currentBox.pos);
       Serial.print("Dropping at: ");
       Serial.println(currentPort.pos);
+      
       for (auto inst : instructions)
       {
         Serial.println(inst.c_str());
@@ -743,10 +744,11 @@ void loop()
       } else if (instructions[instructionCounter] == "Line" && (instructions[instructionCounter + 1] == "Drop" || instructions[instructionCounter + 1] == "Pick")){
         Serial.println("Case GO");
         robot.setState(GO);
+
       } else if (instructions[instructionCounter] == "Left" && (instructions[instructionCounter + 1] == "Pick" || instructions[instructionCounter + 1] == "Drop")){
         Serial.println("Case TLEFT");
-
         robot.setState(TLEFT);
+
         if (robot.compassCount == 0)
           robot.compassCount = 3;
         else
@@ -768,11 +770,13 @@ void loop()
       } else if (instructions[instructionCounter] == "Pick"){
         if (currentBox.pos == 0 || currentBox.pos == 1 || currentBox.pos == 2 || currentBox.pos == 3){
           robot.setState(PICKB);
+          robot.wasDropPick = 1;
           robot.compassCount = 2;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentBox.pos == 16 || currentBox.pos == 23 || currentBox.pos == 12 || currentBox.pos == 19){
           robot.setState(PICKBV);
+          robot.wasDropPick = 1;
           robot.compassCount = 1;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
@@ -782,10 +786,10 @@ void loop()
         currentBox.status = HOLDING;
         Serial.println("Case PICK");
 
-        Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[0].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[0].occupied);
-        Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[1].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[1].occupied);
-        Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[2].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[2].occupied);
-        Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[3].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[3].occupied);
+        // Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[0].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[0].occupied);
+        // Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[1].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[1].occupied);
+        // Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[2].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[2].occupied);
+        // Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[3].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[3].occupied);
 
         // instructionCounter++;
       } else if (instructions[instructionCounter] == "Drop"){
@@ -793,11 +797,13 @@ void loop()
 
         if (currentPort.pos == 31 || currentPort.pos == 32 || currentPort.pos == 33 || currentPort.pos == 34){
           robot.setState(DROPB);
+          robot.wasDropPick = 1;
           robot.compassCount = 0;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentPort.pos == 15 || currentPort.pos == 22 || currentPort.pos == 11 || currentPort.pos == 18) {
           robot.setState(DROPBV);
+          robot.wasDropPick = 1;
           robot.compassCount = 3;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
           //Serial.println("CAIXA VERDE OU VERMELHA");
@@ -806,17 +812,17 @@ void loop()
         else 
           Serial.println("Failed to start dropping phase");
 
-          if(currentPort.pos == 31) scheduler.deliveryPorts[0].occupied = true;
-          else if(currentPort.pos == 32) scheduler.deliveryPorts[1].occupied = true;
-          else if(currentPort.pos == 33) scheduler.deliveryPorts[2].occupied = true;
-          else if(currentPort.pos == 34) scheduler.deliveryPorts[3].occupied = true;
+          //if(currentPort.pos == 31) scheduler.deliveryPorts[0].occupied = true;
+          //else if(currentPort.pos == 32) scheduler.deliveryPorts[1].occupied = true;
+          //else if(currentPort.pos == 33) scheduler.deliveryPorts[2].occupied = true;
+          //else if(currentPort.pos == 34) scheduler.deliveryPorts[3].occupied = true;
 
           currentBox.status = DELIVERED;
           currentPort = scheduler.getAvailablePort(currentBox);
           currentPort.occupied = true;
           currentBox = scheduler.getBox();
         
-      } else if (instructions[instructionCounter] == "Left") {
+      } else if (instructions[instructionCounter] == "Left" && robot.wasDropPick == 0) {
         Serial.println("Case LEFTLINE");
         robot.setState(LEFTLINE);
 
@@ -827,7 +833,7 @@ void loop()
 
         //Serial.printf("compassCount: %d\n", robot.compassCount);
         
-      } else if (instructions[instructionCounter] == "Right"){
+      } else if (instructions[instructionCounter] == "Right" && robot.wasDropPick == 0){
         Serial.println("Case RIGHTLINE");
         robot.setState(RIGHTLINE);
         if (robot.compassCount == 3)
@@ -837,10 +843,24 @@ void loop()
 
         //Serial.printf("compassCount: %d\n", robot.compassCount);
         
-      } else if (instructions[instructionCounter] == "Error"){
+      } 
+      else if(instructions[instructionCounter] == "Left" && robot.wasDropPick == 1){
+        Serial.println("Case TRIGHT AFTER DROP");
+        robot.setState(TRIGHT);
+        
+
+      } else if(instructions[instructionCounter] == "Right" && robot.wasDropPick == 1){
+        Serial.println("Case TLEFT AFTER DROP");
+        robot.setState(TLEFT);
+      
+
+      } 
+      
+      else if (instructions[instructionCounter] == "Error"){
         Serial.println("CASE ERROR -> State = START");
         robot.setState(START);
       } 
+      
       
       // else if (instructions[instructionCounter] == "Fim"){
       //   Serial.println("CASE FIM");
@@ -881,8 +901,8 @@ void loop()
     // serial_commands.send_command("theta", robot.rel_theta);
     // Serial.println("");
 
-    // serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
-    // Serial.println("");
+    serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
+    Serial.println("");
     // serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
     // serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
     // serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);

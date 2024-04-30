@@ -63,6 +63,8 @@ class robot_t {
   float rel_s, rel_theta;
   float xe, ye, thetae;
 
+  bool wasDropPick = 0;
+
   int *mypath;
   int mypathsize;
 

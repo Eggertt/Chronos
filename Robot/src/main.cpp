@@ -190,7 +190,7 @@ void save_pars(void)
 
   f.printf("kf %.6g;\n", robot.IRkp);
   f.printf("kc %.6g;\n", robot.IRki);
-  f.printf("ki %.6g;\n", robot.IRkp);
+  f.printf("ki %.6g;\n", robot.IRkd);
 
   f.close();
 }
@@ -273,9 +273,29 @@ void process_command(command_frame_t frame)
     serial_commands.send_command("ki", robot.IRki);
     serial_commands.send_command("kd", robot.IRkd);
   }
+  else if (frame.command_is("rlv"))
+  { 
+    robot.rightLeft_v = frame.value;
+    serial_commands.send_command("rlv", robot.rightLeft_v);
+  }
+  else if (frame.command_is("rlw"))
+  { 
+    robot.rightLeft_w = frame.value;
+    serial_commands.send_command("rlw", robot.rightLeft_w);
+  }
+  else if (frame.command_is("rllv"))
+  { 
+    robot.rightLeftLine_v = frame.value;
+    serial_commands.send_command("rllv", robot.rightLeftLine_v);
+  }
+  else if (frame.command_is("rllw"))
+  { 
+    robot.rightLeftLine_w = frame.value;
+    serial_commands.send_command("rllw", robot.rightLeftLine_w);
+  }
   else if (frame.command_is("ES"))
   { // EEPROM Store
-    save_pars();
+    save_pars(); 
   }
   else if (frame.command_is("fv"))
   {
@@ -284,6 +304,26 @@ void process_command(command_frame_t frame)
   else if (frame.command_is("fk"))
   {
     robot.follow_k = frame.value;
+  }
+  else if (frame.command_is("rsdb"))
+  {
+    robot.rel_sDROPB = frame.value;
+    serial_commands.send_command("rsdb", robot.rel_sDROPB);
+  }
+  else if (frame.command_is("rsdg"))
+  {
+    robot.rel_sDROPG = frame.value;
+    serial_commands.send_command("rsdg", robot.rel_sDROPG);
+  }
+  else if (frame.command_is("tdb"))
+  {
+    robot.tis_DROPB = frame.value;
+    serial_commands.send_command("tdb", robot.tis_DROPB);
+  }
+  else if (frame.command_is("tdg"))
+  {
+    robot.tis_DROPG = frame.value;
+    serial_commands.send_command("tdg", robot.tis_DROPG);
   }
   else if (frame.command_is("ssid"))
   {
@@ -780,7 +820,7 @@ void loop()
           //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentBox.pos == 16 || currentBox.pos == 23 || currentBox.pos == 12 || currentBox.pos == 19){
-          robot.setState(PICKBV);
+          robot.setState(PICKG);
           //robot.wasDropPick = 1;
           robot.compassCount = 1;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
@@ -807,7 +847,7 @@ void loop()
           //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentPort.pos == 15 || currentPort.pos == 22 || currentPort.pos == 11 || currentPort.pos == 18) {
-          robot.setState(DROPBV);
+          robot.setState(DROPG);
           robot.wasDropPick = 1;
           robot.compassCount = 3;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
@@ -878,36 +918,35 @@ void loop()
 
     // Debug information
     // prints
-    serial_commands.send_command("dte", delta);
+    // serial_commands.send_command("dte", delta);
 
-    serial_commands.send_command("M1", robot.PWM_1);
-    serial_commands.send_command("M2", robot.PWM_2);
+    // serial_commands.send_command("M1", robot.PWM_1);
+    // serial_commands.send_command("M2", robot.PWM_2);
 
-    serial_commands.send_command("e1", robot.enc1);
-    serial_commands.send_command("e2", robot.enc2);
+    // serial_commands.send_command("e1", robot.enc1);
+    // serial_commands.send_command("e2", robot.enc2);
 
-    serial_commands.send_command("Vbat", robot.battery_voltage);
+    // serial_commands.send_command("Vbat", robot.battery_voltage);
 
     serial_commands.send_command("ve", robot.ve);
     serial_commands.send_command("we", robot.we);
 
     serial_commands.send_command("v1ref", robot.v1ref);
     serial_commands.send_command("v2ref", robot.v2ref);
-    Serial.println("TESTE");
 
     serial_commands.send_command("iman", robot.solenoid_PWM);
 
-    serial_commands.send_command("mode", robot.control_mode);
+    // serial_commands.send_command("mode", robot.control_mode);
 
     serial_commands.send_command("st", robot.state);
 
-    serial_commands.send_command("rel_s", robot.rel_s);
-    Serial.println("");
-    serial_commands.send_command("theta", robot.rel_theta);
-    Serial.println("");
+    // serial_commands.send_command("rel_s", robot.rel_s);
+    // Serial.println("");
+    // serial_commands.send_command("theta", robot.rel_theta);
+    // Serial.println("");
 
-    serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
-    Serial.println("");
+    // serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
+    // Serial.println("");
     serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
     serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
     serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
@@ -915,25 +954,38 @@ void loop()
     serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
     Serial.println("");
 
-    serial_commands.send_command("tof", robot.tof_dist);
-    serial_commands.send_command("fk", robot.follow_k);
+    serial_commands.send_command("x", robot.IRLine.crosses);
+    serial_commands.send_command("er", robot.integral);
+    // serial_commands.send_command("tof", robot.tof_dist);
+    // serial_commands.send_command("fk", robot.follow_k);
     serial_commands.send_command("fv", robot.follow_v);
 
-    serial_commands.send_command("pr", robot.IRLine.pos_right);
-    serial_commands.send_command("pl", robot.IRLine.pos_left);
+    // serial_commands.send_command("pr", robot.IRLine.pos_right);
+    // serial_commands.send_command("pl", robot.IRLine.pos_left);
 
     serial_commands.send_command("kp", robot.IRkp);
     serial_commands.send_command("ki", robot.IRki);
     serial_commands.send_command("kd", robot.IRkd);
 
+    serial_commands.send_command("rlv", robot.rightLeft_v);
+    serial_commands.send_command("rlw", robot.rightLeft_w);
+    serial_commands.send_command("rllv", robot.rightLeftLine_v);
+    serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
-    Serial.print(" cmd: ");
-    Serial.print(serial_commands.frame.command);
-    Serial.print("; ");
+    serial_commands.send_command("rsdb", robot.rel_sDROPB);
+    serial_commands.send_command("rsdg", robot.rel_sDROPG);
+    serial_commands.send_command("tdb", robot.tis_DROPB);
+    serial_commands.send_command("tdg", robot.tis_DROPG);
 
-    serial_commands.send_command("dbg", debug);
+
+
+    // Serial.print(" cmd: ");
+    // Serial.print(serial_commands.frame.command);
+    // Serial.print("; ");
+
+    // serial_commands.send_command("dbg", debug);
     Serial.print(" loop: ");
-    Serial.println(micros() - loop_micros);
+    // Serial.println(micros() - loop_micros);
     serial_commands.send_command("loop", micros() - loop_micros);
 
     serial_commands.flush();

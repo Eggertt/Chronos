@@ -71,8 +71,8 @@ typedef enum{
   RIGHTLINE,  // 7
   START,      // 8
   SETUP,      // 9
-  DROPBV,     // 10
-  PICKBV,     // 11
+  DROPG,     // 10
+  PICKG,     // 11
   NEXT,       // 12
   TURNBACK,   // 13
   TEST       // 14

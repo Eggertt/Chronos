@@ -174,23 +174,29 @@ void robot_t::followLine(){
   // robot.IRkp = 0.1;
   // robot.IRki = 0.02;
   // robot.IRkd = 0.1;
-  double prevError = 0; // Erro anterior para cada sensor
-  double integral = 0; // Integral para cada sensor
-  double derivative = 0; // Derivada para cada sensor
 
-  double error = -1.2 * IRLine.IR_values[0] - 1.1 * IRLine.IR_values[1] + IRLine.IR_values[2] + 1.1 * IRLine.IR_values[3] + 1.2 * IRLine.IR_values[4];
+  if(robot.IR_sum() < 2500){
+    double error = -1.0 * IRLine.IR_values[0] - 1.0 * IRLine.IR_values[1] + IRLine.IR_values[2] + 1.0 * IRLine.IR_values[3] + 1.0 * IRLine.IR_values[4];
 
-  integral += error;
-  derivative = error - prevError;
-  prevError = error;
+    integral += error;
+    derivative = error - prevError;
+    prevError = error;
 
-  double output_w = (robot.IRkp * error + robot.IRki * integral + robot.IRkd * derivative)/100;
+    double output_w = (robot.IRkp * error + robot.IRki * integral + robot.IRkd * derivative)/100;
 
-  Serial.printf("Output_w = %f\n",output_w);
+    Serial.printf("Output_w = %f\n",output_w);
 
-  // Aplicação das saídas
-  setRobotVW(0.1, output_w);
+    // Aplicação das saídas
+    setRobotVW(robot.follow_v, output_w);
+  }
+  else {
+    integral = 0;
+    setRobotVW(robot.follow_v, 0);
+  }
+}
 
+int robot_t::IR_sum(){
+  return IRLine.IR_values[0] + IRLine.IR_values[1] + IRLine.IR_values[2] + IRLine.IR_values[3] + IRLine.IR_values[4];
 }
 
 void robot_t::send_command(const char* command, float par)

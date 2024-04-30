@@ -65,8 +65,6 @@ class robot_t {
 
   bool wasDropPick = 0;
 
-  double  IRkp=0.1, IRki=0.02, IRkd=0.1;
-
   int *mypath;
   int mypathsize;
 
@@ -89,7 +87,18 @@ class robot_t {
   int PWM_1, PWM_2;
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
+
+  double  IRkp=0.1, IRki=0.02, IRkd=0.1;
+  double prevError = 0; // Erro anterior para cada sensor
+  double integral = 0; // Integral para cada sensor
+  double derivative = 0; // Derivada para cada sensor
+
   float follow_v, follow_k;
+  float rightLeft_v = 0.06, rightLeft_w = 2.5; // for tright and tleft
+  float rightLeftLine_v = 0.08, rightLeftLine_w = 2; //for leftline and rightline
+
+  float rel_sDROPB = 0.11, rel_sDROPG = 0.15;
+  float tis_DROPB = 1000, tis_DROPG = 1500;
   
   PID_t PID[NUM_WHEELS];
   float battery_voltage;
@@ -121,6 +130,8 @@ class robot_t {
 
   void send_command(const char* command, float par);
   void send_command(const char* command, const char* par);
+
+  int IR_sum();
 };
 
 extern robot_t robot;

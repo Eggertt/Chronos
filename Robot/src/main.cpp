@@ -219,6 +219,21 @@ void load_pars(void)
   f.close();
 }
 
+
+#include "direction.h"
+#include "node.h"
+#include "config.h"
+#include "scheduler.h"
+
+std::vector<std::string> instructions;
+Scheduler scheduler(25);
+int instructionCounter = 0;
+int pathCounter = 0;
+Box currentBox;
+Box newBox;
+Port currentPort;
+Box boxes[4];
+
 void process_command(command_frame_t frame)
 {
   commands_list.process_command(frame);
@@ -292,6 +307,22 @@ void process_command(command_frame_t frame)
   { 
     robot.rightLeftLine_w = frame.value;
     serial_commands.send_command("rllw", robot.rightLeftLine_w);
+  }
+  else if (frame.command_is("er"))
+  { 
+    robot.integral = frame.value;
+    serial_commands.send_command("er", robot.integral);
+  }
+  else if (frame.command_is("box"))
+  { 
+    instructions.clear();
+    instructionCounter = 0;
+    pathCounter = 0;
+    robot.integral = 0;
+    robot.IRLine.crosses = 0;
+    scheduler.resetPosition();
+    strcpy(irrecvbuffer, frame.text);
+    serial_commands.send_command("box", irrecvbuffer);
   }
   else if (frame.command_is("ES"))
   { // EEPROM Store
@@ -401,19 +432,6 @@ void wifi_list(void)
   }
 }
 
-#include "direction.h"
-#include "node.h"
-#include "config.h"
-#include "scheduler.h"
-
-Scheduler scheduler(25);
-std::vector<std::string> instructions;
-int instructionCounter = 0;
-int pathCounter = 0;
-Box currentBox;
-Box newBox;
-Port currentPort;
-Box boxes[4];
 
 void setup()
 {
@@ -485,10 +503,10 @@ void setup()
   password[c] = 0;
   f.close();
 
-  // strcpy(ssid, "TP-Link_4B12");
-  // strcpy(password, "23893481");
-  strcpy(ssid, "5DPO-NETWORK");
-  strcpy(password, "5dpo5dpo");
+  strcpy(ssid, "TP-Link_28CD");
+  strcpy(password, "49871005");
+  // strcpy(ssid, "5DPO-NETWORK");
+  // strcpy(password, "5dpo5dpo");
 
   // Operate in WiFi Station mode
   WiFi.mode(WIFI_STA);
@@ -764,7 +782,13 @@ void loop()
           pathCounter = 0;
       }
 
-      if (instructions[instructionCounter] == "Line" && (instructions[instructionCounter + 1] != "Drop" || instructions[instructionCounter + 1] != "Pick"))
+      if(instructions[instructionCounter] == "Line" && robot.wasDropPick == 1){
+        Serial.println("Case TURNBACK AFTER DROP/PICK");
+        robot.setState(TURNBACK);
+        
+
+      }
+      else if (instructions[instructionCounter] == "Line" && (instructions[instructionCounter + 1] != "Drop" || instructions[instructionCounter + 1] != "Pick"))
       {
         Serial.println("Case FLINE");
         robot.setState(FLINE);
@@ -792,7 +816,8 @@ void loop()
 
       } else if (instructions[instructionCounter] == "Left" && (instructions[instructionCounter + 1] == "Pick" || instructions[instructionCounter + 1] == "Drop")){
         Serial.println("Case TLEFT");
-        robot.setState(TLEFT);
+        //robot.setState(TLEFT);
+        robot.setState(60);
 
         if (robot.compassCount == 0)
           robot.compassCount = 3;
@@ -802,7 +827,8 @@ void loop()
         //Serial.printf("compassCount: %d\n", robot.compassCount);
       } else if (instructions[instructionCounter] == "Right" && (instructions[instructionCounter + 1] == "Pick" || instructions[instructionCounter + 1] == "Drop")){
         Serial.println("Case TRIGHT");
-        robot.setState(TRIGHT);
+        //robot.setState(TRIGHT);
+        robot.setState(70);
 
         if (robot.compassCount == 3)
           robot.compassCount = 0;
@@ -815,13 +841,13 @@ void loop()
       } else if (instructions[instructionCounter] == "Pick"){
         if (currentBox.pos == 0 || currentBox.pos == 1 || currentBox.pos == 2 || currentBox.pos == 3){
           robot.setState(PICKB);
-          //robot.wasDropPick = 1;
+          robot.wasDropPick = 1;
           robot.compassCount = 2;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentBox.pos == 16 || currentBox.pos == 23 || currentBox.pos == 12 || currentBox.pos == 19){
           robot.setState(PICKG);
-          //robot.wasDropPick = 1;
+          robot.wasDropPick = 1;
           robot.compassCount = 1;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
@@ -890,15 +916,14 @@ void loop()
         
       } 
       else if(instructions[instructionCounter] == "Left" && robot.wasDropPick == 1){
-        Serial.println("Case TRIGHT AFTER DROP");
+        Serial.println("Case TRIGHT AFTER DROP/PICK");
         robot.setState(TRIGHT);
         
 
       } else if(instructions[instructionCounter] == "Right" && robot.wasDropPick == 1){
-        Serial.println("Case TLEFT AFTER DROP");
+        Serial.println("Case TLEFT AFTER DROP/PICK");
         robot.setState(TLEFT);
-      
-
+     
       } 
       
       else if (instructions[instructionCounter] == "Error"){
@@ -918,7 +943,7 @@ void loop()
 
     // Debug information
     // prints
-    // serial_commands.send_command("dte", delta);
+    serial_commands.send_command("dte", delta);
 
     // serial_commands.send_command("M1", robot.PWM_1);
     // serial_commands.send_command("M2", robot.PWM_2);
@@ -926,15 +951,15 @@ void loop()
     // serial_commands.send_command("e1", robot.enc1);
     // serial_commands.send_command("e2", robot.enc2);
 
-    // serial_commands.send_command("Vbat", robot.battery_voltage);
+    serial_commands.send_command("Vbat", robot.battery_voltage);
 
-    serial_commands.send_command("ve", robot.ve);
-    serial_commands.send_command("we", robot.we);
+    serial_commands.send_command("ve", robot.battery_voltage); // This should be robot.ve
+    // serial_commands.send_command("we", robot.we);
 
-    serial_commands.send_command("v1ref", robot.v1ref);
-    serial_commands.send_command("v2ref", robot.v2ref);
+    // serial_commands.send_command("v1ref", robot.v1ref);
+    // serial_commands.send_command("v2ref", robot.v2ref);
 
-    serial_commands.send_command("iman", robot.solenoid_PWM);
+    // serial_commands.send_command("iman", robot.solenoid_PWM);
 
     // serial_commands.send_command("mode", robot.control_mode);
 
@@ -967,15 +992,18 @@ void loop()
     serial_commands.send_command("ki", robot.IRki);
     serial_commands.send_command("kd", robot.IRkd);
 
-    serial_commands.send_command("rlv", robot.rightLeft_v);
-    serial_commands.send_command("rlw", robot.rightLeft_w);
-    serial_commands.send_command("rllv", robot.rightLeftLine_v);
-    serial_commands.send_command("rllw", robot.rightLeftLine_w);
+    // serial_commands.send_command("rlv", robot.rightLeft_v);
+    // serial_commands.send_command("rlw", robot.rightLeft_w);
+    // serial_commands.send_command("rllv", robot.rightLeftLine_v);
+    // serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
-    serial_commands.send_command("rsdb", robot.rel_sDROPB);
-    serial_commands.send_command("rsdg", robot.rel_sDROPG);
-    serial_commands.send_command("tdb", robot.tis_DROPB);
-    serial_commands.send_command("tdg", robot.tis_DROPG);
+    // serial_commands.send_command("rsdb", robot.rel_sDROPB);
+    // serial_commands.send_command("rsdg", robot.rel_sDROPG);
+    // serial_commands.send_command("tdb", robot.tis_DROPB);
+    // serial_commands.send_command("tdg", robot.tis_DROPG);
+
+    serial_commands.send_command("box", irrecvbuffer);
+    serial_commands.send_command("wasDP", robot.wasDropPick);
 
 
 

@@ -88,16 +88,16 @@ class robot_t {
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
 
-  double  IRkp=0.1, IRki=0.02, IRkd=0.1;
+  double  IRkp=0.2, IRki=0.02, IRkd=0.3;
   double prevError = 0; // Erro anterior para cada sensor
   double integral = 0; // Integral para cada sensor
   double derivative = 0; // Derivada para cada sensor
 
   float follow_v, follow_k;
-  float rightLeft_v = 0.06, rightLeft_w = 2.5; // for tright and tleft
+  float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
   float rightLeftLine_v = 0.08, rightLeftLine_w = 2; //for leftline and rightline
 
-  float rel_sDROPB = 0.11, rel_sDROPG = 0.15;
+  float rel_sDROPB = 0.10, rel_sDROPG = 0.15;
   float tis_DROPB = 1000, tis_DROPG = 1500;
   
   PID_t PID[NUM_WHEELS];

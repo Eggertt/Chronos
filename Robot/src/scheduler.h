@@ -16,6 +16,7 @@ class Scheduler
 private:
     Direction dir;
     int currentPosition, prevPosition = -1;
+    int startPosition;
     Node *nodeVec;
     int *path; 
     int pathSize;
@@ -34,6 +35,7 @@ public:
     Box getBox();
     Port getAvailablePort(Box currentBox);
     Node* getNodeVec();
+    void resetPosition();
     int * getPath();
     int getPathSize();
     int flag = 0;
@@ -41,6 +43,7 @@ public:
 
 Scheduler::Scheduler(int startPosition) {
     currentPosition = startPosition;
+    this->startPosition = startPosition;
 }
 
 Scheduler::~Scheduler() {
@@ -308,4 +311,12 @@ int * Scheduler::getPath() {
 
 int Scheduler::getPathSize(){
     return pathSize;
+}
+
+void Scheduler::resetPosition(){
+    this->currentPosition = this->startPosition;
+    this->prevPosition = -1;
+    while(!queue.empty()){
+        queue.pop();
+    }
 }

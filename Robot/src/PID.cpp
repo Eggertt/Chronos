@@ -49,8 +49,8 @@ PID_t::PID_t()
   pars.Kd = 0;
   pars.dt = 0.04;
   
-  m_max = 255;
-  m_min = -255;
+  m_max = 200;
+  m_min = -200;
 
   Se = 0;
   e = 0;

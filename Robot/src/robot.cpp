@@ -184,7 +184,7 @@ void robot_t::followLine(){
 
     double output_w = (robot.IRkp * error + robot.IRki * integral + robot.IRkd * derivative)/10000;
 
-    Serial.printf("Output_w = %f\n",output_w);
+    // Serial.printf("Output_w = %f\n",output_w);
     if (output_w > 3.5) output_w = 3.5;
     else if (output_w < -3.5) output_w = -3.5;
 

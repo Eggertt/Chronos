@@ -720,6 +720,8 @@ void loop()
 
     }
 
+    String color;
+
     // if Setup, create boxes and start the setup for the Dijkstra
     if (robot.state == SETUP){
       for (size_t i = 0; i < 4; i++){
@@ -740,19 +742,12 @@ void loop()
       }
 
       scheduler.setUp(boxes, 4);
+      
+      // robot.setState(NEXT);
 
-      robot.setState(NEXT);
-    }
-    
-
-    if (robot.state == NEXT){
       currentBox = scheduler.getBox();
       currentPort = scheduler.getAvailablePort(currentBox);
       instructions = scheduler.getRoute();
-      Serial.print("Picking at: ");
-      Serial.println(currentBox.pos);
-      Serial.print("Dropping at: ");
-      Serial.println(currentPort.pos);
       
       for (auto inst : instructions)
       {
@@ -761,6 +756,24 @@ void loop()
 
       robot.setState(GO);
     }
+    
+
+    // if (robot.state == NEXT){
+    //   currentBox = scheduler.getBox();
+    //   currentPort = scheduler.getAvailablePort(currentBox);
+    //   instructions = scheduler.getRoute();
+    //   Serial.print("Picking at: ");
+    //   Serial.println(currentBox.pos);
+    //   Serial.print("Dropping at: ");
+    //   Serial.println(currentPort.pos);
+      
+    //   for (auto inst : instructions)
+    //   {
+    //     Serial.println(inst.c_str());
+    //   }
+
+    //   robot.setState(GO);
+    // }
 
 
     if (robot.state == GO)
@@ -770,12 +783,38 @@ void loop()
 
       if (instructionCounter == instructions.size()) {
         if (currentBox.status == HOLDING) {
+          // currentPort = scheduler.getAvailablePort(currentBox);
           instructions = scheduler.getRoute(currentBox, currentPort);
+
+          switch (currentBox.color){
+            case 0:
+              color = "Green";
+              break;
+            case 1:
+              color = "Blue";
+              break;
+            case 2:
+              color = "Red";
+              break;
+          }
+          Serial.println("            [Main: state = GO]");
+          Serial.print("Picking ");
+          Serial.print(color);
+          Serial.print(" box at: ");
+          Serial.println(currentBox.pos);
+          Serial.print("Dropping at: ");
+          Serial.println(currentPort.pos);
+          for (auto inst : instructions)
+          {
+            Serial.println(inst.c_str());
+          }
+          Serial.println("");
+          Serial.println("");
+          Serial.println("");
+          Serial.println("");
+          Serial.println("");
         } else {
           instructions = scheduler.getRoute();
-
-          Serial.print("Picking at: ");
-          Serial.println(currentBox.pos);
 
         }
           instructionCounter = 0;
@@ -865,6 +904,7 @@ void loop()
         // instructionCounter++;
       } else if (instructions[instructionCounter] == "Drop"){
         Serial.println("Case DROP");
+        
 
         if (currentPort.pos == 31 || currentPort.pos == 32 || currentPort.pos == 33 || currentPort.pos == 34){
           robot.setState(DROPB);
@@ -888,10 +928,43 @@ void loop()
           //else if(currentPort.pos == 33) scheduler.deliveryPorts[2].occupied = true;
           //else if(currentPort.pos == 34) scheduler.deliveryPorts[3].occupied = true;
 
+              switch (currentBox.color){
+                case 0:
+                  color = "Green";
+                  break;
+                case 1:
+                  color = "Blue";
+                  break;
+                case 2:
+                  color = "Red";
+                  break;
+              }
+          
+              Serial.println("              [Main: state = DROP]");
+              Serial.print("Box ");
+              Serial.print(color);
+              Serial.print(" dropped at: ");
+              Serial.print(currentPort.pos);
+              Serial.print(" which is: ");
+              if(currentPort.occupied) Serial.println("occupied");
+              else Serial.println("free");
           currentBox.status = DELIVERED;
-          currentPort = scheduler.getAvailablePort(currentBox);
           currentPort.occupied = true;
+          scheduler.updatePorts(currentBox, currentPort);
           currentBox = scheduler.getBox();
+              Serial.print("Now the Port ");
+              Serial.print(currentPort.pos);
+              Serial.print(" is: ");
+              if(currentPort.occupied) Serial.println("occupied");
+              else Serial.println("free");
+          currentPort = scheduler.getAvailablePort(currentBox);
+              Serial.print("Next Box: ");
+              Serial.print(color);
+              Serial.print(" has to be dropped at: ");
+              Serial.print(currentPort.pos);
+              Serial.print(" which is: ");
+              if(currentPort.occupied) Serial.println("occupied");
+              else Serial.println("free");
         
       } else if(instructions[instructionCounter] == "Left" && (robot.wasPick == 1 || robot.wasDrop == 1)){
         Serial.println("Case TRIGHT AFTER DROP/PICK");
@@ -899,11 +972,11 @@ void loop()
         
 
       } else if(instructions[instructionCounter] == "Right" && (robot.wasPick == 1 && robot.wasDrop == 0)){
-        Serial.println("Case TLEFT AFTER DROP/PICK");
+        Serial.println("Case TLEFT AFTER PICK");
         robot.setState(TLEFT);
      
       } else if(instructions[instructionCounter] == "Right" && robot.wasDrop == 1){
-        Serial.println("Case TLEFT AFTER DROP/PICK");
+        Serial.println("Case TLEFT AFTER DROP");
         robot.setState(TLEFTAFTERDROP);
 
      
@@ -947,7 +1020,7 @@ void loop()
 
     // Debug information
     // prints
-    serial_commands.send_command("dte", delta);
+    // serial_commands.send_command("dte", delta);
 
     // serial_commands.send_command("M1", robot.PWM_1);
     // serial_commands.send_command("M2", robot.PWM_2);
@@ -955,9 +1028,9 @@ void loop()
     // serial_commands.send_command("e1", robot.enc1);
     // serial_commands.send_command("e2", robot.enc2);
 
-    serial_commands.send_command("Vbat", robot.battery_voltage);
+    // serial_commands.send_command("Vbat", robot.battery_voltage);
 
-    serial_commands.send_command("ve", robot.battery_voltage); // This should be robot.ve
+    // serial_commands.send_command("ve", robot.battery_voltage); // This should be robot.ve
     // serial_commands.send_command("we", robot.we);
 
     // serial_commands.send_command("v1ref", robot.v1ref);
@@ -976,29 +1049,29 @@ void loop()
 
     // serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
     // Serial.println("");
-    serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
-    serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
-    serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
-    serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
-    serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
-    Serial.println("");
+    // serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
+    // serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
+    // serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
+    // serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
+    // serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
+    // Serial.println("");
 
-    serial_commands.send_command("x", robot.IRLine.crosses);
-    serial_commands.send_command("x_t", robot.IRLine.cross_count);
-    serial_commands.send_command("er", robot.integral);
+    // serial_commands.send_command("x", robot.IRLine.crosses);
+    // serial_commands.send_command("x_t", robot.IRLine.cross_count);
+    // serial_commands.send_command("er", robot.integral);
     // serial_commands.send_command("tof", robot.tof_dist);
     // serial_commands.send_command("fk", robot.follow_k);
-    serial_commands.send_command("fv", robot.follow_v);
+    // serial_commands.send_command("fv", robot.follow_v);
 
     // serial_commands.send_command("pr", robot.IRLine.pos_right);
     // serial_commands.send_command("pl", robot.IRLine.pos_left);
 
-    serial_commands.send_command("kp", robot.IRkp);
-    serial_commands.send_command("ki", robot.IRki);
-    serial_commands.send_command("kd", robot.IRkd);
+    // serial_commands.send_command("kp", robot.IRkp);
+    // serial_commands.send_command("ki", robot.IRki);
+    // serial_commands.send_command("kd", robot.IRkd);
 
     // serial_commands.send_command("rlv", robot.rightLeft_v);
-    // serial_commands.send_command("rlw", robot.rightLeft_w);
+    serial_commands.send_command("rlw", robot.rightLeft_w);               
     // serial_commands.send_command("rllv", robot.rightLeftLine_v);
     // serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
@@ -1007,8 +1080,8 @@ void loop()
     // serial_commands.send_command("tdb", robot.tis_DROPB);
     // serial_commands.send_command("tdg", robot.tis_DROPG);
 
-    serial_commands.send_command("box", irrecvbuffer);
-    serial_commands.send_command("wasDP", robot.wasPick);
+    // serial_commands.send_command("box", irrecvbuffer);
+    // serial_commands.send_command("wasDP", robot.wasPick);
 
 
 
@@ -1017,7 +1090,7 @@ void loop()
     // Serial.print("; ");
 
     // serial_commands.send_command("dbg", debug);
-    Serial.print(" loop: ");
+    // Serial.print(" loop: ");
     // Serial.println(micros() - loop_micros);
     serial_commands.send_command("loop", micros() - loop_micros);
 

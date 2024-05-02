@@ -1,8 +1,8 @@
 #pragma once
 
 enum Color {
-    BLUE,
     GREEN,
+    BLUE,
     RED,
     PURPLE
 };

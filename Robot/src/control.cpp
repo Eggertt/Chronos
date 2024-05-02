@@ -59,7 +59,7 @@ class main_fsm_t: public state_machine_t
       }  
     
     }
-    else if(robot.state == TLEFTAFTERDROP && robot.rel_theta > radians (70)){
+    else if(robot.state == TLEFTAFTERDROP && robot.rel_theta > radians (80)){
       robot.IRLine.crosses = 0;
 
       Serial.print("State:");
@@ -135,7 +135,7 @@ class main_fsm_t: public state_machine_t
       Serial.println(robot.state);
       robot.setState(52); 
     
-    }else if(robot.state == 52 && robot.rel_s < -robot.rel_sDROPG){ //0.17
+    }else if(robot.state == 52 && robot.rel_s < -0.17){ //0.17
       robot.rel_theta = 0;
 
       Serial.print("State:");
@@ -270,7 +270,7 @@ class main_fsm_t: public state_machine_t
       robot.followLine();
     
     }else if(robot.state == 42){  //go back a little
-      robot.setRobotVW(-0.1, 0); //v was 0.12
+      robot.setRobotVW(-0.15, 0.11); //v was 0.12
     
     }else if(robot.state == 43){  //turn 180
       robot.setRobotVW(0, -2.5); //w was 3
@@ -283,7 +283,7 @@ class main_fsm_t: public state_machine_t
       robot.followLine();
     
     }else if(robot.state == 52){  //go back a little
-      robot.setRobotVW(-0.1, 0.2); //v was 0.12
+      robot.setRobotVW(-0.15, 0); //v was 0.12
     
     }else if(robot.state == 53){  //turn 180
       robot.setRobotVW(0, 2.5); //w was 3
@@ -296,7 +296,7 @@ class main_fsm_t: public state_machine_t
     
     }else if(robot.state == 21){  //iman off and go back
       robot.solenoid_PWM = 0;
-      robot.setRobotVW(-0.1, 0);
+      robot.setRobotVW(-0.15, 0.11);
     
     }else if(robot.state == 22){  //turn 180
       robot.setRobotVW(0, -2.5); // w was 3
@@ -319,7 +319,7 @@ class main_fsm_t: public state_machine_t
     
     }else if(robot.state == 31){  //iman off and go back
       robot.solenoid_PWM = 0;
-      robot.setRobotVW(-0.1, 0);
+      robot.setRobotVW(-0.15, 0.11);
     
     }else if(robot.state == 32){  //turn 180
       robot.setRobotVW(0, 2.5); // w was 3
@@ -328,8 +328,8 @@ class main_fsm_t: public state_machine_t
       robot.setRobotVW(0, 2.5); // w was 3
 
     }else if(robot.state == 102){
-      robot.followLine();
-      //robot.setRobotVW(0.1, 0);
+      //robot.followLine();
+      robot.setRobotVW(-0.15,  robot.rightLeft_w);
     }else if(robot.state == TEST){
 
     }

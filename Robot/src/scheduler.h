@@ -34,6 +34,7 @@ public:
     std::vector<Port> deliveryNodesB;
     Box getBox();
     Port getAvailablePort(Box currentBox);
+    void updatePorts(Box currentBox, Port destPort);
     Node* getNodeVec();
     void resetPosition();
     int * getPath();
@@ -84,42 +85,49 @@ std::vector<std::string> Scheduler::getRoute(Box box, Port destPort) {
     Dijkstra dijkstra = Dijkstra(N_NODES);
     
     // TODO: Chose which port to go based on the color
-    if(destPort.occupied == true){
-        if(box.color == BLUE){
-            for(int i = 0; i<deliveryPorts.size(); i++){
-                if (deliveryPorts[i].pos == destPort.pos)
-                    deliveryPorts[i].occupied = destPort.occupied; 
-            }
-        }
+    // if(destPort.occupied == true){
+    //     if(box.color == BLUE){
+    //         for(int i = 0; i<deliveryPorts.size(); i++){
+    //             if (deliveryPorts[i].pos == destPort.pos)
+    //                 deliveryPorts[i].occupied = destPort.occupied; 
+    //         }
+    //     }
 
-        if(box.color == RED){   
-            for(int i = 0; i<deliveryNodesA.size(); i++){
-                if (deliveryNodesA[i].pos == destPort.pos)
-                    deliveryNodesA[i].occupied = destPort.occupied; 
-            }
-        }
+    //     if(box.color == RED){   
+    //         for(int i = 0; i<deliveryNodesA.size(); i++){
+    //             if (deliveryNodesA[i].pos == destPort.pos)
+    //                 deliveryNodesA[i].occupied = destPort.occupied; 
+    //         }
+    //     }
             
-        if(box.color == GREEN){
-            for(int i = 0; i<deliveryNodesB.size(); i++){
-                if (deliveryNodesB[i].pos == destPort.pos)
-                    deliveryNodesB[i].occupied = destPort.occupied; 
-            }
-        }
-        destPort = getAvailablePort(box);
+    //     if(box.color == GREEN){
+    //         for(int i = 0; i<deliveryNodesB.size(); i++){
+    //             if (deliveryNodesB[i].pos == destPort.pos)
+    //                 deliveryNodesB[i].occupied = destPort.occupied; 
+    //         }
+    //     }
+    //     Serial.println("                [Scheduler: getRoute]");
+    //     Serial.print("Next Port is at: ");
+    //     Serial.print(destPort.pos);
+    //     Serial.print(" which is: ");
+    //     if(destPort.occupied) Serial.println("occupied");
+    //     else Serial.println("free");
+    //             destPort = getAvailablePort(box);
 
-        Serial.println();
-        Serial.print("Dropping at: ");
-        Serial.print(destPort.pos);
-        Serial.print(".occupied = ");
-        Serial.println(destPort.occupied);
-    }
-    else {
-        Serial.println();
-        Serial.print("Dropping at: ");
-        Serial.print(destPort.pos);
-        Serial.print(".occupied = ");
-        Serial.println(destPort.occupied);
-    }
+    //     Serial.println();
+    //     Serial.print("Port was occupied, updated to Port at: ");
+    //     Serial.print(destPort.pos);
+    //     Serial.print(" which is: ");
+    //     if(destPort.occupied) Serial.println("occupied");
+    //     else Serial.println("free");
+    // }
+    // else {
+    //     Serial.print("Port at: ");
+    //     Serial.print(destPort.pos);
+    //     Serial.print(" is free");
+    //     if(destPort.occupied) Serial.println("occupied");
+    //     else Serial.println("free");
+    // }
 
     // Serial.printf("No de destino: ");
     // Serial.println(destPort.pos);
@@ -157,6 +165,31 @@ std::vector<std::string> Scheduler::getRoute(Box box, Port destPort) {
     }
       
     return dirVec;
+}
+
+void Scheduler::updatePorts(Box box, Port destPort){
+    if(destPort.occupied == true){
+        if(box.color == BLUE){
+            for(int i = 0; i<deliveryPorts.size(); i++){
+                if (deliveryPorts[i].pos == destPort.pos)
+                    deliveryPorts[i].occupied = destPort.occupied; 
+            }
+        }
+
+        if(box.color == RED){   
+            for(int i = 0; i<deliveryNodesA.size(); i++){
+                if (deliveryNodesA[i].pos == destPort.pos)
+                    deliveryNodesA[i].occupied = destPort.occupied; 
+            }
+        }
+            
+        if(box.color == GREEN){
+            for(int i = 0; i<deliveryNodesB.size(); i++){
+                if (deliveryNodesB[i].pos == destPort.pos)
+                    deliveryNodesB[i].occupied = destPort.occupied; 
+            }
+        }
+    }
 }
 
 std::vector<std::string> Scheduler::getRoute() {
@@ -280,24 +313,36 @@ Box Scheduler::getBox() {
 // }
 
 Port Scheduler::getAvailablePort(Box currentBox) {
-    
+    Serial.println("                [Scheduler: getAvailablePort]");
     if(currentBox.color == BLUE){
         for (Port port: deliveryPorts) {
-            if (port.occupied == false)
+            if (port.occupied == false){
+                Serial.print("Color: Blue");
+                Serial.print("      Port: ");
+                Serial.println(port.pos);
                 return port;
+            }
         }
     } else if(currentBox.color == GREEN){
-        for (Port port1: deliveryNodesB) {
-            if (port1.occupied == false)
-                return port1;
+        for (Port port: deliveryNodesB) {
+            if (port.occupied == false){
+                Serial.print("Color: Green");
+                Serial.print("      Port: ");
+                Serial.println(port.pos);
+                return port;
+            }
         }
     } else if(currentBox.color == RED){
-        for (Port port2: deliveryNodesA) {
-            if (port2.occupied == false)
-                return port2;
+        for (Port port: deliveryNodesA) {
+            if (port.occupied == false){
+                Serial.print("Color: Red");
+                Serial.print("      Port: ");
+                Serial.println(port.pos);
+                return port;
+            }
         }
     } 
-    
+    Serial.println("No valid color found! [PURPLE]");
     return port3;
 }
 

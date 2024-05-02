@@ -88,7 +88,7 @@ class robot_t {
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
 
-  double  IRkp=0.2, IRki=0.02, IRkd=0.3;
+  double  IRkp = 20, IRki = 1, IRkd = 30;
   double prevError = 0; // Erro anterior para cada sensor
   double integral = 0; // Integral para cada sensor
   double derivative = 0; // Derivada para cada sensor

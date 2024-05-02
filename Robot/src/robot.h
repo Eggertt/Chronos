@@ -63,7 +63,8 @@ class robot_t {
   float rel_s, rel_theta;
   float xe, ye, thetae;
 
-  bool wasDropPick = 0;
+  bool wasPick = 0;
+  bool wasDrop = 0;
 
   int *mypath;
   int mypathsize;
@@ -88,7 +89,7 @@ class robot_t {
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
 
-  double  IRkp=0.2, IRki=0.02, IRkd=0.3;
+  double  IRkp=20, IRki=1, IRkd=30;
   double prevError = 0; // Erro anterior para cada sensor
   double integral = 0; // Integral para cada sensor
   double derivative = 0; // Derivada para cada sensor
@@ -97,8 +98,8 @@ class robot_t {
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
   float rightLeftLine_v = 0.08, rightLeftLine_w = 2; //for leftline and rightline
 
-  float rel_sDROPB = 0.10, rel_sDROPG = 0.15;
-  float tis_DROPB = 1000, tis_DROPG = 1500;
+  float rel_sDROPB = 0.10, rel_sDROPG = 0.17;
+  float tis_DROPB = 1000, tis_DROPG = 1700;
   
   PID_t PID[NUM_WHEELS];
   float battery_voltage;

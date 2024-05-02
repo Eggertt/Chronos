@@ -75,5 +75,6 @@ typedef enum{
   PICKG,     // 11
   NEXT,       // 12
   TURNBACK,   // 13
-  TEST       // 14
+  TLEFTAFTERDROP, // 14
+  TEST       // 15
 }estados; 

@@ -37,40 +37,60 @@ class main_fsm_t: public state_machine_t
 
       robot.setState(GO);
     
-    }else if(robot.state == 60 && robot.rel_s > 0.03){
+    }else if(robot.state == 60 && robot.rel_s > 0.04){
       robot.setState(TLEFT);
 
-    }else if(robot.state == TLEFT && robot.rel_theta > radians (90)){
+    }
+    else if(robot.state == TLEFT && robot.rel_theta > radians (80)){
       robot.IRLine.crosses = 0;
 
       Serial.print("State:");
       Serial.println(robot.state);
 
-      if(robot.wasDropPick == 0){
+      if(robot.wasPick == 0 && robot.wasDrop == 0){
         robot.setState(GO);
 
-      }else if(robot.wasDropPick == 1){
+      }else if(robot.wasPick == 1 || robot.wasDrop == 1){
         // robot.integral = 0;
         robot.setState(FLINE);
-        robot.wasDropPick = 0;
+        robot.wasPick = 0;
+        robot.wasDrop = 0;
 
       }  
     
-    }else if(robot.state == 70 && robot.rel_s > 0.03){
-      robot.setState(TRIGHT);
-
-    }else if(robot.state == TRIGHT && robot.rel_theta < radians (-90)){
+    }
+    else if(robot.state == TLEFTAFTERDROP && robot.rel_theta > radians (70)){
       robot.IRLine.crosses = 0;
 
       Serial.print("State:");
       Serial.println(robot.state);
 
-      if(robot.wasDropPick == 0){
+      if(robot.wasDrop == 0 && robot.wasDrop == 0){
         robot.setState(GO);
 
-      }else if(robot.wasDropPick == 1){
+      }else if(robot.wasDrop == 1 || robot.wasDrop == 1){
         robot.setState(FLINE);
-        robot.wasDropPick = 0;
+        robot.wasDrop = 0;
+
+      }  
+    
+    }else if(robot.state == 70 && robot.rel_s > 0.04){
+      robot.setState(TRIGHT);
+
+    }else if(robot.state == TRIGHT && robot.rel_theta < radians (-80)){
+      robot.IRLine.crosses = 0;
+
+      Serial.print("State:");
+      Serial.println(robot.state);
+
+      if(robot.wasPick == 0 && robot.wasDrop == 0){
+        robot.setState(GO);
+
+      }else if(robot.wasPick == 1 || robot.wasDrop == 1){
+        robot.setState(FLINE);
+        robot.wasPick = 0;
+        robot.wasDrop = 0;
+      
 
       }  
     
@@ -197,12 +217,12 @@ class main_fsm_t: public state_machine_t
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 
-      if(robot.wasDropPick == 0){
+      if(robot.wasPick == 0){
         robot.setState(GO);
 
-      }else if(robot.wasDropPick == 1){
+      }else if(robot.wasPick == 1){
         robot.setState(FLINE);
-        robot.wasDropPick = 0;
+        robot.wasPick = 0;
       }
     
     } else if(robot.state == 102){
@@ -235,6 +255,10 @@ class main_fsm_t: public state_machine_t
       //robot.rel_theta = 0;
       robot.setRobotVW(robot.rightLeft_v, -robot.rightLeft_w); //v was 0.02 and w was w
     
+    }else if(robot.state == TLEFTAFTERDROP){  
+      //robot.rel_theta = 0;
+      robot.setRobotVW(robot.rightLeft_v, -robot.rightLeft_w); //v was 0.02 and w was w
+    
     }else if(robot.state == TRIGHT){  
       robot.setRobotVW(0, robot.rightLeft_w); //v was 0.02 and w was 2
     
@@ -259,7 +283,7 @@ class main_fsm_t: public state_machine_t
       robot.followLine();
     
     }else if(robot.state == 52){  //go back a little
-      robot.setRobotVW(-0.1, 0); //v was 0.12
+      robot.setRobotVW(-0.1, 0.2); //v was 0.12
     
     }else if(robot.state == 53){  //turn 180
       robot.setRobotVW(0, 2.5); //w was 3

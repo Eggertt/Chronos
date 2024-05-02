@@ -782,7 +782,7 @@ void loop()
           pathCounter = 0;
       }
 
-      if(instructions[instructionCounter] == "Line" && robot.wasDropPick == 1){
+      if(instructions[instructionCounter] == "Line" && robot.wasPick == 1){
         Serial.println("Case TURNBACK AFTER DROP/PICK");
         robot.setState(TURNBACK);
         
@@ -841,13 +841,13 @@ void loop()
       } else if (instructions[instructionCounter] == "Pick"){
         if (currentBox.pos == 0 || currentBox.pos == 1 || currentBox.pos == 2 || currentBox.pos == 3){
           robot.setState(PICKB);
-          robot.wasDropPick = 1;
+          robot.wasPick = 1;
           robot.compassCount = 2;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentBox.pos == 16 || currentBox.pos == 23 || currentBox.pos == 12 || currentBox.pos == 19){
           robot.setState(PICKG);
-          robot.wasDropPick = 1;
+          robot.wasPick = 1;
           robot.compassCount = 1;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
@@ -868,13 +868,13 @@ void loop()
 
         if (currentPort.pos == 31 || currentPort.pos == 32 || currentPort.pos == 33 || currentPort.pos == 34){
           robot.setState(DROPB);
-          robot.wasDropPick = 1;
+          robot.wasDrop = 1;
           robot.compassCount = 0;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
 
         } else if (currentPort.pos == 15 || currentPort.pos == 22 || currentPort.pos == 11 || currentPort.pos == 18) {
           robot.setState(DROPG);
-          robot.wasDropPick = 1;
+          robot.wasDrop = 1;
           robot.compassCount = 3;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
           //Serial.println("CAIXA VERDE OU VERMELHA");
@@ -893,7 +893,21 @@ void loop()
           currentPort.occupied = true;
           currentBox = scheduler.getBox();
         
-      } else if (instructions[instructionCounter] == "Left" && robot.wasDropPick == 0) {
+      } else if(instructions[instructionCounter] == "Left" && (robot.wasPick == 1 || robot.wasDrop == 1)){
+        Serial.println("Case TRIGHT AFTER DROP/PICK");
+        robot.setState(TRIGHT);
+        
+
+      } else if(instructions[instructionCounter] == "Right" && (robot.wasPick == 1 && robot.wasDrop == 0)){
+        Serial.println("Case TLEFT AFTER DROP/PICK");
+        robot.setState(TLEFT);
+     
+      } else if(instructions[instructionCounter] == "Right" && robot.wasDrop == 1){
+        Serial.println("Case TLEFT AFTER DROP/PICK");
+        robot.setState(TLEFTAFTERDROP);
+
+     
+      } else if (instructions[instructionCounter] == "Left" && (robot.wasPick == 0 && robot.wasDrop == 0)) {
         Serial.println("Case LEFTLINE");
         robot.setState(LEFTLINE);
 
@@ -904,7 +918,7 @@ void loop()
 
         //Serial.printf("compassCount: %d\n", robot.compassCount);
         
-      } else if (instructions[instructionCounter] == "Right" && robot.wasDropPick == 0){
+      } else if (instructions[instructionCounter] == "Right" && (robot.wasPick == 0 && robot.wasDrop == 0)){
         Serial.println("Case RIGHTLINE");
         robot.setState(RIGHTLINE);
         if (robot.compassCount == 3)
@@ -914,17 +928,7 @@ void loop()
 
         //Serial.printf("compassCount: %d\n", robot.compassCount);
         
-      } 
-      else if(instructions[instructionCounter] == "Left" && robot.wasDropPick == 1){
-        Serial.println("Case TRIGHT AFTER DROP/PICK");
-        robot.setState(TRIGHT);
-        
-
-      } else if(instructions[instructionCounter] == "Right" && robot.wasDropPick == 1){
-        Serial.println("Case TLEFT AFTER DROP/PICK");
-        robot.setState(TLEFT);
-     
-      } 
+      }
       
       else if (instructions[instructionCounter] == "Error"){
         Serial.println("CASE ERROR -> State = START");
@@ -980,6 +984,7 @@ void loop()
     Serial.println("");
 
     serial_commands.send_command("x", robot.IRLine.crosses);
+    serial_commands.send_command("x_t", robot.IRLine.cross_count);
     serial_commands.send_command("er", robot.integral);
     // serial_commands.send_command("tof", robot.tof_dist);
     // serial_commands.send_command("fk", robot.follow_k);
@@ -1003,7 +1008,7 @@ void loop()
     // serial_commands.send_command("tdg", robot.tis_DROPG);
 
     serial_commands.send_command("box", irrecvbuffer);
-    serial_commands.send_command("wasDP", robot.wasDropPick);
+    serial_commands.send_command("wasDP", robot.wasPick);
 
 
 

@@ -35,6 +35,7 @@ public:
     Box getBox();
     Port getAvailablePort(Box currentBox);
     Node* getNodeVec();
+    void updatePorts(Box currentBox, Port destPort);
     void resetPosition();
     int * getPath();
     int getPathSize();
@@ -80,8 +81,7 @@ void Scheduler::setUp(Box *boxes, unsigned int numBoxes) {
 
 }
 
-std::vector<std::string> Scheduler::getRoute(Box box, Port destPort) {
-    Dijkstra dijkstra = Dijkstra(N_NODES);
+void Scheduler::updatePorts(Box box, Port destPort) {
     
     // TODO: Chose which port to go based on the color
     if(destPort.occupied == true){
@@ -105,21 +105,11 @@ std::vector<std::string> Scheduler::getRoute(Box box, Port destPort) {
                     deliveryNodesB[i].occupied = destPort.occupied; 
             }
         }
-        destPort = getAvailablePort(box);
+    }
+}
 
-        Serial.println();
-        Serial.print("Dropping at: ");
-        Serial.print(destPort.pos);
-        Serial.print(".occupied = ");
-        Serial.println(destPort.occupied);
-    }
-    else {
-        Serial.println();
-        Serial.print("Dropping at: ");
-        Serial.print(destPort.pos);
-        Serial.print(".occupied = ");
-        Serial.println(destPort.occupied);
-    }
+std::vector<std::string> Scheduler::getRoute(Box box, Port destPort) {
+    Dijkstra dijkstra = Dijkstra(N_NODES);
 
     // Serial.printf("No de destino: ");
     // Serial.println(destPort.pos);

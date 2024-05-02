@@ -889,9 +889,10 @@ void loop()
           //else if(currentPort.pos == 34) scheduler.deliveryPorts[3].occupied = true;
 
           currentBox.status = DELIVERED;
-          currentPort = scheduler.getAvailablePort(currentBox);
           currentPort.occupied = true;
+          scheduler.updatePorts(currentBox, currentPort);
           currentBox = scheduler.getBox();
+          currentPort = scheduler.getAvailablePort(currentBox);
         
       } else if (instructions[instructionCounter] == "Left" && robot.wasDropPick == 0) {
         Serial.println("Case LEFTLINE");

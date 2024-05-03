@@ -14,11 +14,11 @@
     <cell r="5" c="3" text="50" write_channel="m1" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
     <cell r="6" c="3" text="50" write_channel="m2" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
     <cell r="2" c="1" text="VBat"/>
-    <cell r="2" c="2" text="7.85" read_channel="Vbat"/>
+    <cell r="2" c="2" text="7.9" read_channel="Vbat"/>
     <cell r="1" c="1" text="IP"/>
     <cell r="1" c="2" text="172.16.16.170" read_channel="IP" read_channel_mode="2"/>
     <cell r="17" c="1" text="loop:"/>
-    <cell r="17" c="2" text="3746" read_channel="loop"/>
+    <cell r="17" c="2" text="3817" read_channel="loop"/>
     <cell r="17" c="4" text="[Button]"/>
     <cell r="10" c="2" text="0" read_channel="e2"/>
     <cell r="9" c="1" text="Enc1"/>
@@ -44,34 +44,34 @@
     <cell r="4" c="6" text="20" read_channel="kp"/>
     <cell r="3" c="7" text="12.5" write_channel="kf" trigger_row="3" trigger_col="8"/>
     <cell r="3" c="8" text="[PID]"/>
-    <cell r="4" c="7" text="20" write_channel="kp" trigger_row="3" trigger_col="8"/>
-    <cell r="5" c="7" text="1" write_channel="ki" trigger_row="3" trigger_col="8"/>
+    <cell r="4" c="7" text="10" write_channel="kp" trigger_row="3" trigger_col="8"/>
+    <cell r="5" c="7" text="0.5" write_channel="ki" trigger_row="3" trigger_col="8"/>
     <cell r="5" c="6" text="1" read_channel="ki"/>
     <cell r="9" c="12" text="0" read_channel="we1"/>
     <cell r="10" c="12" text="0" read_channel="we2"/>
     <cell r="9" c="14" text="[Set]"/>
     <cell r="9" c="13" text="0" write_channel="w1" trigger_row="9" trigger_col="14"/>
     <cell r="10" c="13" text="0" write_channel="w2" trigger_row="9" trigger_col="14"/>
-    <cell r="9" c="6" text="7.85" read_channel="ve" charted="1"/>
+    <cell r="9" c="6" text="7.9" read_channel="ve" charted="1"/>
     <cell r="9" c="7" text="0.2" write_channel="v" trigger_row="9" trigger_col="8" default_write="0" default_trigger_row="10" default_trigger_col="8"/>
     <cell r="19" c="2" text="0.215" read_channel="d0"/>
     <cell r="19" c="1" text="Dist:"/>
     <cell r="21" c="1" text="State:"/>
-    <cell r="21" c="2" text="1" read_channel="st"/>
+    <cell r="21" c="2" text="8" read_channel="st"/>
     <cell r="21" c="3" text="9" write_channel="st" trigger_row="21" trigger_col="4"/>
     <cell r="21" c="4" text="[State]"/>
     <cell r="10" c="8" text="[Zero]"/>
     <cell r="5" c="4" text="[Set PWM]"/>
     <cell r="6" c="5" text="Kd"/>
     <cell r="6" c="6" text="30" read_channel="kd"/>
-    <cell r="6" c="7" text="30" write_channel="kd" trigger_row="3" trigger_col="8"/>
+    <cell r="6" c="7" text="15" write_channel="kd" trigger_row="3" trigger_col="8"/>
     <cell r="4" c="8" text="[Read]" write_channel="pr" trigger_row="4" trigger_col="8"/>
     <cell r="5" c="8" text="[Store]" write_channel="ES" trigger_row="5" trigger_col="8"/>
     <cell r="7" c="1" text="Sol"/>
     <cell r="7" c="2" text="0" read_channel="sl"/>
     <cell r="7" c="3" text="180" write_channel="sl" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
     <cell r="6" c="8" text="[Load]" write_channel="pl" trigger_row="6" trigger_col="8"/>
-    <cell r="3" c="10" text="0.15" read_channel="fv"/>
+    <cell r="3" c="10" text="0.2" read_channel="fv"/>
     <cell r="3" c="11" text="0.20" write_channel="fv" trigger_row="3" trigger_col="12"/>
     <cell r="4" c="10" text="-0.15" read_channel="fk"/>
     <cell r="4" c="11" text="-0.15" write_channel="fk" trigger_row="3" trigger_col="12"/>
@@ -84,11 +84,11 @@
     <cell r="6" c="10" text="-34.3962" read_channel="pl"/>
     <cell r="6" c="9" text="PosLeft"/>
     <cell r="12" c="1" text="IR"/>
-    <cell r="12" c="2" text="58" read_channel="IR0"/>
-    <cell r="12" c="3" text="56" read_channel="IR1"/>
-    <cell r="12" c="4" text="924" read_channel="IR2"/>
-    <cell r="12" c="5" text="232" read_channel="IR3"/>
-    <cell r="12" c="6" text="61" read_channel="IR4"/>
+    <cell r="12" c="2" text="56" read_channel="IR0"/>
+    <cell r="12" c="3" text="57" read_channel="IR1"/>
+    <cell r="12" c="4" text="911" read_channel="IR2"/>
+    <cell r="12" c="5" text="64" read_channel="IR3"/>
+    <cell r="12" c="6" text="59" read_channel="IR4"/>
     <cell r="1" c="5" text="BDWireless" write_channel="ssid" trigger_row="1" trigger_col="4"/>
     <cell r="1" c="4" text="[SSID]"/>
     <cell r="1" c="8" text="[Pass]"/>
@@ -100,7 +100,7 @@
     <cell r="16" c="6" text="err"/>
     <cell r="15" c="6" text="x" write_channel="x"/>
     <cell r="15" c="7" text="0" read_channel="x"/>
-    <cell r="16" c="7" text="-1773" read_channel="er"/>
+    <cell r="16" c="7" text="0" read_channel="er"/>
     <cell r="21" c="5" text="[Kill]"/>
     <cell r="21" c="6" text="8" write_channel="st" trigger_row="21" trigger_col="5"/>
     <cell r="15" c="9" text="0.06" write_channel="rlv" trigger_row="15" trigger_col="10"/>
@@ -133,7 +133,7 @@
     <cell r="21" c="11" text="1500" read_channel="tdg"/>
     <cell r="22" c="4" text="[Set]"/>
     <cell r="22" c="3" text="oooo" read_channel_mode="2" write_channel="box" trigger_row="22" trigger_col="4"/>
-    <cell r="22" c="2" text="oooo" read_channel="box" read_channel_mode="2"/>
+    <cell r="22" c="2" text="" read_channel="box" read_channel_mode="2"/>
     <cell r="7" c="7" text="80"/>
     <cell r="14" c="6" text="x_t"/>
     <cell r="14" c="7" text="0" read_channel="x_t"/>
@@ -142,5 +142,17 @@
     <cell r="2" c="12" text="0.20"/>
     <cell r="19" c="8" text="1"/>
     <cell r="17" c="6" text="blacks"/>
+    <cell r="13" c="8" text="0" read_channel="refreshRate"/>
+    <cell r="13" c="10" text="[refRate]"/>
+    <cell r="13" c="9" text=" " write_channel="refreshRate" trigger_row="15" trigger_col="8"/>
+    <cell r="13" c="11" text="0.04"/>
+    <cell r="3" c="13" text="V       ="/>
+    <cell r="3" c="14" text="0.2"/>
+    <cell r="4" c="14" text="20"/>
+    <cell r="4" c="13" text="Kp     ="/>
+    <cell r="5" c="13" text="Ki      ="/>
+    <cell r="6" c="13" text="Kd     ="/>
+    <cell r="5" c="14" text="1"/>
+    <cell r="6" c="14" text="30"/>
   </cells>
 </sheet>

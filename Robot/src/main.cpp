@@ -318,6 +318,11 @@ void process_command(command_frame_t frame)
     robot.IRLine.black_cross_level = frame.value;
     serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
   }
+  else if (frame.command_is("refreshRate"))
+  { 
+    robot.refreshRate = frame.value;
+    serial_commands.send_command("refreshRate", robot.refreshRate);
+  }
   else if (frame.command_is("box"))
   { 
     instructions.clear();
@@ -590,7 +595,8 @@ void setup()
   // Start new distance measure
   tof.startContinuous(0);
 
-  set_interval(0.040); // In seconds | was 0.04
+  //refresh rate
+  set_interval(robot.refreshRate); // In seconds | was 0.04
   init_control(robot);
 
   Serial.println("setup completed");
@@ -1016,6 +1022,8 @@ void loop()
     serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
     serial_commands.send_command("blacks", robot.IRLine.blacks);
     serial_commands.send_command("wasDP", robot.wasDropPick);
+
+    serial_commands.send_command("refreshRate", robot.refreshRate);
 
 
 

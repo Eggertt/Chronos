@@ -583,7 +583,7 @@ void setup()
   // Start new distance measure
   tof.startContinuous(0);
 
-  set_interval(0.040); // In seconds
+  set_interval(0.040); // In seconds | was 0.04
   init_control(robot);
 
   Serial.println("setup completed");

@@ -37,7 +37,7 @@ class main_fsm_t: public state_machine_t
 
       robot.setState(GO);
     
-    }else if(robot.state == 60 && robot.rel_s > 0.06){
+    }else if(robot.state == 60 && robot.rel_s > 0.05){
       robot.setState(TLEFT);
 
     }else if(robot.state == TLEFT && robot.rel_theta > radians (robot.tleftAngle)){
@@ -56,7 +56,7 @@ class main_fsm_t: public state_machine_t
 
       }  
     
-    }else if(robot.state == 70 && robot.rel_s > 0.04){
+    }else if(robot.state == 70 && robot.rel_s > 0.03){
       robot.setState(TRIGHT);
 
     }else if(robot.state == TRIGHT && robot.rel_theta < radians (-80)){

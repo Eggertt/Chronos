@@ -1003,15 +1003,15 @@ void loop()
     serial_commands.send_command("ki", robot.IRki);
     serial_commands.send_command("kd", robot.IRkd);
 
-    // serial_commands.send_command("rlv", robot.rightLeft_v);
-    // serial_commands.send_command("rlw", robot.rightLeft_w);
-    // serial_commands.send_command("rllv", robot.rightLeftLine_v);
-    // serial_commands.send_command("rllw", robot.rightLeftLine_w);
+    serial_commands.send_command("rlv", robot.rightLeft_v);
+    serial_commands.send_command("rlw", robot.rightLeft_w);
+    serial_commands.send_command("rllv", robot.rightLeftLine_v);
+    serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
-    // serial_commands.send_command("rsdb", robot.rel_sDROPB);
-    // serial_commands.send_command("rsdg", robot.rel_sDROPG);
-    // serial_commands.send_command("tdb", robot.tis_DROPB);
-    // serial_commands.send_command("tdg", robot.tis_DROPG);
+    serial_commands.send_command("rsdb", robot.rel_sDROPB);
+    serial_commands.send_command("rsdg", robot.rel_sDROPG);
+    serial_commands.send_command("tdb", robot.tis_DROPB);
+    serial_commands.send_command("tdg", robot.tis_DROPG);
 
     serial_commands.send_command("box", irrecvbuffer);
     serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);

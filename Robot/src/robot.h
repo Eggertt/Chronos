@@ -94,7 +94,7 @@ class robot_t {
   double derivative = 0; // Derivada para cada sensor
 
   float follow_v, follow_k;
-  float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
+  float rightLeft_v = 0.06, rightLeft_w = 3; // for tright and tleft
   float rightLeftLine_v = 0.08, rightLeftLine_w = 3; //for leftline and rightline
 
   float refreshRate = 0.02; //original is 0.04

@@ -37,7 +37,7 @@ class main_fsm_t: public state_machine_t
 
       robot.setState(GO);
     
-    }else if(robot.state == 60 && robot.rel_s > 0.05){
+    }else if(robot.state == 60 && robot.rel_s > 0.00){
       robot.setState(TLEFT);
 
     }else if(robot.state == TLEFT && robot.rel_theta > radians (robot.tleftAngle)){
@@ -84,7 +84,7 @@ class main_fsm_t: public state_machine_t
       Serial.println(robot.state);
       robot.setState(41); 
     
-    }else if(robot.state == 41 && robot.tis > robot.tis_DROPB){ //1000
+    }else if(robot.state == 41 && robot.tis > 200){ //1000
       robot.rel_s = 0;
 
       Serial.print("State:");
@@ -138,7 +138,7 @@ class main_fsm_t: public state_machine_t
 
       robot.setState(GO);
     
-    }else if(robot.state == DROPB && robot.tis > robot.tis_DROPB){
+    }else if(robot.state == DROPB && robot.tis > 700){
       
       robot.IRkp = 20;
       robot.IRki = 1;

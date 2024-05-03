@@ -97,7 +97,7 @@ class robot_t {
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
   float rightLeftLine_v = 0.08, rightLeftLine_w = 3; //for leftline and rightline
 
-  float rel_sDROPB = 0.08, rel_sDROPG = 0.19;
+  float rel_sDROPB = 0.115, rel_sDROPG = 0.19;
   float tis_DROPB = 1000, tis_DROPG = 2100;
   float tleftAngle = 80;
   

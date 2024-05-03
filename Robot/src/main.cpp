@@ -318,11 +318,6 @@ void process_command(command_frame_t frame)
     robot.IRLine.black_cross_level = frame.value;
     serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
   }
-  else if (frame.command_is("refreshRate"))
-  { 
-    robot.refreshRate = frame.value;
-    serial_commands.send_command("refreshRate", robot.refreshRate);
-  }
   else if (frame.command_is("box"))
   { 
     instructions.clear();
@@ -1023,7 +1018,7 @@ void loop()
     serial_commands.send_command("blacks", robot.IRLine.blacks);
     serial_commands.send_command("wasDP", robot.wasDropPick);
 
-    serial_commands.send_command("refreshRate", robot.refreshRate);
+    // serial_commands.send_command("refreshRate", robot.refreshRate);
 
 
 

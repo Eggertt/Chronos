@@ -88,7 +88,7 @@ class robot_t {
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
 
-  double  IRkp = 20, IRki = 1, IRkd = 30;
+  double IRkp = 10, IRki = 0.1, IRkd = 0; //with 0.04 de refresh estava 20 | 1 | 30
   double prevError = 0; // Erro anterior para cada sensor
   double integral = 0; // Integral para cada sensor
   double derivative = 0; // Derivada para cada sensor
@@ -99,7 +99,7 @@ class robot_t {
 
   float refreshRate = 0.02; //original is 0.04
 
-  float rel_sDROPB = 0.115, rel_sDROPG = 0.19;
+  float rel_sDROPB = 0.105, rel_sDROPG = 0.19;
   float tis_DROPB = 1000, tis_DROPG = 2100;
   float tleftAngle = 80;
   

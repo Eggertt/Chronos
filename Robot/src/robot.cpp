@@ -40,7 +40,7 @@ robot_t::robot_t()
   dt = 0.04;
 
   follow_k = -0.15;
-  follow_v = 0.20; // 0.20;
+  follow_v = 0.30; // 0.20;
 
   pchannels = NULL;
   pfsm = NULL;

@@ -74,7 +74,7 @@ class main_fsm_t: public state_machine_t
 
       }  
     
-    }else if(robot.state == PICKB && robot.tof_dist < 0.04){ 
+    }else if(robot.state == PICKB && robot.tof_dist < 0.05){ // 0.04
 
       Serial.print("State:");
       Serial.println(robot.state);
@@ -102,7 +102,7 @@ class main_fsm_t: public state_machine_t
       robot.setState(GO); 
     
     }
-    else if(robot.state == PICKG && robot.tof_dist < 0.04){ 
+    else if(robot.state == PICKG && robot.tof_dist < 0.05){ // 0.04
 
       Serial.print("State:");
       Serial.println(robot.state);

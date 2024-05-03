@@ -313,6 +313,11 @@ void process_command(command_frame_t frame)
     robot.integral = frame.value;
     serial_commands.send_command("er", robot.integral);
   }
+  else if (frame.command_is("blacks_lvl"))
+  { 
+    robot.IRLine.black_cross_level = frame.value;
+    serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
+  }
   else if (frame.command_is("box"))
   { 
     instructions.clear();
@@ -1008,6 +1013,8 @@ void loop()
     // serial_commands.send_command("tdg", robot.tis_DROPG);
 
     serial_commands.send_command("box", irrecvbuffer);
+    serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
+    serial_commands.send_command("blacks", robot.IRLine.blacks);
     serial_commands.send_command("wasDP", robot.wasDropPick);
 
 

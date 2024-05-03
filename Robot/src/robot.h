@@ -95,7 +95,7 @@ class robot_t {
 
   float follow_v, follow_k;
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
-  float rightLeftLine_v = 0.08, rightLeftLine_w = 2; //for leftline and rightline
+  float rightLeftLine_v = 0.08, rightLeftLine_w = 3; //for leftline and rightline
 
   float rel_sDROPB = 0.08, rel_sDROPG = 0.19;
   float tis_DROPB = 1000, tis_DROPG = 2100;

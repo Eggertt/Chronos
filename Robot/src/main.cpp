@@ -817,6 +817,7 @@ void loop()
       } else if (instructions[instructionCounter] == "Left" && (instructions[instructionCounter + 1] == "Pick" || instructions[instructionCounter + 1] == "Drop")){
         Serial.println("Case TLEFT");
         //robot.setState(TLEFT);
+        //if(instructions[instructionCounter + 1] == "Drop")robot.tleftAngle = 90;
         robot.setState(60);
 
         if (robot.compassCount == 0)
@@ -868,6 +869,7 @@ void loop()
 
         if (currentPort.pos == 31 || currentPort.pos == 32 || currentPort.pos == 33 || currentPort.pos == 34){
           robot.setState(DROPB);
+          // robot.tleftAngle = 80;
           robot.wasDropPick = 1;
           robot.compassCount = 0;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
@@ -982,7 +984,7 @@ void loop()
 
     serial_commands.send_command("x", robot.IRLine.crosses);
     serial_commands.send_command("er", robot.integral);
-    // serial_commands.send_command("tof", robot.tof_dist);
+    serial_commands.send_command("tof", robot.tof_dist);
     // serial_commands.send_command("fk", robot.follow_k);
     serial_commands.send_command("fv", robot.follow_v);
 

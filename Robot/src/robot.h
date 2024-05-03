@@ -97,9 +97,11 @@ class robot_t {
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
   float rightLeftLine_v = 0.08, rightLeftLine_w = 3; //for leftline and rightline
 
-  float refreshRate = 0.02; //original is 0.04
+  float refreshRate = 0.04; //original is 0.04
 
-  float rel_sDROPB = 0.115, rel_sDROPG = 0.19;
+  bool lastDeliveryException = 0;
+
+  float rel_sDROPB = 0.105, rel_sDROPG = 0.19;
   float tis_DROPB = 1000, tis_DROPG = 2100;
   float tleftAngle = 80;
   

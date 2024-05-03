@@ -10,7 +10,6 @@ IRLine_t IRLine;
 state_machines_t state_machines;
 
 
-
 class main_fsm_t: public state_machine_t
 {
 
@@ -46,8 +45,10 @@ class main_fsm_t: public state_machine_t
       Serial.print("State:");
       Serial.println(robot.state);
 
-      if(robot.wasDropPick == 0){
+      if(robot.wasDropPick == 0 || robot.lastDeliveryException == 1){
         robot.setState(GO);
+        robot.lastDeliveryException = 0;
+        robot.wasDropPick = 0;
 
       }else if(robot.wasDropPick == 1){
         // robot.integral = 0;

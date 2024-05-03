@@ -503,8 +503,10 @@ void setup()
   password[c] = 0;
   f.close();
 
-  strcpy(ssid, "TP-Link_28CD");
-  strcpy(password, "49871005");
+  strcpy(ssid, "FNR");
+  strcpy(password, "FNR-PCR-2024");
+  // strcpy(ssid, "TP-Link_28CD");
+  // strcpy(password, "49871005");
   // strcpy(ssid, "5DPO-NETWORK");
   // strcpy(password, "5dpo5dpo");
 
@@ -973,7 +975,7 @@ void loop()
     // serial_commands.send_command("theta", robot.rel_theta);
     // Serial.println("");
 
-    // serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
+    serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
     // Serial.println("");
     serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
     serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);

@@ -4,6 +4,7 @@
     <defaultcol width="50"/>
     <col num="2" width="82"/>
     <col num="4" width="67"/>
+    <col num="10" width="49"/>
   </columns>
   <cells>
     <cell r="6" c="2" text="0" read_channel="M2"/>
@@ -152,5 +153,7 @@
     <cell r="8" c="6" text="10" read_channel="testKp"/>
     <cell r="8" c="7" text="10" write_channel="testKp" trigger_row="8" trigger_col="8"/>
     <cell r="8" c="8" text="[Test PID]"/>
+    <cell r="12" c="10" text="Out_W:"/>
+    <cell r="12" c="11" text="" read_channel="output_w"/>
   </cells>
 </sheet>

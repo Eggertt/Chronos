@@ -2,7 +2,7 @@
 // Periodic Interrupts for Quadrature Encoder reading and serial commands example
 // It also has the PWM generation code to drive an H-bridge like the DRV8212PDSGR
 
-#define COM_ROBOT 1
+#define COM_ROBOT 0
 
 #include <Arduino.h>
 
@@ -829,7 +829,8 @@ void loop()
           Serial.print("Dropping at: ");
           Serial.println(currentPort.pos);
 
-          
+          // if(instructions.size() == 1 && instructions[0] == "Drop") instructions.insert(instructions.begin(), "");
+
           for (auto inst : instructions)
           {
             Serial.println(inst.c_str());
@@ -850,7 +851,12 @@ void loop()
           pathCounter = 0;
       }
 
-      if(instructions[instructionCounter] == "Line" && robot.wasDropPick == 1 /*&& currentBox.pos != 19*/){
+      if(instructions[instructionCounter] == "Turnback"){
+        robot.rel_theta = 0;
+        Serial.println("                        Case TURNBACK&Drop");
+        robot.setState(TURNBACK);
+      }
+      else if(instructions[instructionCounter] == "Line" && robot.wasDropPick == 1 /*&& currentBox.pos != 19*/){
         Serial.println("Case TURNBACK AFTER DROP/PICK");
         robot.setState(TURNBACK);
         
@@ -927,6 +933,9 @@ void loop()
             robot.tis_DROPB += 200;
 
             if(currentBox.num == 3) robot.lastDeliveryException = 1; 
+
+            // if(currentBox.pos == 12) scheduler.deliveryNodesB[0].occupied = true;
+
           }
           //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
@@ -936,6 +945,10 @@ void loop()
         currentBox.status = HOLDING;
         Serial.println("Case PICK");
 
+        if(currentBox.pos == 12){ 
+          scheduler.deliveryNodesB[0].occupied = true;
+          scheduler.deliveryNodesB[1].occupied = false;
+        }
         // Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[0].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[0].occupied);
         // Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[1].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[1].occupied);
         // Serial.print("TestPort "); Serial.print(scheduler.deliveryPorts[2].pos); Serial.print(".occupied = "); Serial.println(scheduler.deliveryPorts[2].occupied);

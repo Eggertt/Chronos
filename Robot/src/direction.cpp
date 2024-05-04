@@ -144,6 +144,10 @@ std::vector<std::string> Direction::definePath(int *path, int size, Node *nodeVe
             }
             break;
         }
+        else if(nodeVec[path[i]].prev == NULL && path[i] == 16 && path[i+1] == 17) {
+            Serial.println("                                                                FUCK THIS SHIT TURNBACK");
+            dirVec.push_back("Turnback");
+        }
     }
     return dirVec;
 }

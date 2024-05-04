@@ -372,18 +372,28 @@ void process_command(command_frame_t frame)
   }
   else if (frame.command_is("rsdb"))
   {
-    robot.rel_sDROPB = frame.value;
-    serial_commands.send_command("rsdb", robot.rel_sDROPB);
+    robot.rel_sDROPBandPICKB = frame.value;
+    serial_commands.send_command("rsdb", robot.rel_sDROPBandPICKB);
   }
   else if (frame.command_is("rsdg"))
   {
-    robot.rel_sDROPG = frame.value;
-    serial_commands.send_command("rsdg", robot.rel_sDROPG);
+    robot.rel_sDROPGandPICKG = frame.value;
+    serial_commands.send_command("rsdg", robot.rel_sDROPGandPICKG);
+  }
+  else if (frame.command_is("tpb"))
+  {
+    robot.tis_PICKB = frame.value;
+    serial_commands.send_command("tpb", robot.tis_PICKB);
   }
   else if (frame.command_is("tdb"))
   {
     robot.tis_DROPB = frame.value;
     serial_commands.send_command("tdb", robot.tis_DROPB);
+  }
+  else if (frame.command_is("tpg"))
+  {
+    robot.tis_PICKG = frame.value;
+    serial_commands.send_command("tpg", robot.tis_PICKG);
   }
   else if (frame.command_is("tdg"))
   {
@@ -542,10 +552,10 @@ void setup()
   password[c] = 0;
   f.close();
 
-  // strcpy(ssid, "FNR");
-  // strcpy(password, "FNR-PCR-2024");
-  strcpy(ssid, "eggert");
-  strcpy(password, "semsenha");
+  strcpy(ssid, "FNR");
+  strcpy(password, "FNR-PCR-2024");
+  //strcpy(ssid, "eggert");
+  //strcpy(password, "semsenha");
   // strcpy(ssid, "5DPO-NETWORK");
   // strcpy(password, "5dpo5dpo");
 
@@ -852,12 +862,14 @@ void loop()
         instructions.insert(instructions.begin() + 2, "Line");
         Serial.println("CASO PROBLEMA1");
         pathCounter++;
+        robot.problem1Flag = 1;
         robot.setState(FLINE);
         
       } else if (instructions[instructionCounter] == "Right" && (instructions[instructionCounter + 1] == "Line" && instructions[instructionCounter + 2] == "Left" && instructions[instructionCounter + 3] == "Pick")){
         instructions.insert(instructions.begin() + 2, "Line");
         pathCounter++;
         Serial.println("CASO PROBLEMA2");
+        robot.problem1Flag = 1;
         robot.setState(FLINE);
         
       } else if (instructions[instructionCounter] == "Right" && (instructions[instructionCounter + 1] == "Line" && instructions[instructionCounter + 2] == "Line" && instructions[instructionCounter + 3] == "Left" && instructions[instructionCounter + 4] == "Pick")){
@@ -882,7 +894,7 @@ void loop()
           robot.compassCount--;
 
         //Serial.printf("compassCount: %d\n", robot.compassCount);
-      } else if (instructions[instructionCounter] == "Right" && (instructions[instructionCounter + 1] == "Pick" || instructions[instructionCounter + 1] == "Drop")){
+      } else if (instructions[instructionCounter] == "Right" && (instructions[instructionCounter + 1] == "Pick" || instructions[instructionCounter + 1] == "Drop" || (robot.problem1Flag == 1))){
         Serial.println("Case TRIGHT");
         //robot.setState(TRIGHT);
         robot.setState(70);
@@ -1007,7 +1019,7 @@ void loop()
 
     // Debug information
     // prints
-    // serial_commands.send_command("dte", delta);
+    serial_commands.send_command("dte", delta);
 
     // // serial_commands.send_command("M1", robot.PWM_1);
     // // serial_commands.send_command("M2", robot.PWM_2);
@@ -1043,8 +1055,8 @@ void loop()
     // serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
     // Serial.println("");
 
-    // serial_commands.send_command("x", robot.IRLine.crosses);
-    // serial_commands.send_command("er", robot.integral);
+    serial_commands.send_command("x", robot.IRLine.crosses);
+    serial_commands.send_command("er", robot.integral);
     // serial_commands.send_command("tof", robot.tof_dist);
     // // serial_commands.send_command("fk", robot.follow_k);
     serial_commands.send_command("fv", robot.follow_v);
@@ -1065,22 +1077,23 @@ void loop()
     // serial_commands.send_command("rllv", robot.rightLeftLine_v);
     // serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
-    // serial_commands.send_command("rsdb", robot.rel_sDROPB);
-    // serial_commands.send_command("rsdg", robot.rel_sDROPG);
-    // serial_commands.send_command("tdb", robot.tis_DROPB);
-    // serial_commands.send_command("tdg", robot.tis_DROPG);
+    serial_commands.send_command("rsdb", robot.rel_sDROPBandPICKB);
+    serial_commands.send_command("rsdg", robot.rel_sDROPGandPICKG);
+    serial_commands.send_command("tpb", robot.tis_PICKB);
+    serial_commands.send_command("tdb", robot.tis_DROPB);
+    serial_commands.send_command("tpg", robot.tis_PICKG);
+    serial_commands.send_command("tdg", robot.tis_DROPG);
+
+    serial_commands.send_command("output_w", robot.output_w);
 
 
     serial_commands.send_command("box", irrecvbuffer);
-    // serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
+    serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
     serial_commands.send_command("blacks", robot.IRLine.blacks);
     // serial_commands.send_command("wasDP", robot.wasDropPick);
 
     // serial_commands.send_command("refreshRate", robot.refreshRate);
 
-
-    Serial.print(">Output_w:");
-    Serial.println(robot.output_w);
 
     Serial.print("Output_w: ");
     Serial.println(robot.output_w);

@@ -57,7 +57,7 @@ class main_fsm_t: public state_machine_t
 
       }  
     
-    }else if(robot.state == 70 && robot.rel_s > 0.03){
+    }else if(robot.state == 70 && robot.rel_s > 0.05){
       robot.setState(TRIGHT);
 
     }else if(robot.state == TRIGHT && robot.rel_theta < radians (-80)){
@@ -66,12 +66,13 @@ class main_fsm_t: public state_machine_t
       Serial.print("State:");
       Serial.println(robot.state);
 
-      if(robot.wasDropPick == 0){
+      if(robot.wasDropPick == 0 && robot.problem1Flag == 0){
         robot.setState(GO);
 
-      }else if(robot.wasDropPick == 1){
+      }else if(robot.wasDropPick == 1 || robot.problem1Flag == 1){
         robot.setState(FLINE);
         robot.wasDropPick = 0;
+        robot.problem1Flag = 0;
 
       }  
     
@@ -85,14 +86,14 @@ class main_fsm_t: public state_machine_t
       Serial.println(robot.state);
       robot.setState(41); 
     
-    }else if(robot.state == 41 && robot.tis > robot.tis_DROPB){ //1000
+    }else if(robot.state == 41 && robot.tis > robot.tis_PICKB){ //400
       robot.rel_s = 0;
 
       Serial.print("State:");
       Serial.println(robot.state);
       robot.setState(42); 
     
-    }else if(robot.state == 42 && robot.rel_s < -robot.rel_sDROPB){ //0.08
+    }else if(robot.state == 42 && robot.rel_s < -robot.rel_sDROPBandPICKB){ //0.08
       robot.rel_theta = 0;
 
       Serial.print("State:");
@@ -121,14 +122,14 @@ class main_fsm_t: public state_machine_t
       Serial.println(robot.state);
       robot.setState(51); 
     
-    }else if(robot.state == 51 && robot.tis > 1700 /*robot.tis_DROPG*/){ //1700
+    }else if(robot.state == 51 && robot.tis > robot.tis_PICKG /*robot.tis_DROPG*/){ //1000
       robot.rel_s = 0;
 
       Serial.print("State:");
       Serial.println(robot.state);
       robot.setState(52); 
     
-    }else if(robot.state == 52 && robot.rel_s < -robot.rel_sDROPG){ //0.17
+    }else if(robot.state == 52 && robot.rel_s < -robot.rel_sDROPGandPICKG){ //0.17
       robot.rel_theta = 0;
 
       Serial.print("State:");
@@ -146,7 +147,7 @@ class main_fsm_t: public state_machine_t
 
       robot.setState(GO);
     
-    }else if(robot.state == DROPB && robot.tis > robot.tis_DROPB){
+    }else if(robot.state == DROPB && robot.tis > robot.tis_DROPB){ //was 600
       
       robot.IRkp = 20;
       robot.IRki = 1;
@@ -160,7 +161,7 @@ class main_fsm_t: public state_machine_t
       Serial.println(robot.state);
       robot.setState(21);
     
-    }else if(robot.state == 21 && robot.rel_s < -robot.rel_sDROPB){
+    }else if(robot.state == 21 && robot.rel_s < -robot.rel_sDROPBandPICKB){
       robot.rel_theta = 0;
 
       Serial.print("State:");
@@ -180,7 +181,7 @@ class main_fsm_t: public state_machine_t
 
     
     }
-    else if(robot.state == LEFTLINE && robot.rel_theta > radians(80)){
+    else if(robot.state == LEFTLINE && robot.rel_theta > radians(70)){
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 
@@ -188,7 +189,7 @@ class main_fsm_t: public state_machine_t
       Serial.println(robot.state);
       robot.setState(FLINE);
     
-    }else if(robot.state == RIGHTLINE && robot.rel_theta < radians (-80)){
+    }else if(robot.state == RIGHTLINE && robot.rel_theta < radians (-70)){
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 
@@ -211,7 +212,7 @@ class main_fsm_t: public state_machine_t
       Serial.println(robot.state);
       robot.setState(31);
     
-    }else if(robot.state == 31 && robot.rel_s < -robot.rel_sDROPG){
+    }else if(robot.state == 31 && robot.rel_s < -robot.rel_sDROPGandPICKG){
     robot.rel_theta = 0;
 
     Serial.print("State:");

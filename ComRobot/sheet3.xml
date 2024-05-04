@@ -2,85 +2,168 @@
 <sheet>
   <columns>
     <defaultcol width="50"/>
+    <col num="2" width="82"/>
     <col num="4" width="67"/>
+    <col num="10" width="49"/>
   </columns>
   <cells>
-    <cell r="7" c="2" text="0" read_channel="M2"/>
-    <cell r="6" c="2" text="0" read_channel="M1"/>
-    <cell r="5" c="2" text="0" read_channel="M0" series_color="clGreen"/>
-    <cell r="5" c="1" text="M0"/>
-    <cell r="6" c="1" text="M1"/>
-    <cell r="7" c="1" text="M2"/>
+    <cell r="6" c="2" text="0" read_channel="M2"/>
+    <cell r="5" c="2" text="0" read_channel="M1"/>
+    <cell r="5" c="1" text="M1"/>
+    <cell r="6" c="1" text="M2"/>
     <cell r="6" c="4" text="[Zero PWM]"/>
-    <cell r="6" c="3" text="0" write_channel="m1" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
-    <cell r="7" c="3" text="0" write_channel="m2" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
+    <cell r="5" c="3" text="50" write_channel="m1" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
+    <cell r="6" c="3" text="50" write_channel="m2" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
     <cell r="2" c="1" text="VBat"/>
     <cell r="2" c="2" text="7.75" read_channel="Vbat"/>
     <cell r="1" c="1" text="IP"/>
-    <cell r="1" c="2" text="192.168.1.196" read_channel="IP" read_channel_mode="2"/>
+    <cell r="1" c="2" text="172.16.16.170" read_channel="IP" read_channel_mode="2"/>
     <cell r="17" c="1" text="loop:"/>
-    <cell r="17" c="2" text="1848" read_channel="loop"/>
+    <cell r="17" c="2" text="2312" read_channel="loop"/>
     <cell r="17" c="4" text="[Button]"/>
-    <cell r="15" c="1" text="Servo"/>
-    <cell r="15" c="2" text="1.5" read_channel="sv"/>
-    <cell r="15" c="3" text="1.5" write_channel="sv" trigger_row="15" trigger_col="4"/>
-    <cell r="15" c="4" text="[Servo]"/>
-    <cell r="11" c="2" text="0" read_channel="e2"/>
-    <cell r="9" c="1" text="Enc0"/>
-    <cell r="5" c="3" text="0" write_channel="m0" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
-    <cell r="10" c="1" text="Enc1"/>
-    <cell r="11" c="1" text="Enc2"/>
-    <cell r="9" c="2" text="0" read_channel="e0"/>
-    <cell r="10" c="2" text="0" read_channel="e1"/>
+    <cell r="10" c="2" text="0" read_channel="e2"/>
+    <cell r="9" c="1" text="Enc1"/>
+    <cell r="10" c="1" text="Enc2"/>
+    <cell r="9" c="2" text="0" read_channel="e1"/>
     <cell r="3" c="1" text="Mode"/>
-    <cell r="3" c="2" text="0" read_channel="mode"/>
+    <cell r="3" c="2" text="1" read_channel="mode"/>
     <cell r="3" c="3" text="0" write_channel="mo" trigger_row="3" trigger_col="4"/>
     <cell r="3" c="4" text="[Set]"/>
-    <cell r="9" c="5" text="V"/>
-    <cell r="10" c="5" text="Vn"/>
-    <cell r="11" c="5" text="W"/>
-    <cell r="11" c="6" text="0" read_channel="we"/>
-    <cell r="11" c="7" text="0" write_channel="w" trigger_row="9" trigger_col="8" default_write="0" default_trigger_row="10" default_trigger_col="8"/>
-    <cell r="9" c="8" text="[Go]"/>
-    <cell r="9" c="10" text="w0"/>
-    <cell r="10" c="10" text="w1"/>
-    <cell r="11" c="10" text="w2"/>
-    <cell r="9" c="11" text="0" read_channel="w0" charted="1"/>
-    <cell r="10" c="11" text="0" read_channel="w1"/>
-    <cell r="11" c="11" text="0" read_channel="w2"/>
+    <cell r="9" c="5" text="testKi"/>
+    <cell r="10" c="5" text="testKd"/>
+    <cell r="10" c="6" text="0" read_channel="testKd"/>
+    <cell r="10" c="7" text="0" write_channel="testKd" trigger_row="8" trigger_col="8" default_write="0"/>
+    <cell r="9" c="10" text="w1"/>
+    <cell r="10" c="10" text="w2"/>
+    <cell r="9" c="11" text="0" read_channel="w1"/>
+    <cell r="10" c="11" text="0" read_channel="w2"/>
     <cell r="3" c="5" text="Kf"/>
-    <cell r="4" c="5" text="Kc"/>
+    <cell r="4" c="5" text="Kp"/>
     <cell r="5" c="5" text="Ki"/>
-    <cell r="3" c="6" text="0.5" read_channel="kf"/>
-    <cell r="4" c="6" text="0.5" read_channel="kc"/>
-    <cell r="3" c="7" text="0.5" write_channel="kf" trigger_row="3" trigger_col="8"/>
+    <cell r="3" c="6" text="12.5" read_channel="kf"/>
+    <cell r="4" c="6" text="8" read_channel="kp"/>
+    <cell r="3" c="7" text="12.5" write_channel="kf" trigger_row="3" trigger_col="8"/>
     <cell r="3" c="8" text="[PID]"/>
-    <cell r="4" c="7" text="0.5" write_channel="kc" trigger_row="3" trigger_col="8"/>
-    <cell r="5" c="7" text="5" write_channel="ki" trigger_row="3" trigger_col="8"/>
-    <cell r="5" c="6" text="5" read_channel="ki"/>
-    <cell r="10" c="6" text="0" read_channel="vne"/>
-    <cell r="9" c="12" text="0" read_channel="we0" charted="1" series_color="clRed"/>
-    <cell r="10" c="12" text="0" read_channel="we1"/>
-    <cell r="11" c="12" text="0" read_channel="we2"/>
-    <cell r="9" c="13" text="0" write_channel="w0" trigger_row="9" trigger_col="14"/>
+    <cell r="4" c="7" text="8" write_channel="kp" trigger_row="3" trigger_col="8"/>
+    <cell r="5" c="7" text="0.02" write_channel="ki" trigger_row="3" trigger_col="8"/>
+    <cell r="5" c="6" text="0.02" read_channel="ki"/>
+    <cell r="9" c="12" text="0" read_channel="we1"/>
+    <cell r="10" c="12" text="0" read_channel="we2"/>
     <cell r="9" c="14" text="[Set]"/>
-    <cell r="10" c="13" text="0" write_channel="w1" trigger_row="9" trigger_col="14"/>
-    <cell r="11" c="13" text="0" write_channel="w2" trigger_row="9" trigger_col="14"/>
-    <cell r="9" c="6" text="0" read_channel="ve"/>
-    <cell r="9" c="7" text="0" write_channel="v" trigger_row="9" trigger_col="8" default_write="0" default_trigger_row="10" default_trigger_col="8"/>
-    <cell r="10" c="7" text="0" write_channel="vn" trigger_row="9" trigger_col="8" default_write="0" default_trigger_row="10" default_trigger_col="8"/>
-    <cell r="19" c="2" text="0.626" read_channel="d0"/>
-    <cell r="19" c="3" text="8.19" read_channel="d1"/>
-    <cell r="19" c="4" text="0.126" read_channel="d2"/>
-    <cell r="19" c="5" text="0.126" read_channel="d3"/>
-    <cell r="19" c="6" text="0.211" read_channel="d4"/>
-    <cell r="19" c="7" text="0.126" read_channel="d5"/>
-    <cell r="19" c="1" text="Dists:"/>
+    <cell r="9" c="13" text="0" write_channel="w1" trigger_row="9" trigger_col="14"/>
+    <cell r="10" c="13" text="0" write_channel="w2" trigger_row="9" trigger_col="14"/>
+    <cell r="9" c="6" text="0.02" read_channel="testKi"/>
+    <cell r="9" c="7" text="0.02" write_channel="testKi" trigger_row="8" trigger_col="8" default_write="0"/>
+    <cell r="19" c="2" text="0.215" read_channel="d0"/>
+    <cell r="19" c="1" text="Dist:"/>
     <cell r="21" c="1" text="State:"/>
-    <cell r="21" c="2" text="200" read_channel="st"/>
-    <cell r="21" c="3" text="0" write_channel="st" trigger_row="21" trigger_col="4"/>
+    <cell r="21" c="2" text="8" read_channel="st"/>
+    <cell r="21" c="3" text="9" write_channel="st" trigger_row="21" trigger_col="4"/>
     <cell r="21" c="4" text="[State]"/>
-    <cell r="10" c="8" text="[Zero]"/>
     <cell r="5" c="4" text="[Set PWM]"/>
+    <cell r="6" c="5" text="Kd"/>
+    <cell r="6" c="6" text="0" read_channel="kd"/>
+    <cell r="6" c="7" text="0" write_channel="kd" trigger_row="3" trigger_col="8"/>
+    <cell r="4" c="8" text="[Read]" write_channel="pr" trigger_row="4" trigger_col="8"/>
+    <cell r="5" c="8" text="[Store]" write_channel="ES" trigger_row="5" trigger_col="8"/>
+    <cell r="7" c="1" text="Sol"/>
+    <cell r="7" c="2" text="0" read_channel="sl"/>
+    <cell r="7" c="3" text="180" write_channel="sl" trigger_row="5" trigger_col="4" default_write="0" default_trigger_row="6" default_trigger_col="4"/>
+    <cell r="6" c="8" text="[Load]" write_channel="pl" trigger_row="6" trigger_col="8"/>
+    <cell r="3" c="10" text="0.3" read_channel="fv"/>
+    <cell r="3" c="11" text="0.3" write_channel="fv" trigger_row="3" trigger_col="12"/>
+    <cell r="4" c="10" text="-0.15" read_channel="fk"/>
+    <cell r="4" c="11" text="-0.15" write_channel="fk" trigger_row="3" trigger_col="12"/>
+    <cell r="4" c="9" text="K"/>
+    <cell r="2" c="9" text="Follow"/>
+    <cell r="3" c="9" text="v"/>
+    <cell r="5" c="9" text="PosRight"/>
+    <cell r="3" c="12" text="[Follow]"/>
+    <cell r="5" c="10" text="-14.1963" read_channel="pr"/>
+    <cell r="6" c="10" text="-34.3962" read_channel="pl"/>
+    <cell r="6" c="9" text="PosLeft"/>
+    <cell r="12" c="1" text="IR"/>
+    <cell r="12" c="2" text="58" read_channel="IR0"/>
+    <cell r="12" c="3" text="103" read_channel="IR1"/>
+    <cell r="12" c="4" text="927" read_channel="IR2"/>
+    <cell r="12" c="5" text="62" read_channel="IR3"/>
+    <cell r="12" c="6" text="57" read_channel="IR4"/>
+    <cell r="1" c="5" text="BDWireless" write_channel="ssid" trigger_row="1" trigger_col="4"/>
+    <cell r="1" c="4" text="[SSID]"/>
+    <cell r="1" c="8" text="[Pass]"/>
+    <cell r="1" c="9" text="" write_channel="pass" trigger_row="1" trigger_col="8"/>
+    <cell r="15" c="1" text="Sol"/>
+    <cell r="15" c="2" text="0" read_channel="sl"/>
+    <cell r="15" c="3" text="170" write_channel="sl" trigger_row="15" trigger_col="4"/>
+    <cell r="15" c="4" text="[sol]"/>
+    <cell r="16" c="6" text="err"/>
+    <cell r="15" c="6" text="x" write_channel="x"/>
+    <cell r="15" c="7" text="2" read_channel="x"/>
+    <cell r="16" c="7" text="0" read_channel="er"/>
+    <cell r="21" c="5" text="[Kill]"/>
+    <cell r="21" c="6" text="8" write_channel="st" trigger_row="21" trigger_col="5"/>
+    <cell r="15" c="9" text="0.06" write_channel="rlv" trigger_row="15" trigger_col="10"/>
+    <cell r="16" c="9" text="2" write_channel="rlw" trigger_row="16" trigger_col="10"/>
+    <cell r="17" c="9" text="0.08" write_channel="rllv" trigger_row="17" trigger_col="10"/>
+    <cell r="18" c="9" text="2.5" write_channel="rllw" trigger_row="18" trigger_col="10"/>
+    <cell r="18" c="8" text="2.5" read_channel="rllw"/>
+    <cell r="17" c="8" text="0.08" read_channel="rllv"/>
+    <cell r="16" c="8" text="2" read_channel="rlw"/>
+    <cell r="15" c="8" text="0.06" read_channel="rlv"/>
+    <cell r="15" c="10" text="[rlv]"/>
+    <cell r="16" c="10" text="[rlw]"/>
+    <cell r="17" c="10" text="[rllv]"/>
+    <cell r="18" c="10" text="[rllw]"/>
+    <cell r="21" c="8" text="0.19" read_channel="rsdg"/>
+    <cell r="15" c="11" text="0.06"/>
+    <cell r="16" c="11" text="2.5"/>
+    <cell r="17" c="11" text="0.08"/>
+    <cell r="18" c="11" text="2"/>
+    <cell r="20" c="10" text="[rsdb]"/>
+    <cell r="20" c="9" text="0.12" write_channel="rsdb" trigger_row="20" trigger_col="10"/>
+    <cell r="20" c="8" text="0.105" read_channel="rsdb"/>
+    <cell r="21" c="10" text="[rsdg]"/>
+    <cell r="21" c="9" text="0.15" write_channel="rsdg" trigger_row="21" trigger_col="10"/>
+    <cell r="22" c="4" text="[Set]"/>
+    <cell r="22" c="3" text="ouuo" read_channel_mode="2" write_channel="box" trigger_row="22" trigger_col="4"/>
+    <cell r="22" c="2" text="ÿuuo" read_channel="box" read_channel_mode="2"/>
+    <cell r="14" c="6" text="x_t"/>
+    <cell r="14" c="7" text="0" read_channel="x_t"/>
+    <cell r="19" c="9" text="3"/>
+    <cell r="2" c="11" text="0.15"/>
+    <cell r="2" c="12" text="0.20"/>
+    <cell r="19" c="8" text="1"/>
+    <cell r="17" c="6" text="blacks"/>
+    <cell r="13" c="9" text=" "/>
+    <cell r="3" c="13" text="V       ="/>
+    <cell r="3" c="14" text="0.2"/>
+    <cell r="4" c="14" text="20"/>
+    <cell r="4" c="13" text="Kp     ="/>
+    <cell r="5" c="13" text="Ki      ="/>
+    <cell r="6" c="13" text="Kd     ="/>
+    <cell r="5" c="14" text="1"/>
+    <cell r="6" c="14" text="30"/>
+    <cell r="8" c="5" text="testKp"/>
+    <cell r="8" c="6" text="8" read_channel="testKp"/>
+    <cell r="8" c="7" text="8" write_channel="testKp" trigger_row="8" trigger_col="8"/>
+    <cell r="8" c="8" text="[Test PID]"/>
+    <cell r="12" c="10" text="Out_W:"/>
+    <cell r="12" c="11" text="-1.12641" read_channel="output_w" charted="1" series_color="clRed"/>
+    <cell r="17" c="7" text="4.95981" read_channel="blacks"/>
+    <cell r="18" c="6" text="2.05" read_channel="blacks_lvl"/>
+    <cell r="18" c="5" text="[crossLvl]"/>
+    <cell r="18" c="7" text="1.9" write_channel="blacks_lvl" trigger_row="18" trigger_col="5"/>
+    <cell r="23" c="10" text="[t_pickb]"/>
+    <cell r="23" c="11" text="" read_channel="tpg"/>
+    <cell r="23" c="12" text="" write_channel="tpg" trigger_row="23" trigger_col="13"/>
+    <cell r="23" c="13" text="[t_pickg]"/>
+    <cell r="24" c="10" text="[t_dropb]"/>
+    <cell r="24" c="11" text="" read_channel="tdg"/>
+    <cell r="24" c="12" text="" write_channel="tdg" trigger_row="24" trigger_col="13"/>
+    <cell r="24" c="13" text="[t_dropg]"/>
+    <cell r="23" c="8" text="" read_channel="tpb"/>
+    <cell r="23" c="9" text="" write_channel="tpb" trigger_row="23" trigger_col="10"/>
+    <cell r="24" c="8" text="" read_channel="tdb"/>
+    <cell r="24" c="9" text="" write_channel="tdb" trigger_row="24" trigger_col="10"/>
   </cells>
 </sheet>

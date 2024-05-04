@@ -88,7 +88,7 @@ class robot_t {
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
 
-  double testKp = 10, testKi = 0, testKd = 0;
+  double testKp = 8, testKi = 0.02, testKd = 0;
 
   double  IRkp = testKp, IRki = testKi, IRkd = testKd;
 
@@ -107,9 +107,13 @@ class robot_t {
   float refreshRate = 0.01; //original is 0.04
 
   bool lastDeliveryException = 0;
+  
+  bool problem1Flag = 0;
 
-  float rel_sDROPB = 0.105, rel_sDROPG = 0.19;
-  float tis_DROPB = 1000, tis_DROPG = 2100;
+  float rel_sDROPBandPICKB = 0.105, rel_sDROPGandPICKG = 0.17;
+
+  float tis_PICKB = 400, tis_DROPB = 600;
+  float tis_PICKG = 1000,tis_DROPG = 1200;
   float tleftAngle = 80;
   
   PID_t PID[NUM_WHEELS];

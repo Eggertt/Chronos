@@ -37,10 +37,10 @@ robot_t::robot_t()
   wheel_radius = 0.0689 / 2;
   dv_max = 5;
   dw_max = 10;
-  dt = 0.04;
+  dt = 0.01;
 
   follow_k = -0.15;
-  follow_v = 0.20; // 0.20;
+  follow_v = 0.3; // 0.20;
 
   pchannels = NULL;
   pfsm = NULL;

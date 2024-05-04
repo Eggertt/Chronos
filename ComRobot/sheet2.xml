@@ -19,7 +19,7 @@
     <cell r="1" c="1" text="IP"/>
     <cell r="1" c="2" text="172.16.16.170" read_channel="IP" read_channel_mode="2"/>
     <cell r="17" c="1" text="loop:"/>
-    <cell r="17" c="2" text="3182" read_channel="loop"/>
+    <cell r="17" c="2" text="2183" read_channel="loop"/>
     <cell r="17" c="4" text="[Button]"/>
     <cell r="10" c="2" text="0" read_channel="e2"/>
     <cell r="9" c="1" text="Enc1"/>
@@ -44,20 +44,20 @@
     <cell r="4" c="6" text="10" read_channel="kp"/>
     <cell r="3" c="7" text="12.5" write_channel="kf" trigger_row="3" trigger_col="8"/>
     <cell r="3" c="8" text="[PID]"/>
-    <cell r="4" c="7" text="10" write_channel="kp" trigger_row="3" trigger_col="8"/>
-    <cell r="5" c="7" text="0" write_channel="ki" trigger_row="3" trigger_col="8"/>
+    <cell r="4" c="7" text="8" write_channel="kp" trigger_row="3" trigger_col="8"/>
+    <cell r="5" c="7" text="0.02" write_channel="ki" trigger_row="3" trigger_col="8"/>
     <cell r="5" c="6" text="0" read_channel="ki"/>
     <cell r="9" c="12" text="0" read_channel="we1"/>
     <cell r="10" c="12" text="0" read_channel="we2"/>
     <cell r="9" c="14" text="[Set]"/>
     <cell r="9" c="13" text="0" write_channel="w1" trigger_row="9" trigger_col="14"/>
     <cell r="10" c="13" text="0" write_channel="w2" trigger_row="9" trigger_col="14"/>
-    <cell r="9" c="6" text="0" read_channel="testKi" charted="1"/>
-    <cell r="9" c="7" text="0" write_channel="testKi" trigger_row="8" trigger_col="8" default_write="0"/>
+    <cell r="9" c="6" text="0" read_channel="testKi"/>
+    <cell r="9" c="7" text="0.02" write_channel="testKi" trigger_row="8" trigger_col="8" default_write="0"/>
     <cell r="19" c="2" text="0.215" read_channel="d0"/>
     <cell r="19" c="1" text="Dist:"/>
     <cell r="21" c="1" text="State:"/>
-    <cell r="21" c="2" text="1" read_channel="st"/>
+    <cell r="21" c="2" text="8" read_channel="st"/>
     <cell r="21" c="3" text="9" write_channel="st" trigger_row="21" trigger_col="4"/>
     <cell r="21" c="4" text="[State]"/>
     <cell r="5" c="4" text="[Set PWM]"/>
@@ -99,13 +99,13 @@
     <cell r="16" c="6" text="err"/>
     <cell r="15" c="6" text="x" write_channel="x"/>
     <cell r="15" c="7" text="0" read_channel="x"/>
-    <cell r="16" c="7" text="-7649" read_channel="er"/>
+    <cell r="16" c="7" text="0" read_channel="er"/>
     <cell r="21" c="5" text="[Kill]"/>
     <cell r="21" c="6" text="8" write_channel="st" trigger_row="21" trigger_col="5"/>
     <cell r="15" c="9" text="0.06" write_channel="rlv" trigger_row="15" trigger_col="10"/>
     <cell r="16" c="9" text="2" write_channel="rlw" trigger_row="16" trigger_col="10"/>
     <cell r="17" c="9" text="0.08" write_channel="rllv" trigger_row="17" trigger_col="10"/>
-    <cell r="18" c="9" text="3" write_channel="rllw" trigger_row="18" trigger_col="10"/>
+    <cell r="18" c="9" text="2.5" write_channel="rllw" trigger_row="18" trigger_col="10"/>
     <cell r="18" c="8" text="3" read_channel="rllw"/>
     <cell r="17" c="8" text="0.08" read_channel="rllv"/>
     <cell r="16" c="8" text="2" read_channel="rlw"/>
@@ -132,10 +132,10 @@
     <cell r="21" c="11" text="2100" read_channel="tdg"/>
     <cell r="22" c="4" text="[Set]"/>
     <cell r="22" c="3" text="ouuo" read_channel_mode="2" write_channel="box" trigger_row="22" trigger_col="4"/>
-    <cell r="22" c="2" text="oooo" read_channel="box" read_channel_mode="2"/>
+    <cell r="22" c="2" text="" read_channel="box" read_channel_mode="2"/>
     <cell r="14" c="6" text="x_t"/>
     <cell r="14" c="7" text="0" read_channel="x_t"/>
-    <cell r="19" c="9" text="3"/>
+    <cell r="19" c="9" text="2.5"/>
     <cell r="2" c="11" text="0.15"/>
     <cell r="2" c="12" text="0.20"/>
     <cell r="19" c="8" text="1"/>
@@ -151,9 +151,14 @@
     <cell r="6" c="14" text="30"/>
     <cell r="8" c="5" text="testKp"/>
     <cell r="8" c="6" text="10" read_channel="testKp"/>
-    <cell r="8" c="7" text="10" write_channel="testKp" trigger_row="8" trigger_col="8"/>
+    <cell r="8" c="7" text="8" write_channel="testKp" trigger_row="8" trigger_col="8"/>
     <cell r="8" c="8" text="[Test PID]"/>
     <cell r="12" c="10" text="Out_W:"/>
-    <cell r="12" c="11" text="" read_channel="output_w"/>
+    <cell r="12" c="11" text="0" read_channel="output_w" charted="1" series_color="clRed"/>
+    <cell r="17" c="7" text="1" read_channel="blacks"/>
+    <cell r="18" c="6" text="1.9" read_channel="blacks_lvl"/>
+    <cell r="18" c="5" text="[crossLvl]"/>
+    <cell r="18" c="7" text="1.9" write_channel="blacks_lvl" trigger_row="18" trigger_col="5"/>
+    <cell r="23" c="9" text="" write_channel="tpb" trigger_row="23" trigger_col="10"/>
   </cells>
 </sheet>

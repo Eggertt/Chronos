@@ -181,7 +181,7 @@ class main_fsm_t: public state_machine_t
 
     
     }
-    else if(robot.state == LEFTLINE && robot.rel_theta > radians(70)){
+    else if(robot.state == LEFTLINE && robot.rel_theta > radians(60)){
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 
@@ -189,7 +189,7 @@ class main_fsm_t: public state_machine_t
       Serial.println(robot.state);
       robot.setState(FLINE);
     
-    }else if(robot.state == RIGHTLINE && robot.rel_theta < radians (-70)){
+    }else if(robot.state == RIGHTLINE && robot.rel_theta < radians (-60)){
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 

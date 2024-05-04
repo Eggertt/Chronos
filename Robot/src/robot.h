@@ -102,7 +102,7 @@ class robot_t {
 
   float follow_v, follow_k;
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
-  float rightLeftLine_v = 0.08, rightLeftLine_w = 3; //for leftline and rightline
+  float rightLeftLine_v = 0.08, rightLeftLine_w = 3.5; //for leftline and rightline
 
   float refreshRate = 0.01; //original is 0.04
 
@@ -112,8 +112,8 @@ class robot_t {
 
   float rel_sDROPBandPICKB = 0.105, rel_sDROPGandPICKG = 0.17;
 
-  float tis_PICKB = 400, tis_DROPB = 600;
-  float tis_PICKG = 1000,tis_DROPG = 1200;
+  float tis_PICKB = 200/*200*/, tis_DROPB = 500 /*600*/;
+  float tis_PICKG = 600/*600*/,tis_DROPG = 1000 /*1000*/;
   float tleftAngle = 80;
   
   PID_t PID[NUM_WHEELS];

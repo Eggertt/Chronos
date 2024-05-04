@@ -878,7 +878,10 @@ void loop()
           robot.wasDropPick = 1;
           robot.compassCount = 1;
 
-          if(currentBox.pos == 19) robot.lastDeliveryException = 1;
+          if(currentBox.pos == 19) {
+            robot.tis_DROPB += 200;
+            robot.lastDeliveryException = 1;
+          }
           //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
         else

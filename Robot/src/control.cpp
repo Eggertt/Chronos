@@ -137,6 +137,8 @@ class main_fsm_t: public state_machine_t
 
       Serial.print("State:");
       Serial.println(robot.state);
+      Serial.print("tis.DROPB = ");
+      Serial.println(robot.tis_DROPB);
       robot.setState(21);
     
     }else if(robot.state == 21 && robot.rel_s < -robot.rel_sDROPB){

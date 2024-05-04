@@ -342,6 +342,7 @@ class main_fsm_t: public state_machine_t
       robot.followLine();
       //robot.setRobotVW(0.1, 0);
     }else if(robot.state == TEST){
+      robot.followLine();
 
     }
   };

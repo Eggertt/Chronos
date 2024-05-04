@@ -27,7 +27,7 @@ int udp_on, ip_on;
 
 WiFiUDP Udp;
 unsigned int localUdpPort = 4224; // local port to listen on
-
+                    //port was 4224
 #define UDP_MAX_SIZE 512
 uint8_t UdpInPacket[UDP_MAX_SIZE];  // buffer for incoming packets
 uint8_t UdpOutPacket[UDP_MAX_SIZE]; // buffer for outgoing packets
@@ -390,6 +390,11 @@ void process_command(command_frame_t frame)
     robot.tis_DROPG = frame.value;
     serial_commands.send_command("tdg", robot.tis_DROPG);
   }
+  else if (frame.command_is("output_w"))
+  {
+    robot.output_w = frame.value;
+    serial_commands.send_command("output_w", robot.output_w);
+  }
   else if (frame.command_is("ssid"))
   {
     strncpy(ssid, frame.text, max_wifi_str - 1);
@@ -537,10 +542,10 @@ void setup()
   password[c] = 0;
   f.close();
 
-  strcpy(ssid, "FNR");
-  strcpy(password, "FNR-PCR-2024");
-  // strcpy(ssid, "TP-Link_28CD");
-  // strcpy(password, "49871005");
+  // strcpy(ssid, "FNR");
+  // strcpy(password, "FNR-PCR-2024");
+  strcpy(ssid, "eggert");
+  strcpy(password, "semsenha");
   // strcpy(ssid, "5DPO-NETWORK");
   // strcpy(password, "5dpo5dpo");
 
@@ -902,7 +907,10 @@ void loop()
           robot.wasDropPick = 1;
           robot.compassCount = 1;
 
-          if(currentBox.pos == 19) robot.lastDeliveryException = 1;
+          if(currentBox.pos == 19){
+            robot.lastDeliveryException = 1; 
+            robot.tis_DROPB += 200;
+          }
           //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
         else
@@ -1052,15 +1060,16 @@ void loop()
     serial_commands.send_command("testKi", robot.testKi);
     serial_commands.send_command("testKd", robot.testKd);
 
-    serial_commands.send_command("rlv", robot.rightLeft_v);
-    serial_commands.send_command("rlw", robot.rightLeft_w);
-    serial_commands.send_command("rllv", robot.rightLeftLine_v);
-    serial_commands.send_command("rllw", robot.rightLeftLine_w);
+    // serial_commands.send_command("rlv", robot.rightLeft_v);
+    // serial_commands.send_command("rlw", robot.rightLeft_w);
+    // serial_commands.send_command("rllv", robot.rightLeftLine_v);
+    // serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
-    serial_commands.send_command("rsdb", robot.rel_sDROPB);
-    serial_commands.send_command("rsdg", robot.rel_sDROPG);
-    serial_commands.send_command("tdb", robot.tis_DROPB);
-    serial_commands.send_command("tdg", robot.tis_DROPG);
+    // serial_commands.send_command("rsdb", robot.rel_sDROPB);
+    // serial_commands.send_command("rsdg", robot.rel_sDROPG);
+    // serial_commands.send_command("tdb", robot.tis_DROPB);
+    // serial_commands.send_command("tdg", robot.tis_DROPG);
+
 
     serial_commands.send_command("box", irrecvbuffer);
     // serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
@@ -1068,6 +1077,13 @@ void loop()
     // serial_commands.send_command("wasDP", robot.wasDropPick);
 
     // serial_commands.send_command("refreshRate", robot.refreshRate);
+
+
+    Serial.print(">Output_w:");
+    Serial.println(robot.output_w);
+
+    Serial.print("Output_w: ");
+    Serial.println(robot.output_w);
 
 
 

@@ -88,13 +88,17 @@ class robot_t {
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
 
-  double  IRkp = testKp, IRki = testKi, IRkd = testKd;
-
   double testKp = 10, testKi = 0, testKd = 0;
 
+  double  IRkp = testKp, IRki = testKi, IRkd = testKd;
+
+  double error;         // Erro medido pelos sensores
   double prevError = 0; // Erro anterior para cada sensor
   double integral = 0; // Integral para cada sensor
   double derivative = 0; // Derivada para cada sensor
+
+  double output_w;
+
 
   float follow_v, follow_k;
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft

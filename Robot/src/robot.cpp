@@ -176,17 +176,20 @@ void robot_t::followLine(){
   // robot.IRkd = 0.1;
 
   if(robot.IR_sum() < 2500){
-    double error = -1.0 * IRLine.IR_values[0] - 1.0 * IRLine.IR_values[1] + 1.0 * IRLine.IR_values[3] + 1.0 * IRLine.IR_values[4];
+    error = -1.0 * IRLine.IR_values[0] - 1.0 * IRLine.IR_values[1] + 1.0 * IRLine.IR_values[3] + 1.0 * IRLine.IR_values[4];
 
     integral += error;
     derivative = error - prevError;
     prevError = error;
 
-    double output_w = (robot.IRkp * error + robot.IRki * integral + robot.IRkd * derivative)/10000;
+    output_w = (robot.IRkp * error + robot.IRki * integral + robot.IRkd * derivative)/10000;
 
     //Serial.printf("Output_w = %f\n",output_w);
     if (output_w > 3.5) output_w = 3.5;
     else if (output_w < -3.5) output_w = -3.5;
+
+    // Serial.print(">Output_w:");
+    // Serial.println(robot.output_w);
 
     // Aplicação das saídas
     setRobotVW(robot.follow_v, output_w);

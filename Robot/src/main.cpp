@@ -2,6 +2,8 @@
 // Periodic Interrupts for Quadrature Encoder reading and serial commands example
 // It also has the PWM generation code to drive an H-bridge like the DRV8212PDSGR
 
+#define COM_ROBOT 1
+
 #include <Arduino.h>
 
 #include <WiFi.h>
@@ -552,10 +554,10 @@ void setup()
   password[c] = 0;
   f.close();
 
-  strcpy(ssid, "FNR");
-  strcpy(password, "FNR-PCR-2024");
-  //strcpy(ssid, "eggert");
-  //strcpy(password, "semsenha");
+  // strcpy(ssid, "FNR");
+  // strcpy(password, "FNR-PCR-2024"); // 172.16.17.132
+  strcpy(ssid, "eggert");
+  strcpy(password, "semsenha");        // 192.168.147.183 (Pedro)
   // strcpy(ssid, "5DPO-NETWORK");
   // strcpy(password, "5dpo5dpo");
 
@@ -1020,99 +1022,102 @@ void loop()
       //Serial.println("HERE");
     }
 
-    // Debug information
-    // prints
-    // serial_commands.send_command("dte", delta);
 
-    // // // serial_commands.send_command("M1", robot.PWM_1);
-    // // // serial_commands.send_command("M2", robot.PWM_2);
+    if(COM_ROBOT){
+      // Debug information
+      // prints
+      serial_commands.send_command("dte", delta);
 
-    // // // serial_commands.send_command("e1", robot.enc1);
-    // // // serial_commands.send_command("e2", robot.enc2);
+      // // serial_commands.send_command("M1", robot.PWM_1);
+      // // serial_commands.send_command("M2", robot.PWM_2);
 
-    // // serial_commands.send_command("Vbat", robot.battery_voltage);
+      // // serial_commands.send_command("e1", robot.enc1);
+      // // serial_commands.send_command("e2", robot.enc2);
 
-    // // serial_commands.send_command("ve", robot.battery_voltage); // This should be robot.ve
-    // // // serial_commands.send_command("we", robot.we);
+      // serial_commands.send_command("Vbat", robot.battery_voltage);
 
-    // // // serial_commands.send_command("v1ref", robot.v1ref);
-    // // // serial_commands.send_command("v2ref", robot.v2ref);
+      // serial_commands.send_command("ve", robot.battery_voltage); // This should be robot.ve
+      // // serial_commands.send_command("we", robot.we);
 
-    // // // serial_commands.send_command("iman", robot.solenoid_PWM);
+      // // serial_commands.send_command("v1ref", robot.v1ref);
+      // // serial_commands.send_command("v2ref", robot.v2ref);
 
-    // // // serial_commands.send_command("mode", robot.control_mode);
+      // // serial_commands.send_command("iman", robot.solenoid_PWM);
 
-    // serial_commands.send_command("st", robot.state);
+      // // serial_commands.send_command("mode", robot.control_mode);
 
-    // // // serial_commands.send_command("rel_s", robot.rel_s);
-    // // // Serial.println("");
-    // // // serial_commands.send_command("theta", robot.rel_theta);
-    // // // Serial.println("");
+      serial_commands.send_command("st", robot.state);
 
-    // // serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
-    // // // Serial.println("");
-    // // serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
-    // // serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
-    // // serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
-    // // serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
-    // // serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
-    // // Serial.println("");
+      // // serial_commands.send_command("rel_s", robot.rel_s);
+      // // Serial.println("");
+      // // serial_commands.send_command("theta", robot.rel_theta);
+      // // Serial.println("");
 
-    // serial_commands.send_command("x", robot.IRLine.crosses);
-    // serial_commands.send_command("er", robot.integral);
-    // // serial_commands.send_command("tof", robot.tof_dist);
-    // // // serial_commands.send_command("fk", robot.follow_k);
-    // serial_commands.send_command("fv", robot.follow_v);
+      serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
+      // // Serial.println("");
+      // serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
+      // serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
+      // serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
+      // serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
+      // serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
+      // Serial.println("");
 
-    // // // serial_commands.send_command("pr", robot.IRLine.pos_right);
-    // // // serial_commands.send_command("pl", robot.IRLine.pos_left);
+      serial_commands.send_command("x", robot.IRLine.crosses);
+      serial_commands.send_command("er", robot.integral);
+      // serial_commands.send_command("tof", robot.tof_dist);
+      // // serial_commands.send_command("fk", robot.follow_k);
+      serial_commands.send_command("fv", robot.follow_v);
 
-    // serial_commands.send_command("kp", robot.IRkp);
-    // serial_commands.send_command("ki", robot.IRki);
-    // serial_commands.send_command("kd", robot.IRkd);
+      // // serial_commands.send_command("pr", robot.IRLine.pos_right);
+      // // serial_commands.send_command("pl", robot.IRLine.pos_left);
 
-    // serial_commands.send_command("testKp", robot.testKp);
-    // serial_commands.send_command("testKi", robot.testKi);
-    // serial_commands.send_command("testKd", robot.testKd);
+      serial_commands.send_command("kp", robot.IRkp);
+      serial_commands.send_command("ki", robot.IRki);
+      serial_commands.send_command("kd", robot.IRkd);
 
-    // // serial_commands.send_command("rlv", robot.rightLeft_v);
-    // // serial_commands.send_command("rlw", robot.rightLeft_w);
-    // // serial_commands.send_command("rllv", robot.rightLeftLine_v);
-    // // serial_commands.send_command("rllw", robot.rightLeftLine_w);
+      serial_commands.send_command("testKp", robot.testKp);
+      serial_commands.send_command("testKi", robot.testKi);
+      serial_commands.send_command("testKd", robot.testKd);
 
-    // serial_commands.send_command("rsdb", robot.rel_sDROPBandPICKB);
-    // serial_commands.send_command("rsdg", robot.rel_sDROPGandPICKG);
-    // serial_commands.send_command("tpb", robot.tis_PICKB);
-    // serial_commands.send_command("tdb", robot.tis_DROPB);
-    // serial_commands.send_command("tpg", robot.tis_PICKG);
-    // serial_commands.send_command("tdg", robot.tis_DROPG);
+      // serial_commands.send_command("rlv", robot.rightLeft_v);
+      // serial_commands.send_command("rlw", robot.rightLeft_w);
+      // serial_commands.send_command("rllv", robot.rightLeftLine_v);
+      // serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
-    // serial_commands.send_command("output_w", robot.output_w);
+      serial_commands.send_command("rsdb", robot.rel_sDROPBandPICKB);
+      serial_commands.send_command("rsdg", robot.rel_sDROPGandPICKG);
+      serial_commands.send_command("tpb", robot.tis_PICKB);
+      serial_commands.send_command("tdb", robot.tis_DROPB);
+      serial_commands.send_command("tpg", robot.tis_PICKG);
+      serial_commands.send_command("tdg", robot.tis_DROPG);
 
-
-    // serial_commands.send_command("box", irrecvbuffer);
-    // serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
-    // serial_commands.send_command("blacks", robot.IRLine.blacks);
-    // // serial_commands.send_command("wasDP", robot.wasDropPick);
-
-    // // serial_commands.send_command("refreshRate", robot.refreshRate);
+      serial_commands.send_command("output_w", robot.output_w);
 
 
-    // Serial.print("Output_w: ");
-    // Serial.println(robot.output_w);
+      serial_commands.send_command("box", irrecvbuffer);
+      serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
+      serial_commands.send_command("blacks", robot.IRLine.blacks);
+      // serial_commands.send_command("wasDP", robot.wasDropPick);
+
+      // serial_commands.send_command("refreshRate", robot.refreshRate);
+
+
+      Serial.print("Output_w: ");
+      Serial.println(robot.output_w);
 
 
 
-    // // Serial.print(" cmd: ");
-    // // Serial.print(serial_commands.frame.command);
-    // // Serial.print("; ");
+      // Serial.print(" cmd: ");
+      // Serial.print(serial_commands.frame.command);
+      // Serial.print("; ");
 
-    // // serial_commands.send_command("dbg", debug);
-    // Serial.print(" loop: ");
-    // // Serial.println(micros() - loop_micros);
-    // serial_commands.send_command("loop", micros() - loop_micros);
+      // serial_commands.send_command("dbg", debug);
+      Serial.print(" loop: ");
+      // Serial.println(micros() - loop_micros);
+      serial_commands.send_command("loop", micros() - loop_micros);
 
-    serial_commands.flush();
-    // Serial.println();
+      serial_commands.flush();
+      Serial.println();
+    }
   }
 }

@@ -88,7 +88,10 @@ class robot_t {
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
 
-  double  IRkp = 20, IRki = 1, IRkd = 30;
+  double  IRkp = testKp, IRki = testKi, IRkd = testKd;
+
+  double testKp = 10, testKi = 0, testKd = 0;
+
   double prevError = 0; // Erro anterior para cada sensor
   double integral = 0; // Integral para cada sensor
   double derivative = 0; // Derivada para cada sensor
@@ -97,7 +100,7 @@ class robot_t {
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
   float rightLeftLine_v = 0.08, rightLeftLine_w = 3; //for leftline and rightline
 
-  float refreshRate = 0.04; //original is 0.04
+  float refreshRate = 0.01; //original is 0.04
 
   bool lastDeliveryException = 0;
 

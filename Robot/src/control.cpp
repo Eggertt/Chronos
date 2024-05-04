@@ -77,6 +77,10 @@ class main_fsm_t: public state_machine_t
     
     }else if(robot.state == PICKB && robot.tof_dist < 0.05){ // 0.04
 
+      robot.IRkp = 20;
+      robot.IRki = 1;
+      robot.IRkd = 30;
+
       Serial.print("State:");
       Serial.println(robot.state);
       robot.setState(41); 
@@ -100,10 +104,18 @@ class main_fsm_t: public state_machine_t
       robot.rel_theta = 0;
       robot.IRLine.crosses = 0;
 
+      robot.IRkp = robot.testKp;
+      robot.IRki = robot.testKi;
+      robot.IRkd = robot.testKd;
+
       robot.setState(GO); 
     
     }
     else if(robot.state == PICKG && robot.tof_dist < 0.05){ // 0.04
+
+      robot.IRkp = 20;
+      robot.IRki = 1;
+      robot.IRkd = 30;
 
       Serial.print("State:");
       Serial.println(robot.state);
@@ -128,9 +140,18 @@ class main_fsm_t: public state_machine_t
       robot.rel_theta = 0;
       robot.IRLine.crosses = 0;
 
+      robot.IRkp = robot.testKp;
+      robot.IRki = robot.testKi;
+      robot.IRkd = robot.testKd;
+
       robot.setState(GO);
     
     }else if(robot.state == DROPB && robot.tis > robot.tis_DROPB){
+      
+      robot.IRkp = 20;
+      robot.IRki = 1;
+      robot.IRkd = 30;
+
       robot.rel_s = 0;
       robot.rel_theta = 0;
       //robot.setState(22);
@@ -150,6 +171,10 @@ class main_fsm_t: public state_machine_t
     //else if(robot.state == 22 && robot.rel_theta > radians(170)){
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
+
+      robot.IRkp = robot.testKp;
+      robot.IRki = robot.testKi;
+      robot.IRkd = robot.testKd;
 
       robot.setState(GO);
 
@@ -174,6 +199,11 @@ class main_fsm_t: public state_machine_t
     } 
     
     else if(robot.state == DROPG && robot.tis > robot.tis_DROPG){
+      
+      robot.IRkp = 20;
+      robot.IRki = 1;
+      robot.IRkd = 30;
+      
       robot.rel_s = 0;
       robot.rel_theta = 0;
 
@@ -191,6 +221,10 @@ class main_fsm_t: public state_machine_t
     //}else if(robot.state == 32 && robot.rel_theta < radians(-170)){
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
+
+      robot.IRkp = robot.testKp;
+      robot.IRki = robot.testKi;
+      robot.IRkd = robot.testKd;
 
       robot.setState(GO);
     

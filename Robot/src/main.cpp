@@ -917,12 +917,12 @@ void loop()
 
           if((currentBox.pos == 12 || currentBox.pos == 19)){
             //robot.lastDeliveryException = 1; 
-            robot.tis_DROPB = 600; //was 600
+            robot.tis_DROPB = 650; //was 600
 
             if(scheduler.deliveryPorts[2].occupied == true && currentBox.color == BLUE){
               Serial.print("Setei o lastDeliveryException para 1");
               robot.lastDeliveryException = 1; 
-              robot.tis_DROPB = 800; //was 800
+              robot.tis_DROPB = 850; //was 800
             }
 
             // if(currentBox.pos == 12) scheduler.deliveryNodesB[0].occupied = true;

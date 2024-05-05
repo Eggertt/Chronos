@@ -89,6 +89,7 @@ class robot_t {
   control_mode_t control_mode;
 
   double  IRkp = 8, IRki = 0.02, IRkd = 6;
+  double lastIRkp = IRkp, lastIRki = IRki, lastIRkd = IRkd;
 
   double error;         // Erro medido pelos sensores
   double prevError = 0; // Erro anterior para cada sensor
@@ -97,8 +98,9 @@ class robot_t {
 
   double output_w;
 
+  float follow_v = 0.3, follow_k = -0.15;
+  float last_follow_v = follow_v;
 
-  float follow_v, follow_k;
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
   float rightLeftLine_v = 0.12, rightLeftLine_w = 3; //for leftline and rightline
 
@@ -111,7 +113,7 @@ class robot_t {
 
   float rel_sDROPBandPICKB = 0.105, rel_sDROPGandPICKG = 0.17;
 
-  float tis_PICKB = 10/*200*/, tis_DROPB = 500 /*600*/;
+  float tis_PICKB = 10/*200*/, tis_DROPB = 550 /*600*/;
   float tis_PICKG = 2/*400*/,tis_DROPG = 1000 /*1000*/;
   float tleftAngle = 80;
   

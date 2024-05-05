@@ -80,9 +80,11 @@ class main_fsm_t: public state_machine_t
     
     }else if(robot.state == PICKB && robot.tof_dist < 0.05){ // 0.04
 
-      // robot.IRkp = 20;
-      // robot.IRki = 1;
-      // robot.IRkd = 30;
+      robot.IRkp = 8;
+      robot.IRki = 0.02;
+      robot.IRkd = 6;
+
+      robot.follow_v = 0.3;
 
       Serial.print("State:");
       Serial.println(robot.state);
@@ -107,18 +109,22 @@ class main_fsm_t: public state_machine_t
       robot.rel_theta = 0;
       robot.IRLine.crosses = 0;
 
-      // robot.IRkp = robot.testKp;
-      // robot.IRki = robot.testKi;
-      // robot.IRkd = robot.testKd;
+      robot.IRkp = robot.lastIRkp;
+      robot.IRki = robot.lastIRki;
+      robot.IRkd = robot.lastIRkd;
+
+      robot.follow_v = robot.last_follow_v;
 
       robot.setState(GO); 
     
     }
     else if(robot.state == PICKG && robot.tof_dist < 0.05){ // 0.04
 
-      // robot.IRkp = 20;
-      // robot.IRki = 1;
-      // robot.IRkd = 30;
+      robot.IRkp = 8;
+      robot.IRki = 0.02;
+      robot.IRkd = 6;
+
+      robot.follow_v = 0.3;
 
       Serial.print("State:");
       Serial.println(robot.state);
@@ -143,17 +149,21 @@ class main_fsm_t: public state_machine_t
       robot.rel_theta = 0;
       robot.IRLine.crosses = 0;
 
-      // robot.IRkp = robot.testKp;
-      // robot.IRki = robot.testKi;
-      // robot.IRkd = robot.testKd;
+      robot.IRkp = robot.lastIRkp;
+      robot.IRki = robot.lastIRki;
+      robot.IRkd = robot.lastIRkd;
+
+      robot.follow_v = robot.last_follow_v;
 
       robot.setState(GO);
     
     }else if(robot.state == DROPB && robot.tis > robot.tis_DROPB){ //was 600
       
-      // robot.IRkp = 20;
-      // robot.IRki = 1;
-      // robot.IRkd = 30;
+      robot.IRkp = 8;
+      robot.IRki = 0.02;
+      robot.IRkd = 6;
+
+      robot.follow_v = 0.3;
 
       robot.rel_s = 0;
       robot.rel_theta = 0;
@@ -175,9 +185,16 @@ class main_fsm_t: public state_machine_t
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 
-      // robot.IRkp = robot.testKp;
-      // robot.IRki = robot.testKi;
-      // robot.IRkd = robot.testKd;
+      robot.IRkp = robot.lastIRkp;
+      robot.IRki = robot.lastIRki;
+      robot.IRkd = robot.lastIRkd;
+
+      robot.follow_v = robot.last_follow_v;
+
+      if(robot.lastDeliveryException){
+        robot.setRobotVW(0, -2.5);
+        robot.setState(TRIGHT);
+      }
 
       robot.setState(GO);
 
@@ -203,9 +220,11 @@ class main_fsm_t: public state_machine_t
     
     else if(robot.state == DROPG && robot.tis > robot.tis_DROPG){
       
-      // robot.IRkp = 20;
-      // robot.IRki = 1;
-      // robot.IRkd = 30;
+      robot.IRkp = 8;
+      robot.IRki = 0.02;
+      robot.IRkd = 6;
+
+      robot.follow_v = 0.3;
       
       robot.rel_s = 0;
       robot.rel_theta = 0;
@@ -225,9 +244,11 @@ class main_fsm_t: public state_machine_t
       robot.IRLine.crosses = 0;
       robot.rel_theta = 0;
 
-      // robot.IRkp = robot.testKp;
-      // robot.IRki = robot.testKi;
-      // robot.IRkd = robot.testKd;
+      robot.IRkp = robot.lastIRkp;
+      robot.IRki = robot.lastIRki;
+      robot.IRkd = robot.lastIRkd;
+
+      robot.follow_v = robot.last_follow_v;
 
       robot.setState(GO);
     
@@ -298,7 +319,7 @@ class main_fsm_t: public state_machine_t
       robot.followLine();
     
     }else if(robot.state == 52){  //go back a little
-      robot.setRobotVW(-0.15, 0.17); //v was 0.12
+      robot.setRobotVW(-0.15, 0.18); //v was 0.17
     
     }else if(robot.state == 53){  //turn 180
       robot.setRobotVW(0, 2.5); //w was 3
@@ -311,7 +332,7 @@ class main_fsm_t: public state_machine_t
     
     }else if(robot.state == 21){  //iman off and go back
       robot.solenoid_PWM = 0;
-      robot.setRobotVW(-0.15, 0.15); // w was 0.11
+      robot.setRobotVW(-0.15, 0.155); // w was 0.15
     
     }else if(robot.state == 22){  //turn 180
       robot.setRobotVW(0, -2.5); // w was 3

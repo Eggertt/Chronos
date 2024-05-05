@@ -39,9 +39,6 @@ robot_t::robot_t()
   dw_max = 10;
   dt = 0.01;
 
-  follow_k = -0.15;
-  follow_v = 0.3; // 0.20;
-
   pchannels = NULL;
   pfsm = NULL;
 }

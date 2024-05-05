@@ -98,10 +98,10 @@ class robot_t {
 
   double output_w;
 
-  float follow_v = 0.3, follow_k = -0.15;
+  float follow_v = 0.33, follow_k = -0.15;
   float last_follow_v = follow_v;
 
-  float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
+  float rightLeft_v = 0.06, rightLeft_w = 3; // for tright and tleft
   float rightLeftLine_v = 0.12, rightLeftLine_w = 3; //for leftline and rightline
 
   float refreshRate = 0.01; //original is 0.04

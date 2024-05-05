@@ -36,10 +36,10 @@ class main_fsm_t: public state_machine_t
 
       robot.setState(GO);
     
-    }else if(robot.state == 60 && robot.rel_s > 0.05){
+    }else if(robot.state == 60 && robot.rel_s > 0.045){
       robot.setState(TLEFT);
 
-    }else if(robot.state == TLEFT && robot.rel_theta > radians (80)){
+    }else if(robot.state == TLEFT && robot.rel_theta > radians (70)){
       robot.IRLine.crosses = 0;
 
       Serial.print("State:");
@@ -59,10 +59,10 @@ class main_fsm_t: public state_machine_t
 
       }  
     
-    }else if(robot.state == 70 && robot.rel_s > 0.04){
+    }else if(robot.state == 70 && robot.rel_s > 0.035){
       robot.setState(TRIGHT);
 
-    }else if(robot.state == TRIGHT && robot.rel_theta < radians (-80)){
+    }else if(robot.state == TRIGHT && robot.rel_theta < radians (-70)){
       robot.IRLine.crosses = 0;
 
       Serial.print("State:");
@@ -355,7 +355,7 @@ class main_fsm_t: public state_machine_t
     
     }else if(robot.state == 31){  //iman off and go back
       robot.solenoid_PWM = 0;
-      robot.setRobotVW(-0.15, 0.22);
+      robot.setRobotVW(-0.15, 0.155);
     
     }else if(robot.state == 32){  //turn 180
       robot.setRobotVW(0, 2.5); // w was 3

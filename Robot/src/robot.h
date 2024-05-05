@@ -88,9 +88,7 @@ class robot_t {
   int PWM_1_req, PWM_2_req;
   control_mode_t control_mode;
 
-  double testKp = 8, testKi = 0.02, testKd = 5;
-
-  double  IRkp = testKp, IRki = testKi, IRkd = testKd;
+  double  IRkp = 8, IRki = 0.02, IRkd = 6;
 
   double error;         // Erro medido pelos sensores
   double prevError = 0; // Erro anterior para cada sensor
@@ -109,11 +107,12 @@ class robot_t {
   bool lastDeliveryException = 0;
   
   bool problem1Flag = 0;
+  bool turnbackOnly = 0;
 
   float rel_sDROPBandPICKB = 0.105, rel_sDROPGandPICKG = 0.17;
 
   float tis_PICKB = 10/*200*/, tis_DROPB = 500 /*600*/;
-  float tis_PICKG = 10/*400*/,tis_DROPG = 1000 /*1000*/;
+  float tis_PICKG = 2/*400*/,tis_DROPG = 1000 /*1000*/;
   float tleftAngle = 80;
   
   PID_t PID[NUM_WHEELS];

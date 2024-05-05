@@ -176,7 +176,7 @@ void robot_t::followLine(){
   // robot.IRkd = 0.1;
 
   if(robot.IR_sum() < 2500){
-    error = -1.0 * IRLine.IR_values[0] - 1.0 * IRLine.IR_values[1] + 1.0 * IRLine.IR_values[3] + 1.0 * IRLine.IR_values[4];
+    error = -1.1 * IRLine.IR_values[0] - 1.0 * IRLine.IR_values[1] + 1.0 * IRLine.IR_values[3] + 1.1 * IRLine.IR_values[4];
 
     integral += error;
     derivative = error - prevError;

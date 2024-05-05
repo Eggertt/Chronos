@@ -2,7 +2,7 @@
 // Periodic Interrupts for Quadrature Encoder reading and serial commands example
 // It also has the PWM generation code to drive an H-bridge like the DRV8212PDSGR
 
-#define COM_ROBOT 0
+#define COM_ROBOT 1
 
 #include <Arduino.h>
 
@@ -286,22 +286,6 @@ void process_command(command_frame_t frame)
 
 
 
-  else if (frame.command_is("testKp"))
-  {
-    robot.testKp = frame.value;
-    serial_commands.send_command("testKp", robot.testKp);
-  }
-  else if (frame.command_is("testKi"))
-  {
-    robot.testKi = frame.value;
-    serial_commands.send_command("testKi", robot.testKi);
-  }
-  else if (frame.command_is("testKd"))
-  {
-    robot.testKd = frame.value;
-    serial_commands.send_command("testKd", robot.testKd);
-  }
-
 
 
   else if (frame.command_is("pl"))
@@ -554,10 +538,10 @@ void setup()
   password[c] = 0;
   f.close();
 
-  // strcpy(ssid, "FNR");
-  // strcpy(password, "FNR-PCR-2024"); // 172.16.17.132
-  strcpy(ssid, "eggert");
-  strcpy(password, "semsenha");        // 192.168.147.183 (Pedro)
+  strcpy(ssid, "FNR");
+  strcpy(password, "FNR-PCR-2024"); // 172.16.17.132
+  // strcpy(ssid, "eggert");
+  // strcpy(password, "semsenha");  // 192.168.147.183 (Pedro)
   // strcpy(ssid, "5DPO-NETWORK");
   // strcpy(password, "5dpo5dpo");
 
@@ -928,15 +912,22 @@ void loop()
           robot.wasDropPick = 1;
           robot.compassCount = 1;
 
+          Serial.print("PICKG Box num: ");
+          Serial.println(currentBox.num);
+
           if((currentBox.pos == 12 || currentBox.pos == 19)){
             //robot.lastDeliveryException = 1; 
-            robot.tis_DROPB += 200;
+            robot.tis_DROPB = 600; //was 600
 
-            if(currentBox.num == 3) robot.lastDeliveryException = 1; 
+            if(scheduler.deliveryPorts[2].occupied == true && currentBox.color == BLUE){
+              Serial.print("Setei o lastDeliveryException para 1");
+              robot.lastDeliveryException = 1; 
+              robot.tis_DROPB = 800; //was 800
+            }
 
             // if(currentBox.pos == 12) scheduler.deliveryNodesB[0].occupied = true;
 
-          }
+          }else if(currentBox.pos == 16) robot.turnbackOnly = 1;
           //Serial.printf("compassCount: %d\n", robot.compassCount);
         }
         else
@@ -1031,6 +1022,9 @@ void loop()
       //   robot.setState(NEXT);
       // }
 
+      Serial.print("wasDropPick: ");
+      Serial.println(robot.wasDropPick);
+
       instructionCounter++;
       //Serial.println("HERE");
     }
@@ -1088,9 +1082,6 @@ void loop()
       serial_commands.send_command("ki", robot.IRki);
       serial_commands.send_command("kd", robot.IRkd);
 
-      serial_commands.send_command("testKp", robot.testKp);
-      serial_commands.send_command("testKi", robot.testKi);
-      serial_commands.send_command("testKd", robot.testKd);
 
       // serial_commands.send_command("rlv", robot.rightLeft_v);
       // serial_commands.send_command("rlw", robot.rightLeft_w);

@@ -89,7 +89,10 @@ class robot_t {
   control_mode_t control_mode;
 
   double  IRkp = 8, IRki = 0.02, IRkd = 6;
-  double lastIRkp = IRkp, lastIRki = IRki, lastIRkd = IRkd;
+  double lastIRkp = 5, lastIRki = 0, lastIRkd = 0;
+
+  float follow_v = 0.5;
+  float last_follow_v = 0.5;
 
   double error;         // Erro medido pelos sensores
   double prevError = 0; // Erro anterior para cada sensor
@@ -98,11 +101,8 @@ class robot_t {
 
   double output_w;
 
-  float follow_v = 0.3, follow_k = -0.15;
-  float last_follow_v = follow_v;
-
   float rightLeft_v = 0.06, rightLeft_w = 2; // for tright and tleft
-  float rightLeftLine_v = 0.12, rightLeftLine_w = 3; //for leftline and rightline
+  float rightLeftLine_v = 0.08, rightLeftLine_w = 3; //for leftline and rightline
 
   float refreshRate = 0.01; //original is 0.04
 
@@ -115,6 +115,9 @@ class robot_t {
 
   float tis_PICKB = 10/*200*/, tis_DROPB = 550 /*600*/;
   float tis_PICKG = 2/*400*/,tis_DROPG = 1000 /*1000*/;
+
+  float follow_k = -0.15;
+
   float tleftAngle = 80;
   
   PID_t PID[NUM_WHEELS];

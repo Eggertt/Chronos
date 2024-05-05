@@ -286,6 +286,30 @@ void process_command(command_frame_t frame)
 
 
 
+    else if (frame.command_is("lastkp"))
+  {
+    robot.lastIRkp = frame.value;
+    serial_commands.send_command("lastkp", robot.lastIRkp);
+  }
+  else if (frame.command_is("lastki"))
+  {
+    robot.lastIRki = frame.value;
+    serial_commands.send_command("lastki", robot.lastIRki);
+  }
+  else if (frame.command_is("lastkd"))
+  {
+    robot.lastIRkd = frame.value;
+    serial_commands.send_command("lastkd", robot.lastIRkd);
+  }
+
+   else if (frame.command_is("last_fv"))
+  {
+    robot.last_follow_v = frame.value;
+    serial_commands.send_command("last_fb", robot.last_follow_v);
+  }
+
+
+
 
 
   else if (frame.command_is("pl"))
@@ -901,6 +925,15 @@ void loop()
         
         
       } else if (instructions[instructionCounter] == "Pick"){
+
+        Serial.println("Case PICK");
+
+        robot.IRkp = 8;
+        robot.IRki = 0.02;
+        robot.IRkd = 6;
+
+        robot.follow_v = 0.3;
+
         if (currentBox.pos == 0 || currentBox.pos == 1 || currentBox.pos == 2 || currentBox.pos == 3){
           robot.setState(PICKB);
           robot.wasDropPick = 1;
@@ -934,7 +967,6 @@ void loop()
           Serial.println("Failed to start picking phase");
 
         currentBox.status = HOLDING;
-        Serial.println("Case PICK");
 
         if(currentBox.pos == 12){ 
           scheduler.deliveryNodesB[0].occupied = true;
@@ -948,6 +980,12 @@ void loop()
         // instructionCounter++;
       } else if (instructions[instructionCounter] == "Drop"){
         Serial.println("Case DROP");
+
+        robot.IRkp = 8;
+        robot.IRki = 0.02;
+        robot.IRkd = 6;
+
+        robot.follow_v = 0.3;
 
         if (currentPort.pos == 31 || currentPort.pos == 32 || currentPort.pos == 33 || currentPort.pos == 34){
           robot.setState(DROPB);
@@ -1074,6 +1112,7 @@ void loop()
       // serial_commands.send_command("tof", robot.tof_dist);
       // // serial_commands.send_command("fk", robot.follow_k);
       serial_commands.send_command("fv", robot.follow_v);
+      serial_commands.send_command("last_fv", robot.last_follow_v);
 
       // // serial_commands.send_command("pr", robot.IRLine.pos_right);
       // // serial_commands.send_command("pl", robot.IRLine.pos_left);
@@ -1082,11 +1121,15 @@ void loop()
       serial_commands.send_command("ki", robot.IRki);
       serial_commands.send_command("kd", robot.IRkd);
 
+      serial_commands.send_command("lastkp", robot.lastIRkp);
+      serial_commands.send_command("lastki", robot.lastIRki);
+      serial_commands.send_command("lastkd", robot.lastIRkd);
 
-      // serial_commands.send_command("rlv", robot.rightLeft_v);
-      // serial_commands.send_command("rlw", robot.rightLeft_w);
-      // serial_commands.send_command("rllv", robot.rightLeftLine_v);
-      // serial_commands.send_command("rllw", robot.rightLeftLine_w);
+
+      serial_commands.send_command("rlv", robot.rightLeft_v);
+      serial_commands.send_command("rlw", robot.rightLeft_w);
+      serial_commands.send_command("rllv", robot.rightLeftLine_v);
+      serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
       serial_commands.send_command("rsdb", robot.rel_sDROPBandPICKB);
       serial_commands.send_command("rsdg", robot.rel_sDROPGandPICKG);
@@ -1122,6 +1165,8 @@ void loop()
 
       serial_commands.flush();
       Serial.println();
+
+
     }
   }
 }

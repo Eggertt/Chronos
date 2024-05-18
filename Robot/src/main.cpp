@@ -631,7 +631,7 @@ void loop(){
 
   unsigned long StartTime = millis();
 
-  if(StartTime > 2 * 60 * 1000) robot.setState(99);
+  if(StartTime > 240 * 1000) robot.setState(99);
 
   if (ip_on)
   {

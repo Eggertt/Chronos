@@ -436,40 +436,40 @@ void serial_write(const char *buffer, size_t size)
   }
 }
 
-const char *encToString(uint8_t enc) {
-  switch (enc) {
-    case ENC_TYPE_NONE: return "NONE";
-    case ENC_TYPE_TKIP: return "WPA";
-    case ENC_TYPE_CCMP: return "WPA2";
-    case ENC_TYPE_AUTO: return "AUTO";
-  }
-  return "UNKN";
-}
+// const char *encToString(uint8_t enc) {
+//   switch (enc) {
+//     case ENC_TYPE_NONE: return "NONE";
+//     case ENC_TYPE_TKIP: return "WPA";
+//     case ENC_TYPE_CCMP: return "WPA2";
+//     case ENC_TYPE_AUTO: return "AUTO";
+//   }
+//   return "UNKN";
+// }
 
-void wifi_list(void)
-{
-  Serial.printf("Beginning scan at %d\n", millis());
-  int cnt = WiFi.scanNetworks();
-  if (!cnt)
-  {
-    Serial.printf("No networks found\n");
-  }
-  else
-  {
-    Serial.printf("Found %d networks\n\n", cnt);
-    Serial.printf("%32s %5s %2s %4s\n", "SSID", "ENC", "CH", "RSSI");
-    for (int i = 0; i < cnt; i++)
-    {
-      uint8_t bssid[6];
-      WiFi.BSSID(i, bssid);
-      Serial.printf("%32s %5s %2d %4d\n", WiFi.SSID(i), encToString(WiFi.encryptionType(i)), WiFi.channel(i), WiFi.RSSI(i));
-    }
-  }
-}
+// void wifi_list(void)
+// {
+//   Serial.printf("Beginning scan at %d\n", millis());
+//   int cnt = WiFi.scanNetworks();
+//   if (!cnt)
+//   {
+//     Serial.printf("No networks found\n");
+//   }
+//   else
+//   {
+//     Serial.printf("Found %d networks\n\n", cnt);
+//     Serial.printf("%32s %5s %2s %4s\n", "SSID", "ENC", "CH", "RSSI");
+//     for (int i = 0; i < cnt; i++)
+//     {
+//       uint8_t bssid[6];
+//       WiFi.BSSID(i, bssid);
+//       Serial.printf("%32s %5s %2d %4d\n", WiFi.SSID(i), encToString(WiFi.encryptionType(i)), WiFi.channel(i), WiFi.RSSI(i));
+//     }
+//   }
+// }
 
 
-void setup()
-{
+void setup(){
+
   Serial.println("setup iniciated");
   // Set the pins as input or output as needed
   pinMode(ENC1_A, INPUT_PULLUP);
@@ -526,30 +526,30 @@ void setup()
     f.close();
   }*/
 
-  f = LittleFS.open(fname_wifi, "r");
-  if (!f)
-  {
-    Serial.println("file open failed");
-  }
-  int c;
-  c = f.readBytesUntil('\t', ssid, max_wifi_str - 1);
-  ssid[c] = 0;
-  c = f.readBytesUntil('\n', password, max_wifi_str - 1);
-  password[c] = 0;
-  f.close();
+  // f = LittleFS.open(fname_wifi, "r");
+  // if (!f)
+  // {
+  //   Serial.println("file open failed");
+  // }
+  // int c;
+  // c = f.readBytesUntil('\t', ssid, max_wifi_str - 1);
+  // ssid[c] = 0;
+  // c = f.readBytesUntil('\n', password, max_wifi_str - 1);
+  // password[c] = 0;
+  // f.close();
 
-  strcpy(ssid, "FNR");
-  strcpy(password, "FNR-PCR-2024"); // 172.16.17.132
+  //strcpy(ssid, "FNR");
+  //strcpy(password, "FNR-PCR-2024"); // 172.16.17.132
   // strcpy(ssid, "eggert");
   // strcpy(password, "semsenha");  // 192.168.147.183 (Pedro)
   // strcpy(ssid, "5DPO-NETWORK");
   // strcpy(password, "5dpo5dpo");
 
   // Operate in WiFi Station mode
-  WiFi.mode(WIFI_STA);
+  //WiFi.mode(WIFI_STA);
 
   // Start WiFi with supplied parameters
-  WiFi.begin(ssid, password);
+  //WiFi.begin(ssid, password);
 
   // Print periods on monitor while establishing connection
   /*while (WiFi.status() != WL_CONNECTED) {
@@ -565,15 +565,15 @@ void setup()
 
   // Connection established
   //Serial.println("");
-  Serial.print("Pico W is connected to WiFi network ");
-  Serial.println(WiFi.SSID());
+  //Serial.print("Pico W is connected to WiFi network ");
+  //Serial.println(WiFi.SSID());
 
   // Print IP Address
-  Serial.print("Assigned IP Address: ");
-  Serial.println(WiFi.localIP());
+  //Serial.print("Assigned IP Address: ");
+  //Serial.println(WiFi.localIP());
 
-  ip_on = Udp.begin(localUdpPort);
-  Serial.printf("Now listening at IP %s, UDP port %d\n", WiFi.localIP().toString().c_str(), localUdpPort);
+  //ip_on = Udp.begin(localUdpPort);
+  //Serial.printf("Now listening at IP %s, UDP port %d\n", WiFi.localIP().toString().c_str(), localUdpPort);
 
   int i;
   // All wheeel PID controllers share the same parameters
@@ -627,8 +627,12 @@ void setup()
   Serial.println("setup completed");
 }
 
-void loop()
-{
+void loop(){
+
+  unsigned long StartTime = millis();
+
+  if(StartTime > 2 * 60 * 1000) robot.setState(99);
+
   if (ip_on)
   {
     // ArduinoOTA.handle();
@@ -1033,7 +1037,7 @@ void loop()
     if(COM_ROBOT){
       // Debug information
       // prints
-      serial_commands.send_command("dte", delta);
+      //serial_commands.send_command("dte", delta);
 
       // // serial_commands.send_command("M1", robot.PWM_1);
       // // serial_commands.send_command("M2", robot.PWM_2);
@@ -1060,27 +1064,27 @@ void loop()
       // // serial_commands.send_command("theta", robot.rel_theta);
       // // Serial.println("");
 
-      serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
+      //serial_commands.send_command("IP", WiFi.localIP().toString().c_str());
       // // Serial.println("");
-      // serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
-      // serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
-      // serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
-      // serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
-      // serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
-      // Serial.println("");
+      serial_commands.send_command("IR0", robot.IRLine.IR_values[0]);
+      serial_commands.send_command("IR1", robot.IRLine.IR_values[1]);
+      serial_commands.send_command("IR2", robot.IRLine.IR_values[2]);
+      serial_commands.send_command("IR3", robot.IRLine.IR_values[3]);
+      serial_commands.send_command("IR4", robot.IRLine.IR_values[4]);
+      Serial.println("");
 
-      serial_commands.send_command("x", robot.IRLine.crosses);
-      serial_commands.send_command("er", robot.integral);
+      serial_commands.send_command("w_req", robot.w_req);
+      serial_commands.send_command("lastleftcurve", robot.lastLeftCurve);
       // serial_commands.send_command("tof", robot.tof_dist);
       // // serial_commands.send_command("fk", robot.follow_k);
-      serial_commands.send_command("fv", robot.follow_v);
+      //serial_commands.send_command("fv", robot.follow_v);
 
       // // serial_commands.send_command("pr", robot.IRLine.pos_right);
       // // serial_commands.send_command("pl", robot.IRLine.pos_left);
 
-      serial_commands.send_command("kp", robot.IRkp);
-      serial_commands.send_command("ki", robot.IRki);
-      serial_commands.send_command("kd", robot.IRkd);
+      //serial_commands.send_command("kp", robot.IRkp);
+      //serial_commands.send_command("ki", robot.IRki);
+      //serial_commands.send_command("kd", robot.IRkd);
 
 
       // serial_commands.send_command("rlv", robot.rightLeft_v);
@@ -1088,19 +1092,19 @@ void loop()
       // serial_commands.send_command("rllv", robot.rightLeftLine_v);
       // serial_commands.send_command("rllw", robot.rightLeftLine_w);
 
-      serial_commands.send_command("rsdb", robot.rel_sDROPBandPICKB);
-      serial_commands.send_command("rsdg", robot.rel_sDROPGandPICKG);
-      serial_commands.send_command("tpb", robot.tis_PICKB);
-      serial_commands.send_command("tdb", robot.tis_DROPB);
-      serial_commands.send_command("tpg", robot.tis_PICKG);
-      serial_commands.send_command("tdg", robot.tis_DROPG);
+      // serial_commands.send_command("rsdb", robot.rel_sDROPBandPICKB);
+      // serial_commands.send_command("rsdg", robot.rel_sDROPGandPICKG);
+      // serial_commands.send_command("tpb", robot.tis_PICKB);
+      // serial_commands.send_command("tdb", robot.tis_DROPB);
+      // serial_commands.send_command("tpg", robot.tis_PICKG);
+      // serial_commands.send_command("tdg", robot.tis_DROPG);
 
-      serial_commands.send_command("output_w", robot.output_w);
+      // serial_commands.send_command("output_w", robot.output_w);
 
 
-      serial_commands.send_command("box", irrecvbuffer);
-      serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
-      serial_commands.send_command("blacks", robot.IRLine.blacks);
+      // serial_commands.send_command("box", irrecvbuffer);
+      // serial_commands.send_command("blacks_lvl", robot.IRLine.black_cross_level);
+      // serial_commands.send_command("blacks", robot.IRLine.blacks);
       // serial_commands.send_command("wasDP", robot.wasDropPick);
 
       // serial_commands.send_command("refreshRate", robot.refreshRate);

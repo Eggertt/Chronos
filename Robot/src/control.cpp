@@ -265,9 +265,38 @@ class main_fsm_t: public state_machine_t
         robot.wasDropPick = 0;
       }
     
-    } else if(robot.state == 102){
+    }else if(robot.state == 200 && robot.IR_sum() < 300){
+      robot.rel_theta = 0;
+      robot.setState(201);
 
-    } else if(robot.state == TEST){
+    }else if(robot.state == 201 && robot.IRLine.IR_values[0]  > 500){
+      robot.rel_theta = 0;
+      robot.setState(200);
+
+    }else if(robot.state == 200 && robot.IR_sum() > 4000){
+      robot.rel_theta = 0;
+      robot.rel_s = 0;
+      robot.setState(202);
+
+    }else if(robot.state == 202 && robot.rel_s > 0.03){
+      robot.rel_theta = 0;
+      robot.rel_s = 0;
+
+      if(robot.IR_sum() > 4000) robot.setState(99);
+
+      else robot.setState(204);
+      
+
+    }else if(robot.state == 203 && robot.rel_s < -0.03){
+      robot.rel_theta = 0;
+      robot.setState(204);
+
+    }else if(robot.state == 204 && robot.rel_theta < radians(-70)){
+      robot.setState(200);
+
+    }else if(robot.state == 205){
+
+    }else if(robot.state == TEST){
 
     }
     
@@ -286,10 +315,28 @@ class main_fsm_t: public state_machine_t
     if (robot.state == GO){
       //robot.setRobotVW(0,0);
     
-    }else if(robot.state == FLINE){  
+    }else if(robot.state == 200){  
+      robot.followLineRight(robot.follow_v, robot.follow_k);
+    
+    }else if(robot.state == 201){  
+      robot.setRobotVW(0, -robot.rightLeft_w);
       
-      robot.rel_theta = 0;                  
-      robot.followLine();
+    
+    }else if(robot.state == 202){ 
+      robot.setRobotVW(robot.follow_v, 0);      
+    
+    }else if(robot.state == 203){  
+      robot.setRobotVW(-robot.follow_v, 0);
+    
+    }else if(robot.state == 204){  
+      robot.setRobotVW(0, robot.rightLeft_w);
+    
+    }else if(robot.state == 99){  
+      robot.setRobotVW(0, 0);
+
+
+
+      
     
     }else if(robot.state == TLEFT){  
       //robot.rel_theta = 0;
@@ -380,7 +427,8 @@ main_fsm_t main_fsm;
 void init_control(robot_t& robot)
 {
   robot.pfsm = &main_fsm;
-  robot.setState(START);
+  robot.setState(200);
+  //robot.setState(START);
   //robot.setState(TEST);
   //robot.setState(102);
 

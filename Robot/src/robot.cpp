@@ -127,6 +127,10 @@ void robot_t::followLineRight(float Vnom, float K)
   //w_req = w_req * fabs(w_req);
   //v_req = fmax(0, Vnom - 0.1 * fabs(w_req));
   v_req = Vnom;
+
+  if((IRLine.IR_values[0] + IRLine.IR_values[1]) > 1000) lastLeftCurve = 1;
+
+  //if(w_req > 2.8 || w_req < -2.8) lastLeftCurve = 0;
 }
 
 

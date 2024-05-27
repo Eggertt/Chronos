@@ -265,38 +265,9 @@ class main_fsm_t: public state_machine_t
         robot.wasDropPick = 0;
       }
     
-    }else if(robot.state == 200 && robot.IR_sum() < 300){
+    }else if(robot.state == ){
       robot.rel_theta = 0;
       robot.setState(201);
-
-    }else if(robot.state == 201 && robot.IRLine.IR_values[0]  > 500){
-      robot.rel_theta = 0;
-      robot.setState(200);
-
-    }else if(robot.state == 200 && robot.IR_sum() > 4000){
-      robot.rel_theta = 0;
-      robot.rel_s = 0;
-      robot.setState(202);
-
-    }else if(robot.state == 202 && robot.rel_s > 0.03){
-      robot.rel_theta = 0;
-      robot.rel_s = 0;
-
-      if(robot.IR_sum() > 4000) robot.setState(99);
-
-      else robot.setState(204);
-      
-
-    }else if(robot.state == 203 && robot.rel_s < -0.03){
-      robot.rel_theta = 0;
-      robot.setState(204);
-
-    }else if(robot.state == 204 && robot.rel_theta < radians(-70)){
-      robot.setState(200);
-
-    }else if(robot.state == 205){
-
-    }else if(robot.state == TEST){
 
     }
     
@@ -317,26 +288,13 @@ class main_fsm_t: public state_machine_t
     
     }else if(robot.state == 200){  
       robot.followLineRight(robot.follow_v, robot.follow_k);
-    
-    }else if(robot.state == 201){  
-      robot.setRobotVW(0, -robot.rightLeft_w);
-      
-    
-    }else if(robot.state == 202){ 
-      robot.setRobotVW(robot.follow_v, 0);      
-    
-    }else if(robot.state == 203){  
-      robot.setRobotVW(-robot.follow_v, 0);
-    
-    }else if(robot.state == 204){  
-      robot.setRobotVW(0, robot.rightLeft_w);
-    
+        
     }else if(robot.state == 99){  
       robot.setRobotVW(0, 0);
 
 
 
-      
+
     
     }else if(robot.state == TLEFT){  
       //robot.rel_theta = 0;

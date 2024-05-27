@@ -76,5 +76,6 @@ typedef enum{
   NEXT,       // 12
   TURNBACK,   // 13
   TLEFTAFTERDROP, // 14
-  TEST       // 15
+  TEST,       // 15
+  DECISION    //16
 }estados; 
